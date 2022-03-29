@@ -1,0 +1,33 @@
+---
+kind: pipeline
+name: update
+
+trigger:
+  branch:
+    - main
+  event:
+    - cron
+    - custom
+  status:
+    - success
+
+steps:
+  - name: update
+    image: archlinux:base-devel
+    pull: always
+    commands:
+      - pacman -Syu --noconfirm --as-needed busybox git rust wget
+      
+      - git clone https://aur.archlinux.org/rlottie
+      - cd rlottie
+      - makepkg -si --noconfirm
+      - cd ..
+      - rm -rf rlottie
+      
+      - ./update.sh
+
+environment:
+  GITHUB_TOKEN:
+    from_secret: GITHUB_TOKEN
+
+...
