@@ -16,7 +16,7 @@ steps:
     image: archlinux:base-devel
     pull: always
     commands:
-      - pacman -Syu --noconfirm --as-needed busybox git rust wget
+      - pacman -Syu --noconfirm --needed busybox git rust wget
       
       - git clone https://aur.archlinux.org/rlottie
       - cd rlottie
