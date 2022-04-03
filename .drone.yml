@@ -17,7 +17,7 @@ steps:
     pull: always
     commands:
       - pacman -Syu --noconfirm --needed busybox git rust wget
-      - sudo sed -i -e 's,exit \$E_ROOT,,' /usr/bin/makepkg
+      - sed -i -e 's,exit \$E_ROOT,,' /usr/bin/makepkg
       
       - git clone https://aur.archlinux.org/rlottie
       - cd rlottie
