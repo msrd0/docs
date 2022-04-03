@@ -31,4 +31,17 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
 
+  - name: notify
+    image: drillster/drone-email
+    pull: always
+    settings:
+      host: smtp.migadu.com
+      username: noreply@drone.msrd0.eu
+      from: noreply@drone.msrd0.eu
+      password:
+        from_secret: SMTP_PASSWORD
+    when:
+      status:
+        - failure
+
 ...
