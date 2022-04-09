@@ -16,7 +16,7 @@ steps:
     image: archlinux:base-devel
     pull: always
     commands:
-      - pacman -Syu --noconfirm --needed busybox git jq rust wget
+      - pacman -Syu --noconfirm --needed busybox curl git jq libgit2 rust wget
       - sed -i -e 's,exit \$E_ROOT,,' /usr/bin/makepkg
       
       - git clone https://aur.archlinux.org/rlottie
