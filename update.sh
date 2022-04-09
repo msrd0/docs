@@ -63,7 +63,7 @@ for crate in $crates; do
 			args="$args --no-default-features --features full"
 		fi
 		
-		RUSTDOCFLAGS="--default-theme ayu" cargo doc $args
+		RUSTDOCFLAGS="--default-theme ayu -A renamed_and_removed_lints" cargo doc $args
 		mv $dir/target/doc $crate/$vers
 		rm -rf $tmp
 	done
