@@ -1,4 +1,4 @@
-#!/bin/busybox ash
+#!/bin/bash
 set -euo pipefail
 
 user="msrd0"
@@ -57,13 +57,19 @@ for crate in $crates; do
 			args="$args --locked"
 		fi
 		
-		if [ "$(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features.full')" == null ]; then
-			args="$args --all-features"
-		else
+		features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features | to_entries[] | .key'))
+		if [[ ${features[*]} =~ tokio ]] || [[ ${features[*]} =~ async[\-_]std ]] || [[ ${features[*]} =~ hyper ]]; then
+			# we want to make very sure not to enable tokio and async-std based stuff at the same time
+		else if [[ ${features[*]} =~ (^|[[:space:]])full([[:space:]]|$) ]]; then
 			args="$args --no-default-features --features full"
+		else
+			args="$args --all-features"
 		fi
 		
+		set -x
 		RUSTDOCFLAGS="--default-theme ayu -A renamed_and_removed_lints" cargo doc $args
+		set +x
+		
 		mv $dir/target/doc $crate/$vers
 		rm -rf $tmp
 	done
