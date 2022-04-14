@@ -60,7 +60,8 @@ for crate in $crates; do
 		features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features | to_entries[] | .key'))
 		if [[ ${features[*]} =~ tokio ]] || [[ ${features[*]} =~ async[\-_]std ]] || [[ ${features[*]} =~ hyper ]]; then
 			# we want to make very sure not to enable tokio and async-std based stuff at the same time
-		else if [[ ${features[*]} =~ (^|[[:space:]])full([[:space:]]|$) ]]; then
+			true
+		elif [[ ${features[*]} =~ (^|[[:space:]])full([[:space:]]|$) ]]; then
 			args="$args --no-default-features --features full"
 		else
 			args="$args --all-features"
