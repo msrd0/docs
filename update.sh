@@ -30,7 +30,8 @@ function get_crates() {
 }
 crates="$(get_crates)"
 
-echo "# Crate Documentation" >README.md
+echo -n "# Crate Documentation " >README.md
+echo '[![Build Status](https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main)](https://drone.msrd0.eu/msrd0/docs)' >>README.md
 echo "Rust Documentation for all of my crates" >>README.md
 
 for crate in $crates; do
