@@ -35,7 +35,8 @@ echo "Rust Documentation for all of my crates" >>README.md
 
 for crate in $crates; do
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
-	
+
+	echo >>README.md
 	echo "## $crate [![$crate on crates.io](https://img.shields.io/crates/v/$crate.svg)](https://crates.io/crates/$crate) ![downloads](https://img.shields.io/crates/d/$crate.svg)" >>README.md
 	
 	test -d $crate || mkdir $crate
@@ -71,10 +72,15 @@ for crate in $crates; do
 		
 		mv $dir/target/doc $crate/$vers
 		rm -rf $tmp
+
+		git add $crate/$vers
+		git commit -q -m "add documentation for $crate $vers" \
+			--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
+		git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
 	done
 done
 
 git add -A
-git commit -m "update documentation ($(date '+%a, %d %B %Y %R'))" \
+git commit -q -m "update readme" \
 	--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
 git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
