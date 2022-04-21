@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["client","Client which can read and write data from InfluxDB."],["error","Errors that might happen in the crate"],["integrations",""],["query","Used to create queries of type `InfluxDbReadQuery` or `InfluxDbWriteQuery` which can be executed in InfluxDB"]]});
