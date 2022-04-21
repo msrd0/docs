@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This crate is an extension to the popular gotham web framework for Rust. The idea is to have several RESTful resources that can be added to the gotham router. This crate will take care of everything else, like parsing path/query parameters, request bodies, and writing response bodies, relying on `serde` and `serde_json` for (de)serializing. If you enable the `openapi` feature, you can also generate an OpenAPI Specification from your RESTful resources."><meta name="keywords" content="rust, rustlang, rust-lang, gotham_restful"><title>gotham_restful - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../gotham_restful/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../gotham_restful/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate gotham_restful</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.0.3</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#attributes">Attribute Macros</a></li><li><a href="#derives">Derive Macros</a></li></ul></div></section><div id="sidebar-vars" data-name="gotham_restful" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../gotham_restful/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">gotham_restful</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/gotham_restful/lib.rs.html#1-188">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This crate is an extension to the popular <a href="https://gotham.rs/">gotham web framework</a> for Rust. The idea is to
+have several RESTful resources that can be added to the gotham router. This crate will take care
+of everything else, like parsing path/query parameters, request bodies, and writing response
+bodies, relying on <a href="https://github.com/serde-rs/serde#serde-----"><code>serde</code></a> and <a href="https://github.com/serde-rs/json#serde-json----"><code>serde_json</code></a> for (de)serializing. If you
+enable the <code>openapi</code> feature, you can also generate an OpenAPI Specification from your RESTful
+resources.</p>
+<h2 id="usage"><a href="#usage">Usage</a></h2>
+<p>This crate targets stable rust, currently requiring rustc 1.40+. To use this crate, add the
+following to your <code>Cargo.toml</code>:</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+gotham_restful = &quot;0.0.1&quot;</code></pre></div>
+<p>A basic server with only one resource, handling a simple <code>GET</code> request, could look like this:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="doccomment">/// Our RESTful Resource.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Resource</span>)]</span>
+<span class="attribute">#[<span class="ident">rest_resource</span>(<span class="ident">read_all</span>)]</span>
+<span class="kw">struct</span> <span class="ident">UsersResource</span>;
+
+<span class="doccomment">/// Our return type.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">struct</span> <span class="ident">User</span> {
+	<span class="ident">id</span>: <span class="ident">i64</span>,
+	<span class="ident">username</span>: <span class="ident">String</span>,
+	<span class="ident">email</span>: <span class="ident">String</span>
+}
+
+<span class="doccomment">/// Our handler method.</span>
+<span class="attribute">#[<span class="ident">rest_read_all</span>(<span class="ident">UsersResource</span>)]</span>
+<span class="kw">fn</span> <span class="ident">read_all</span>(<span class="ident">_state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span>) -&gt; <span class="ident">Success</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+	<span class="macro">vec!</span>[<span class="ident">User</span> {
+		<span class="ident">id</span>: <span class="number">1</span>,
+		<span class="ident">username</span>: <span class="string">&quot;h4ck3r&quot;</span>.<span class="ident">to_string</span>(),
+		<span class="ident">email</span>: <span class="string">&quot;h4ck3r@example.org&quot;</span>.<span class="ident">to_string</span>()
+	}].<span class="ident">into</span>()
+}
+
+<span class="doccomment">/// Our main method.</span>
+<span class="kw">fn</span> <span class="ident">main</span>() {
+	<span class="ident">gotham::start</span>(<span class="string">&quot;127.0.0.1:8080&quot;</span>, <span class="ident">build_simple_router</span>(<span class="op">|</span><span class="ident">route</span><span class="op">|</span> {
+		<span class="ident">route</span>.<span class="ident">resource</span>::<span class="op">&lt;</span><span class="ident">UsersResource</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;users&quot;</span>);
+	}));
+}</code></pre></div>
+<p>Uploads and Downloads can also be handled, but you need to specify the mime type manually:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Resource</span>)]</span>
+<span class="attribute">#[<span class="ident">rest_resource</span>(<span class="ident">create</span>)]</span>
+<span class="kw">struct</span> <span class="ident">ImageResource</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromBody</span>, <span class="ident">RequestBody</span>)]</span>
+<span class="attribute">#[<span class="ident">supported_types</span>(<span class="ident">mime::IMAGE_GIF</span>, <span class="ident">mime::IMAGE_JPEG</span>, <span class="ident">mime::IMAGE_PNG</span>)]</span>
+<span class="kw">struct</span> <span class="ident">RawImage</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>);
+
+<span class="attribute">#[<span class="ident">rest_create</span>(<span class="ident">ImageResource</span>)]</span>
+<span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">_state</span> : <span class="kw-2">&amp;mut</span> <span class="ident">State</span>, <span class="ident">body</span> : <span class="ident">RawImage</span>) -&gt; <span class="ident">Raw</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+	<span class="ident">Raw::new</span>(<span class="ident">body</span>.<span class="number">0</span>, <span class="ident">mime::APPLICATION_OCTET_STREAM</span>)
+}</code></pre></div>
+<p>Look at the <a href="https://gitlab.com/msrd0/gotham-restful/tree/master/example">example</a> for more methods and usage with the <code>openapi</code> feature.</p>
+<h2 id="known-issues"><a href="#known-issues">Known Issues</a></h2>
+<p>These are currently known major issues. For a complete list please see
+<a href="https://gitlab.com/msrd0/gotham-restful/issues">the issue tracker</a>.
+If you encounter any issues that aren’t yet reported, please report them
+<a href="https://gitlab.com/msrd0/gotham-restful/issues/new">here</a>.</p>
+<ul>
+<li>Enabling the <code>openapi</code> feature might break code (<a href="https://gitlab.com/msrd0/gotham-restful/issues/4">#4</a>)</li>
+<li>For <code>chrono</code>’s <code>DateTime</code> types, the format is <code>date-time</code> instead of <code>datetime</code> (<a href="https://github.com/glademiller/openapiv3/pull/14">openapiv3#14</a>)</li>
+</ul>
+<h2 id="license"><a href="#license">License</a></h2>
+<p>Licensed under your option of:</p>
+<ul>
+<li><a href="https://gitlab.com/msrd0/gotham-restful/blob/master/LICENSE-Apache">Apache License Version 2.0</a></li>
+<li><a href="https://gitlab.com/msrd0/gotham-restful/blob/master/LICENSE-EPL">Eclipse Public License Version 2.0</a></li>
+</ul>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use hyper::header::<a class="struct" href="../http/header/name/struct.HeaderName.html" title="struct http::header::name::HeaderName">HeaderName</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use hyper::<a class="struct" href="../hyper/body/chunk/struct.Chunk.html" title="struct hyper::body::chunk::Chunk">Chunk</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use hyper::<a class="struct" href="../http/status/struct.StatusCode.html" title="struct http::status::StatusCode">StatusCode</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use mime::<a class="struct" href="../mime/struct.Mime.html" title="struct mime::Mime">Mime</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use result::AuthResult::<a class="enum" href="enum.AuthResult.html" title="enum gotham_restful::AuthResult">AuthErr</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.AuthMiddleware.html" title="gotham_restful::AuthMiddleware struct">AuthMiddleware</a></div><div class="item-right docblock-short"><p>This is the auth middleware. To use it, first make sure you have the <code>auth</code> feature enabled. Then
+simply add it to your pipeline and request it inside your handler:</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.AuthValidation.html" title="gotham_restful::AuthValidation struct">AuthValidation</a></div><div class="item-right docblock-short"><p>Contains the various validations that are applied after decoding a token.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.NoContent.html" title="gotham_restful::NoContent struct">NoContent</a></div><div class="item-right docblock-short"><p>This is the return type of a resource that doesn’t actually return something. It will result
+in a <em>204 No Content</em> answer by default. You don’t need to use this type directly if using
+the function attributes:</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OpenapiRouter.html" title="gotham_restful::OpenapiRouter struct">OpenapiRouter</a></div><div class="item-right docblock-short"><p>This type is required to build routes while adding them to the generated OpenAPI Spec at the
+same time. There is no need to use this type directly. See <a href="trait.WithOpenapi.html"><code>WithOpenapi</code></a> on how to do this.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OpenapiSchema.html" title="gotham_restful::OpenapiSchema struct">OpenapiSchema</a></div><div class="item-right docblock-short"><p>This struct needs to be available for every type that can be part of an OpenAPI Spec. It is
+already implemented for primitive types, String, Vec, Option and the like. To have it available
+for your type, simply derive from <a href="trait.OpenapiType.html"><code>OpenapiType</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Raw.html" title="gotham_restful::Raw struct">Raw</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Response.html" title="gotham_restful::Response struct">Response</a></div><div class="item-right docblock-short"><p>A response, used to create the final gotham response from.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.StaticAuthHandler.html" title="gotham_restful::StaticAuthHandler struct">StaticAuthHandler</a></div><div class="item-right docblock-short"><p>An <code>AuthHandler</code> returning always the same secret. See <code>AuthMiddleware</code> for a usage example.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Success.html" title="gotham_restful::Success struct">Success</a></div><div class="item-right docblock-short"><p>This can be returned from a resource when there is no cause of an error. For example:</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.AuthResult.html" title="gotham_restful::AuthResult enum">AuthResult</a></div><div class="item-right docblock-short"><p>This return type can be used to map another <code>ResourceResult</code> that can only be returned if the
+client is authenticated. Otherwise, an empty <em>403 Forbidden</em> response will be issued. Use can
+look something like this (assuming the <code>auth</code> feature is enabled):</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.AuthSource.html" title="gotham_restful::AuthSource enum">AuthSource</a></div><div class="item-right docblock-short"><p>The source of the authentication token in the request.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.AuthStatus.html" title="gotham_restful::AuthStatus enum">AuthStatus</a></div><div class="item-right docblock-short"><p>The authentication status returned by the auth middleware for each request.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.AuthHandler.html" title="gotham_restful::AuthHandler trait">AuthHandler</a></div><div class="item-right docblock-short"><p>This trait will help the auth middleware to determine the validity of an authentication token.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.DrawResourceRoutes.html" title="gotham_restful::DrawResourceRoutes trait">DrawResourceRoutes</a></div><div class="item-right docblock-short"><p>This trait allows to draw routes within an resource. Use this only inside the
+<code>Resource::setup</code> method.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.DrawResources.html" title="gotham_restful::DrawResources trait">DrawResources</a></div><div class="item-right docblock-short"><p>This trait adds the <code>resource</code> method to gotham’s routing. It allows you to register
+any RESTful <code>Resource</code> with a path.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.FromBody.html" title="gotham_restful::FromBody trait">FromBody</a></div><div class="item-right docblock-short"><p>This trait must be implemented by every type that can be used as a request body. It allows
+to create the type from a hyper body chunk and it’s content type.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.GetOpenapi.html" title="gotham_restful::GetOpenapi trait">GetOpenapi</a></div><div class="item-right docblock-short"><p>This trait adds the <code>get_openapi</code> method to an OpenAPI-aware router.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.OpenapiType.html" title="gotham_restful::OpenapiType trait">OpenapiType</a></div><div class="item-right docblock-short"><p>This trait needs to be implemented by every type that is being used in the OpenAPI Spec. It gives
+access to the <a href="struct.OpenapiSchema.html"><code>OpenapiSchema</code></a> of this type. It is provided for primitive types, String and the
+like. For use on your own types, there is a derive macro:</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.RequestBody.html" title="gotham_restful::RequestBody trait">RequestBody</a></div><div class="item-right docblock-short"><p>A type that can be used inside a request body. Implemented for every type that is
+deserializable with serde. If the <code>openapi</code> feature is used, it must also be of type
+<code>OpenapiType</code>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Resource.html" title="gotham_restful::Resource trait">Resource</a></div><div class="item-right docblock-short"><p>This trait must be implemented by every RESTful Resource. It will
+allow you to register the different methods for this Resource.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceCreate.html" title="gotham_restful::ResourceCreate trait">ResourceCreate</a></div><div class="item-right docblock-short"><p>Handle a POST request on the Resource root.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceDelete.html" title="gotham_restful::ResourceDelete trait">ResourceDelete</a></div><div class="item-right docblock-short"><p>Handle a DELETE request on the Resource with an id.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceDeleteAll.html" title="gotham_restful::ResourceDeleteAll trait">ResourceDeleteAll</a></div><div class="item-right docblock-short"><p>Handle a DELETE request on the Resource root.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceRead.html" title="gotham_restful::ResourceRead trait">ResourceRead</a></div><div class="item-right docblock-short"><p>Handle a GET request on the Resource with an id.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceReadAll.html" title="gotham_restful::ResourceReadAll trait">ResourceReadAll</a></div><div class="item-right docblock-short"><p>Handle a GET request on the Resource root.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceResult.html" title="gotham_restful::ResourceResult trait">ResourceResult</a></div><div class="item-right docblock-short"><p>A trait provided to convert a resource’s result to json.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceSearch.html" title="gotham_restful::ResourceSearch trait">ResourceSearch</a></div><div class="item-right docblock-short"><p>Handle a GET request on the Resource with additional search parameters.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceType.html" title="gotham_restful::ResourceType trait">ResourceType</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceUpdate.html" title="gotham_restful::ResourceUpdate trait">ResourceUpdate</a></div><div class="item-right docblock-short"><p>Handle a PUT request on the Resource with an id.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResourceUpdateAll.html" title="gotham_restful::ResourceUpdateAll trait">ResourceUpdateAll</a></div><div class="item-right docblock-short"><p>Handle a PUT request on the Resource root.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ResponseBody.html" title="gotham_restful::ResponseBody trait">ResponseBody</a></div><div class="item-right docblock-short"><p>A type that can be used inside a response body. Implemented for every type that is
+serializable with serde. If the <code>openapi</code> feature is used, it must also be of type
+<code>OpenapiType</code>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.WithOpenapi.html" title="gotham_restful::WithOpenapi trait">WithOpenapi</a></div><div class="item-right docblock-short"><p>This trait adds the <code>with_openapi</code> method to gotham’s routing. It turns the default
+router into one that will only allow RESTful resources, but record them and generate
+an OpenAPI specification on request.</p>
+</div></div></div><h2 id="attributes" class="small-section-header"><a href="#attributes">Attribute Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_create.html" title="gotham_restful::rest_create attr">rest_create</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_delete.html" title="gotham_restful::rest_delete attr">rest_delete</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_delete_all.html" title="gotham_restful::rest_delete_all attr">rest_delete_all</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_read.html" title="gotham_restful::rest_read attr">rest_read</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_read_all.html" title="gotham_restful::rest_read_all attr">rest_read_all</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_search.html" title="gotham_restful::rest_search attr">rest_search</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_update.html" title="gotham_restful::rest_update attr">rest_update</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.rest_update_all.html" title="gotham_restful::rest_update_all attr">rest_update_all</a></div><div class="item-right docblock-short"></div></div></div><h2 id="derives" class="small-section-header"><a href="#derives">Derive Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="derive" href="derive.FromBody.html" title="gotham_restful::FromBody derive">FromBody</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="derive" href="derive.OpenapiType.html" title="gotham_restful::OpenapiType derive">OpenapiType</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="derive" href="derive.RequestBody.html" title="gotham_restful::RequestBody derive">RequestBody</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="derive" href="derive.Resource.html" title="gotham_restful::Resource derive">Resource</a></div><div class="item-right docblock-short"></div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="gotham_restful" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0 (Arch Linux rust 1:1.60.0-1)" ></div>
+</body></html>
