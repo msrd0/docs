@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["QueryType","Internal Enum used to decide if a `POST` or `GET` request should be sent to InfluxDB. See InfluxDB Docs."],["Timestamp",""]],"mod":[["read_query","Read Query Builder returned by InfluxDbQuery::raw_read_query"],["write_query","Write Query Builder returned by InfluxDbQuery::write_query"]],"trait":[["InfluxDbQuery",""]]});
