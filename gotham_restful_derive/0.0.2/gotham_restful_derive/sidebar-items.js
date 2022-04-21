@@ -1,0 +1,1 @@
+initSidebarItems({"attr":[["rest_create",""],["rest_delete",""],["rest_delete_all",""],["rest_read",""],["rest_read_all",""],["rest_search",""],["rest_update",""],["rest_update_all",""]],"derive":[["FromBody",""],["OpenapiType",""],["RequestBody",""],["Resource",""]]});
