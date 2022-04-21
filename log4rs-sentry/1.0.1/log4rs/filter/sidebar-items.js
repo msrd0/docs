@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Response","The response returned by a filter."]],"trait":[["Filter","The trait implemented by log4rs filters."]]});

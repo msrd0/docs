@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["DEFAULT_CODEBLOCK_LANG",""],["RUSTDOC_CODEBLOCK_FLAGS","List of codeblock flags that rustdoc allows"],["RUST_PRIMITIVES",""]],"fn":[["broken_link_callback",""],["emit",""],["newline",""]]});

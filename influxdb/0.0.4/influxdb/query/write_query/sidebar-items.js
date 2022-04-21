@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["InfluxDbType",""]],"struct":[["InfluxDbWriteQuery","Internal Representation of a Write query that has not yet been built"]]});

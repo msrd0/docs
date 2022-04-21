@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["NEWSTROKE_FONT","KiCAD’s newstroke font’s raw data."]]});

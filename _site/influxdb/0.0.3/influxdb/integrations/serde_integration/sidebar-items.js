@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["InfluxDbSeries","Represents a returned series from InfluxDB"]]});

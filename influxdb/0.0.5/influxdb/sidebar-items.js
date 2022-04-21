@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Error",""],["Timestamp",""]],"mod":[["integrations",""]],"struct":[["Client","Internal Representation of a Client"],["ReadQuery",""],["WriteQuery","Internal Representation of a Write query that has not yet been built"]],"trait":[["Query",""]]});

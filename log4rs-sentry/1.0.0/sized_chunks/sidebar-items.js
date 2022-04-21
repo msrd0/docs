@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["bitmap","A fixed capacity sparse array."],["sized_chunk","A fixed capacity smart array."],["sparse_chunk","A fixed capacity sparse array."],["types",""]],"struct":[["Bitmap","A compact array of bits."],["Chunk","A fixed capacity smart array."],["SparseChunk","A fixed capacity sparse array."]]});

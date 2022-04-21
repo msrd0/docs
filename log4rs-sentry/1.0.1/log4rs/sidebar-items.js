@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["init_config","Initializes the global logger as a log4rs logger with the provided config."]],"mod":[["append","Appenders"],["config","log4rs configuration"],["encode","Encoders"],["filter","Filters"]],"struct":[["Handle","A handle to the active logger."]]});

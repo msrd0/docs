@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["openapi_type_derive","proc_macro2","quote","syn","unicode_xid"];

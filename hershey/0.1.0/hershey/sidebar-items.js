@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Vector",""]],"struct":[["Font",""],["Glyph",""],["NoSuchGlyph",""]]});

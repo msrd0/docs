@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["atty","bitflags","cfg_if","clap","clap_derive","hashbrown","heck","indexmap","lazy_static","libc","libwebp_sys","log","lottie2webp","memchr","os_str_bytes","proc_macro2","proc_macro_error","proc_macro_error_attr","quote","rgb","rlottie","rlottie_sys","strsim","syn","termcolor","textwrap","unicode_xid","webp_animation"];

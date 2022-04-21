@@ -25,7 +25,7 @@ steps:
       - cd ..
       - rm -rf rlottie
       
-      - ./update.sh
+      - ./_update.sh
 
     environment:
       GITHUB_TOKEN:

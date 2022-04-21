@@ -1,4 +1,0 @@
-(function() {var implementors = {};
-implementors["serde"] = [];
-implementors["serde_kicad_sexpr"] = [{"text":"impl&lt;'a&gt; <a class=\"trait\" href=\"serde/ser/trait.SerializeTupleStruct.html\" title=\"trait serde::ser::SerializeTupleStruct\">SerializeTupleStruct</a> for &amp;'a mut <a class=\"struct\" href=\"serde_kicad_sexpr/ser/struct.Serializer.html\" title=\"struct serde_kicad_sexpr::ser::Serializer\">Serializer</a>","synthetic":false,"types":["serde_kicad_sexpr::ser::Serializer"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["bitmap_font","byteorder","embedded_graphics"];

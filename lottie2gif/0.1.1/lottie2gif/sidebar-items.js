@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["convert","Convert a lottie animation to a GIF file."]],"struct":[["Animation",""],["Color",""]]});

@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Subcommand",""]],"fn":[["init_git_transports","Copied from cargo crate: https://github.com/rust-lang/cargo/blob/e870eac9967b132825116525476d6875c305e4d8/src/bin/cargo/main.rs#L199"],["main",""]],"mod":[["input",""],["output",""]],"struct":[["Args",""],["CmdLine",""]]});

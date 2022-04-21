@@ -1,4 +1,0 @@
-(function() {var implementors = {};
-implementors["gotham"] = [{"text":"impl <a class=\"trait\" href=\"hyper/client/connect/trait.Connect.html\" title=\"trait hyper::client::connect::Connect\">Connect</a> for <a class=\"struct\" href=\"gotham/plain/test/struct.TestConnect.html\" title=\"struct gotham::plain::test::TestConnect\">TestConnect</a>","synthetic":false,"types":["gotham::plain::test::TestConnect"]},{"text":"impl <a class=\"trait\" href=\"hyper/client/connect/trait.Connect.html\" title=\"trait hyper::client::connect::Connect\">Connect</a> for <a class=\"struct\" href=\"gotham/tls/test/struct.TestConnect.html\" title=\"struct gotham::tls::test::TestConnect\">TestConnect</a>","synthetic":false,"types":["gotham::tls::test::TestConnect"]}];
-implementors["hyper"] = [];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

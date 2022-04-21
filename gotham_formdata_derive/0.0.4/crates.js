@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["gotham_formdata_derive","proc_macro2","quote","syn","unicode_xid"];

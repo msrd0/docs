@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["ConfigFormat",""]],"fn":[["get",""]],"struct":[["GetOptions","Options for `cargo config get`."]]});

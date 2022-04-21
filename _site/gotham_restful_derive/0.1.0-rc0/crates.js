@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["gotham_restful_derive","heck","proc_macro2","quote","syn","unicode_segmentation","unicode_xid"];

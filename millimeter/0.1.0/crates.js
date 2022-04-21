@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["millimeter","paste","proc_macro2","quote","serde","syn","thiserror","thiserror_impl","unicode_xid"];

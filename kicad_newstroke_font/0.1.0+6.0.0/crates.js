@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["kicad_newstroke_font"];

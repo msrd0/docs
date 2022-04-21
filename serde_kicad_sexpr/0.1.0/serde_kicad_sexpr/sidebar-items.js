@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["deserialize_option","Deserialize an [`Option`] in a way that is supported by the s-expression format."]],"macro":[["untagged",""]],"mod":[["de",""],["ser",""]],"struct":[["Option","Deserialize an [`Option`] in a way that is supported by the s-expression format."]]});

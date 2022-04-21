@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["iter","Iterator implementations for `AATreeSet` and `AATreeMap`."],["node","Low-level implementation of an AA tree. You shouldn’t have to use this directly; instead, use the implementations in `AATreeSet` and `AATreeMap`."]],"struct":[["AATreeMap",""],["AATreeSet","A set based on an AA-Tree."]]});

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This crate is an extension to the popular gotham web framework for Rust. It aims to reduce boilerplate necessary to read request bodies today as a stop-gap until gotham finally implements a body extractor."><meta name="keywords" content="rust, rustlang, rust-lang, gotham_formdata"><title>gotham_formdata - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../gotham_formdata/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../gotham_formdata/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate gotham_formdata</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.0.4</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li><li><a href="#derives">Derive Macros</a></li></ul></div></section><div id="sidebar-vars" data-name="gotham_formdata" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../gotham_formdata/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">gotham_formdata</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/gotham_formdata/lib.rs.html#1-105">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This crate is an extension to the popular <a href="https://github.com/gotham-rs/gotham">gotham web framework</a> for Rust. It aims to
+reduce boilerplate necessary to read request bodies today as a stop-gap until gotham finally
+implements a <a href="https://github.com/gotham-rs/gotham/issues/11">body extractor</a>.</p>
+<h2 id="sparkles-features"><a href="#sparkles-features">:sparkles: Features</a></h2>
+<ul>
+<li>Parse <code>application/x-www-form-urlencoded</code> request bodies</li>
+<li>Parse <code>multipart/form-data</code> request bodies</li>
+<li>Verify the parsed request body</li>
+<li><code>#![forbid(unsafe_code)]</code> ensures that all functionality is implemented in 100% safe Rust code</li>
+</ul>
+<h2 id="warning-warning"><a href="#warning-warning">:warning: Warning</a></h2>
+<p>This crate is asynchronous, but does not yet enforce uploads limits. <strong>YOU ARE RESPONSIBLE
+FOR ENFORCING UPLOAD LIMITS.</strong></p>
+<h2 id="spiral_notepad-example"><a href="#spiral_notepad-example">:spiral_notepad: Example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">gotham_formdata::FormData</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FormData</span>)]</span>
+<span class="kw">struct</span> <span class="ident">LoginData</span> {
+	<span class="attribute">#[<span class="ident">validate</span>(<span class="ident">regex</span> <span class="op">=</span> <span class="string">&quot;[a-zA-Z0-9_]&quot;</span>, <span class="ident">error</span> <span class="op">=</span> <span class="string">&quot;The username contains illegal characters.&quot;</span>)]</span>
+	<span class="ident">username</span>: <span class="ident">String</span>,
+	<span class="attribute">#[<span class="ident">validate</span>(<span class="ident">min_length</span> <span class="op">=</span> <span class="number">6</span>)]</span>
+	<span class="ident">password</span>: <span class="ident">String</span>
+}
+
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">login_handler</span>(<span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Response</span><span class="op">&lt;</span><span class="ident">Body</span><span class="op">&gt;</span>, <span class="ident">HandlerError</span><span class="op">&gt;</span> {
+	<span class="kw">let</span> <span class="ident">login_data</span>: <span class="ident">LoginData</span> <span class="op">=</span> <span class="ident">FormData::parse_form_data</span>(<span class="ident">state</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+	<span class="prelude-val">Ok</span>(<span class="kw">if</span> <span class="ident">login_data</span>.<span class="ident">password</span> <span class="op">==</span> <span class="string">&quot;secret&quot;</span> {
+		<span class="ident">create_response</span>(<span class="ident">state</span>, <span class="ident">StatusCode::OK</span>, <span class="ident">TEXT_PLAIN</span>, <span class="ident">login_data</span>.<span class="ident">username</span>)
+	} <span class="kw">else</span> {
+		<span class="ident">create_empty_response</span>(<span class="ident">state</span>, <span class="ident">StatusCode::FORBIDDEN</span>)
+	})
+}</code></pre></div>
+<h2 id="label-versioning"><a href="#label-versioning">:label: Versioning</a></h2>
+<p>Like all rust crates, this crate will follow semantic versioning guidelines. However, changing
+the MSRV (minimum supported rust version) is not considered a breaking change.</p>
+<h2 id="page_with_curl-license"><a href="#page_with_curl-license">:page_with_curl: License</a></h2><div class="example-wrap"><pre class="language-text"><code>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</code></pre></div></div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="conversion/index.html" title="gotham_formdata::conversion mod">conversion</a></div><div class="item-right docblock-short"><p>This mod contains conversion traits for common used types, that allows them to be created from
+a stream of bytes. Furthermore, it allows every type that implements <a href="https://doc.rust-lang.org/1.60.0/core/str/traits/trait.FromStr.html" title="FromStr">FromStr</a> plus some other
+common types to be converted.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="validate/index.html" title="gotham_formdata::validate mod">validate</a></div><div class="item-right docblock-short"><p>This mod contains the <a href="validate/trait.Validator.html" title="Validator">Validator</a> trait as well as pre-defined validation methods.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="value/index.html" title="gotham_formdata::value mod">value</a></div><div class="item-right docblock-short"><p>This mod defines the <a href="value/struct.Value.html" title="Value">Value</a> used for parsing the form data.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Error.html" title="gotham_formdata::Error enum">Error</a></div><div class="item-right docblock-short"><p>This error type is used when parsing form data from a request body was unsuccessful.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.FormData.html" title="gotham_formdata::FormData trait">FormData</a></div><div class="item-right docblock-short"><p>This is the trait implemented by <code>#[derive(FormData)]</code>. It provides a method to parse the struct
+it is implemented for to be parsed from the request body contained in gotham’s state.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.FormDataFromState.html" title="gotham_formdata::FormDataFromState trait">FormDataFromState</a></div><div class="item-right docblock-short"><p>This is the equivalent of <a href="trait.FormData.html" title="FormData">FormData</a> from the state’s perspective. Use this if you prefer
+<code>state.parse_form_data::&lt;MyData&gt;()?</code> over <code>MyData::parse_form_data(&amp;mut state)?</code>.</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.FormDataFuture.html" title="gotham_formdata::FormDataFuture type">FormDataFuture</a></div><div class="item-right docblock-short"><p>This is the return type of <a href="trait.FormData.html#tymethod.parse_form_data" title="FormData::parse_form_data">FormData::parse_form_data</a>.</p>
+</div></div></div><h2 id="derives" class="small-section-header"><a href="#derives">Derive Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="derive" href="derive.FormData.html" title="gotham_formdata::FormData derive">FormData</a></div><div class="item-right docblock-short"><p>This derive macro implements <code>FormData</code> for the struct it is invoked on. Enums, unions and
+tuple structs are not supported.</p>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="gotham_formdata" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0 (Arch Linux rust 1:1.60.0-1)" ></div>
+</body></html>

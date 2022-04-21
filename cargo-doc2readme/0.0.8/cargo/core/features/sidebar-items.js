@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["HIDDEN",""],["SEE_CHANNELS",""]],"enum":[["Edition","The edition of the compiler (RFC 2052)"]],"fn":[["channel","Returns the current release channel (“stable”, “beta”, “nightly”, “dev”)."]],"struct":[["CliUnstable","A parsed representation of all unstable flags that Cargo accepts."],["Feature",""],["Features",""]]});

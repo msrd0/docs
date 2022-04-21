@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["proc_macro2","quote","syn","syn_path","unicode_xid"];

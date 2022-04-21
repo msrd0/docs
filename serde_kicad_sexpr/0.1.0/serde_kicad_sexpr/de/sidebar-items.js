@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["ErrorKind",""]],"fn":[["from_str",""]],"struct":[["Deserializer",""],["Error",""]]});

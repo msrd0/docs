@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["serde_integration","Serde Integration for InfluxDB. Provides deserialization of query returns."]]});
