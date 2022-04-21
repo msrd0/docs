@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Append","A trait implemented by log4rs appenders."]]});

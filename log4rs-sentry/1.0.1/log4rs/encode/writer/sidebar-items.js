@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["simple","The simple writer"]]});
