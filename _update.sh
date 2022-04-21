@@ -34,15 +34,15 @@ echo -n "# Crate Documentation " >README.md
 echo '[![Build Status](https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main)](https://drone.msrd0.eu/msrd0/docs)' >>README.md
 echo "Rust Documentation for all of my crates" >>README.md
 
-echo "safe = true" >_config.toml
-echo "keep_files = [" >>_config.toml
+echo "safe: true" >_config.yml
+echo "keep_files:" >>_config.yml
 
 for crate in $crates; do
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
 
 	echo >>README.md
 	echo "## $crate [![$crate on crates.io](https://img.shields.io/crates/v/$crate.svg)](https://crates.io/crates/$crate) ![downloads](https://img.shields.io/crates/d/$crate.svg)" >>README.md
-	echo "  '$crate'," >>_config.toml
+	echo "  - $crate" >>_config.yml
 	
 	test -d _site/$crate || mkdir _site/$crate
 	response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
@@ -84,8 +84,6 @@ for crate in $crates; do
 		git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
 	done
 done
-
-echo "]" >>_config.toml
 
 git add -A
 git commit -q -m "update readme and config" \
