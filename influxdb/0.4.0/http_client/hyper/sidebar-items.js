@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["HyperClient","Hyper-based HTTP Client."]]});
