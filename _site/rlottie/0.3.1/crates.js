@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["rgb","rlottie","rlottie_sys"];
+../../assets/0fb640b4d83f8a58987751a2
