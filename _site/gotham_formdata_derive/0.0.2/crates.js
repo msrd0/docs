@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["gotham_formdata_derive","heck","proc_macro2","quote","syn","unicode_segmentation","unicode_xid"];
+../../assets/94835bd6bf8eb19e27a2f645
