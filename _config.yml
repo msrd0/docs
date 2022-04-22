@@ -1,5 +1,6 @@
 safe: true
 keep_files:
+  - assets
   - aatree
   - bitmap-font
   - cargo-doc2readme
