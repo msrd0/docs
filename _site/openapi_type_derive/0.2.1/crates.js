@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["openapi_type_derive","proc_macro2","quote","syn","unicode_xid"];
+../../assets/493b4ec5c207f583c0f29911
