@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["influxdb_derive","proc_macro2","quote","syn","unicode_xid"];
+../../assets/5606fa109c86dd0432c12427
