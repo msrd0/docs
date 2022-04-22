@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["bitmap_font","byteorder","embedded_graphics"];
+../../assets/866529bdbd59ba4c09fe558e
