@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Animation","A lottie animation."],["RenderError",""],["Size","The size type used by lottie [`Animation`]."]]});
