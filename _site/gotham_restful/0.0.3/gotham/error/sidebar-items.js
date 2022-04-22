@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Error","The `Error` type, which can contain any failure."]],"type":[["CompatError","An alias for `failure::Error.compat()`, which exists to fulfill the std::error::Error trait."],["Result","An implementation of the single-parameter Result pattern, using our `pub use failure::Error`"]]});
