@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["kicad_newstroke_font"];
+../../assets/ea67253c38bd63c764afc3e9

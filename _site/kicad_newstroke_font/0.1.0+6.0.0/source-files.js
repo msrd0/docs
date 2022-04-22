@@ -1,3 +1,1 @@
-var N = null;var sourcesIndex = {};
-sourcesIndex["kicad_newstroke_font"] = {"name":"","files":["lib.rs"]};
-createSourceSidebar();
+../../assets/4e1af9965bd219e1c9ac0cff
