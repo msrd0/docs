@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Point","2D point."],["Size","2D size."]],"trait":[["DrawTarget","Defines a display that can be used to render `Drawable` objects."],["GrayColor","Grayscale color."],["RgbColor","RGB color."]]});
