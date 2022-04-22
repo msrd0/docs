@@ -16,7 +16,7 @@ steps:
     image: archlinux:base-devel
     pull: always
     commands:
-      - pacman -Syu --noconfirm --needed clang curl git jq libgit2 rust wget
+      - pacman -Syu --noconfirm --needed b3sum clang curl git jq libgit2 rust wget
       - sed -i -e 's,exit \$E_ROOT,,' /usr/bin/makepkg
       
       - git clone https://aur.archlinux.org/rlottie

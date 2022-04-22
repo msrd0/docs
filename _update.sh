@@ -36,6 +36,8 @@ echo "Rust Documentation for all of my crates" >>README.md
 
 echo "safe: true" >_config.yml
 echo "keep_files:" >>_config.yml
+echo "  - assets" >>_config.yml
+mkdir -p _site/assets
 
 for crate in $crates; do
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
@@ -51,41 +53,62 @@ for crate in $crates; do
 	for vers in $versions; do
 		echo " - Version $vers: [Documentation](_site/$crate/$vers/$crate/index.html)" >>README.md
 		
-		test ! -d _site/$crate/$vers || continue
-		echo -e "\e[1m  -> Documenting version $vers ...\e[0m"
-		
-		tmp=$(mktemp -d)
-		http_get "$base_url/crates/$crate/$vers/download" | tar x -z -f - -C $tmp
-		dir="$tmp/$crate-$vers"
-		
-		args="--manifest-path $dir/Cargo.toml"
-		if [ -f $tmp/Cargo.lock ]; then
-			args="$args --locked"
-		fi
-		
-		features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features | to_entries[] | .key'))
-		if [[ ${features[*]} =~ tokio ]] || [[ ${features[*]} =~ async[\-_]std ]] || [[ ${features[*]} =~ hyper ]]; then
-			# we want to make very sure not to enable tokio and async-std based stuff at the same time
-			true
-		elif [[ ${features[*]} =~ (^|[[:space:]])full([[:space:]]|$) ]]; then
-			args="$args --no-default-features --features full"
-		else
-			args="$args --all-features"
-		fi
-		
-		bash -exuc "RUSTDOCFLAGS='--default-theme ayu -A renamed_and_removed_lints' cargo doc $args"
-		
-		mv $dir/target/doc _site/$crate/$vers
-		rm -rf $tmp
+		if [ ! -d _site/$crate/$vers ]; then
+			echo -e "\e[1m  -> Documenting version $vers ...\e[0m"
+			
+			tmp=$(mktemp -d)
+			http_get "$base_url/crates/$crate/$vers/download" | tar x -z -f - -C $tmp
+			dir="$tmp/$crate-$vers"
+			
+			args="--manifest-path $dir/Cargo.toml"
+			if [ -f $tmp/Cargo.lock ]; then
+				args="$args --locked"
+			fi
+			
+			features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features | to_entries[] | .key'))
+			if [[ ${features[*]} =~ tokio ]] || [[ ${features[*]} =~ async[\-_]std ]] || [[ ${features[*]} =~ hyper ]]; then
+				# we want to make very sure not to enable tokio and async-std based stuff at the same time
+				true
+			elif [[ ${features[*]} =~ (^|[[:space:]])full([[:space:]]|$) ]]; then
+				args="$args --no-default-features --features full"
+			else
+				args="$args --all-features"
+			fi
+			
+			bash -exuc "RUSTDOCFLAGS='--default-theme ayu -A renamed_and_removed_lints' cargo doc $args"
+			
+			mv $dir/target/doc _site/$crate/$vers
+			rm -rf $tmp
 
-		git add _site/$crate/$vers
-		git commit -q -m "add documentation for $crate $vers" \
-			--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-		git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+			git add _site/$crate/$vers
+			git commit -q -m "add documentation for $crate $vers" \
+				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
+			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+		fi
+
+		if [ -f _site/$crate/$vers/.lock ]; then
+			echo -e "\e[1m  -> Extracting assets of version $vers ...\e[0m"
+
+			rm _site/$crate/$vers/.lock
+			find _site/$crate/$vers/ -maxdepth 1 -type f | while read file; do
+				hash=$(b3sum -l 12 --no-names "$file")
+				asset=_site/assets/$hash
+				test -f $asset || cp "$file" $asset
+				rm "$file"
+				ln -s ../../assets/$hash "$file"
+			done
+
+			git add _site/$crate/$vers _site/assets
+			git commit -q -m "extract assets of $crate $vers" \
+				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
+			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+		fi
 	done
 done
 
-git add -A
+git add README.md _config.yml 
 git commit -q -m "update readme and config" \
 	--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
 git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+
+git status
