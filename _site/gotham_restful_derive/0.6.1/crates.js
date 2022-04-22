@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["aho_corasick","either","gotham_restful_derive","lazy_regex","lazy_regex_proc_macros","memchr","once_cell","paste","proc_macro2","quote","regex","regex_syntax","syn","unicode_xid"];
+../../assets/35545bae419205459ee8c68c
