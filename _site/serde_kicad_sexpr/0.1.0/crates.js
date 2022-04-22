@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["addr2line","adler","backtrace","cfg_if","gimli","itoa","libc","memchr","miniz_oxide","object","once_cell","paste","proc_macro2","quote","rustc_demangle","serde","serde_derive","serde_kicad_sexpr","syn","thiserror","thiserror_impl","unicode_xid"];
+../../assets/bb811081bc4371b12177fd9d
