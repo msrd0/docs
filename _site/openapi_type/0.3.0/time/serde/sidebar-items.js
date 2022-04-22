@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["timestamp","Treat an [`OffsetDateTime`] as a Unix timestamp for the purposes of serde."]]});
