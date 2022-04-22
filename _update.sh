@@ -30,6 +30,13 @@ function get_crates() {
 }
 crates="$(get_crates)"
 
+function hash_dir() {
+	find "$1" -type f \
+		| LC_ALL=C sort \
+		| while read file; do echo "$(b3sum -l 12 --no-names "$file")  $(realpath --relative-to="$1" "$file")" ; done \
+		| b3sum -l 12 --no-names
+}
+
 echo -n "# Crate Documentation " >README.md
 echo '[![Build Status](https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main)](https://drone.msrd0.eu/msrd0/docs)' >>README.md
 echo "Rust Documentation for all of my crates" >>README.md
@@ -37,7 +44,9 @@ echo "Rust Documentation for all of my crates" >>README.md
 echo "safe: true" >_config.yml
 echo "keep_files:" >>_config.yml
 echo "  - assets" >>_config.yml
-mkdir -p _site/assets
+echo "  - dependencies" >>_config.yml
+echo "  - sources" >>_config.yml
+mkdir -p _site/assets _site/dependencies _site/sources
 
 for crate in $crates; do
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
@@ -100,6 +109,31 @@ for crate in $crates; do
 
 			git add _site/$crate/$vers _site/assets
 			git commit -q -m "extract assets of $crate $vers" \
+				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
+			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+		fi
+
+		crate_escaped=$(printf "%s" $crate | tr '-' '_')
+		if [ -n "$(find _site/$crate/$vers/src -mindepth 1 -maxdepth 1 -type d -not -name $crate_escaped)" ]; then
+			echo -e "\e[1m  -> Extracting dependencies of version $vers ...\e[0m"
+			find _site/$crate/$vers -maxdepth 2 -name index.html -not -path "*/$crate_escaped/index.html" | while read file; do
+				dir="$(dirname "$file")"
+				hash=$(hash_dir "$dir")
+				dep="$(basename "$dir")-$hash"
+				test -d "_site/dependencies/$dep" || cp -R "$dir" "_site/dependencies/$dep"
+				rm -rf "$dir"
+				ln -s "../../dependencies/$dep" "$dir"
+			done
+			find _site/$crate/$vers/src -mindepth 1 -maxdepth 1 -type d -not -name $crate_escaped | while read dir; do
+				hash=$(hash_dir "$dir")
+				src="$(basename "$dir")-$hash"
+				test -d "_site/sources/$src" || cp -R "$dir" "_site/sources/$src"
+				rm -rf "$dir"
+				ln -s "../../../sources/$src" "$dir"
+			done
+
+			git add _site/$crate/$vers _site/dependencies _site/sources
+			git commit -q -m "extract dependencies of $crate $vers" \
 				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
 			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
 		fi
