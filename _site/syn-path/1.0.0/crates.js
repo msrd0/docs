@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["proc_macro2","quote","syn","syn_path","unicode_xid"];
+../../assets/f7c59fc4cba52c8c83ba4e91
