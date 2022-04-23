@@ -41,26 +41,95 @@ echo -n "# Crate Documentation " >README.md
 echo '[![Build Status](https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main)](https://drone.msrd0.eu/msrd0/docs)' >>README.md
 echo "Rust Documentation for all of my crates" >>README.md
 
-echo "safe: true" >_config.yml
-echo "keep_files:" >>_config.yml
-echo "  - assets" >>_config.yml
-echo "  - dependencies" >>_config.yml
-echo "  - sources" >>_config.yml
+cat >_site/index.html <<EOF
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Crate Documentation</title>
+	<meta charset="utf-8">
+	<style>
+		body {
+			background: #0d1117;
+			color: #c9d1d9;
+			font-family: ui-sans-serif, sans-serif;
+		}
+		.container {
+			max-width: 78ch;
+			margin: 2rem auto;
+		}
+		.header {
+			display: flex;
+			align-items: center;
+			gap: 2ch;
+			margin-bottom: 1rem;
+		}
+		.header a {
+			display: contents;
+		}
+		h1, h2 {
+			margin: 0;
+		}
+		h1 {
+			font-size: 2rem;
+		}
+		h2 {
+			font-size: 1.8rem;
+		}
+		ul {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+		li {
+			flex: 0 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Crate Documentation</h1>
+			<a href="https://drone.msrd0.eu/msrd0/docs">
+				<img src="https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main" alt="Build Status" />
+			</a>
+		</div>
+EOF
+
+cat >_config.yml <<EOF
+safe: true
+keep_files:
+  - index.html
+  - assets
+  - dependencies
+  - sources
+EOF
 mkdir -p _site/assets _site/dependencies _site/sources
 
 for crate in $crates; do
+	crate_escaped=$(printf "%s" $crate | tr '-' '_')
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
 
 	echo >>README.md
 	echo "## $crate [![$crate on crates.io](https://img.shields.io/crates/v/$crate.svg)](https://crates.io/crates/$crate) ![downloads](https://img.shields.io/crates/d/$crate.svg)" >>README.md
 	echo "  - $crate" >>_config.yml
+	cat >>_site/index.html <<EOF
+		<section id="$crate">
+			<div class="header">
+				<h2>$crate</h2>
+				<a href="https://crates.io/crates/$crate">
+					<img src="https://img.shields.io/crates/v/$crate.svg" alt="$crate on crates.io"/>
+				</a>
+				<img src="https://img.shields.io/crates/d/$crate.svg"/>
+			</div>
+			<ul>
+EOF
 	
 	test -d _site/$crate || mkdir _site/$crate
 	response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
 	versions="$(printf "%s" "$response" | jq -r 'select(.yanked == false) | .vers')"
 	
 	for vers in $versions; do
-		echo " - Version $vers: [Documentation](_site/$crate/$vers/$crate/index.html)" >>README.md
+		echo " - Version $vers: [Documentation](_site/$crate/$vers/$crate_escaped/index.html)" >>README.md
+		echo "				<li>Version $vers: <a href=\"./$crate/$vers/$crate_escaped/index.html\">Documentation</a></li>" >>_site/index.html
 		
 		if [ ! -d _site/$crate/$vers ]; then
 			echo -e "\e[1m  -> Documenting version $vers ...\e[0m"
@@ -89,15 +158,7 @@ for crate in $crates; do
 			mv $dir/target/doc _site/$crate/$vers
 			rm -rf $tmp
 
-			git add _site/$crate/$vers
-			git commit -q -m "add documentation for $crate $vers" \
-				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
-		fi
-
-		if [ -f _site/$crate/$vers/.lock ]; then
 			echo -e "\e[1m  -> Extracting assets of version $vers ...\e[0m"
-
 			rm _site/$crate/$vers/.lock
 			find _site/$crate/$vers/ -maxdepth 1 -type f | while read file; do
 				hash=$(b3sum -l 12 --no-names "$file")
@@ -107,16 +168,8 @@ for crate in $crates; do
 				ln -s ../../assets/$hash "$file"
 			done
 
-			git add _site/$crate/$vers _site/assets
-			git commit -q -m "extract assets of $crate $vers" \
-				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
-		fi
-
-		crate_escaped=$(printf "%s" $crate | tr '-' '_')
-		if [ -n "$(find _site/$crate/$vers/src -mindepth 1 -maxdepth 1 -type d -not -name $crate_escaped)" ]; then
 			echo -e "\e[1m  -> Extracting dependencies of version $vers ...\e[0m"
-			find _site/$crate/$vers -maxdepth 2 -name index.html -not -path "*/$crate_escaped/index.html" | while read file; do
+			find _site/$crate/$vers -maxdepth 2 -name _site/index.html -not -path "*/$crate_escaped/_site/index.html" | while read file; do
 				dir="$(dirname "$file")"
 				hash=$(hash_dir "$dir")
 				dep="$(basename "$dir")-$hash"
@@ -132,17 +185,32 @@ for crate in $crates; do
 				ln -s "../../../sources/$src" "$dir"
 			done
 
-			git add _site/$crate/$vers _site/dependencies _site/sources
-			git commit -q -m "extract dependencies of $crate $vers" \
+			git add _site/$crate/$vers _site/{assets,dependencies,sources}
+			git commit -q -m "add documentation for $crate $vers" \
 				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
 			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
 		fi
 	done
+	
+	cat >>_site/index.html <<EOF
+			</ul>
+		</section>
+EOF
 done
 
-git add README.md _config.yml 
-git commit -q -m "update readme and config" \
-	--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+cat >>_site/index.html <<EOF
+	</div>
+</body>
+</html>
+EOF
 
+if ! git diff --exit-code _site/index.html README.md _config.yml &>/dev/null;  then
+	git add _site/index.html README.md _config.yml 
+	git commit -q -m "update readme and config" \
+		--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
+	git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+fi
+
+# there shouldn't be any changed files left over
 git status
+git diff --exit-code
