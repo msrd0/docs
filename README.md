@@ -5,19 +5,19 @@ Rust Documentation for all of my crates
  - Version 0.1.0: [Documentation](_site/aatree/0.1.0/aatree/index.html)
 
 ## bitmap-font [![bitmap-font on crates.io](https://img.shields.io/crates/v/bitmap-font.svg)](https://crates.io/crates/bitmap-font) ![downloads](https://img.shields.io/crates/d/bitmap-font.svg)
- - Version 0.0.1: [Documentation](_site/bitmap-font/0.0.1/bitmap-font/index.html)
- - Version 0.1.0: [Documentation](_site/bitmap-font/0.1.0/bitmap-font/index.html)
- - Version 0.1.1: [Documentation](_site/bitmap-font/0.1.1/bitmap-font/index.html)
- - Version 0.2.0: [Documentation](_site/bitmap-font/0.2.0/bitmap-font/index.html)
- - Version 0.2.1: [Documentation](_site/bitmap-font/0.2.1/bitmap-font/index.html)
- - Version 0.2.2: [Documentation](_site/bitmap-font/0.2.2/bitmap-font/index.html)
+ - Version 0.0.1: [Documentation](_site/bitmap-font/0.0.1/bitmap_font/index.html)
+ - Version 0.1.0: [Documentation](_site/bitmap-font/0.1.0/bitmap_font/index.html)
+ - Version 0.1.1: [Documentation](_site/bitmap-font/0.1.1/bitmap_font/index.html)
+ - Version 0.2.0: [Documentation](_site/bitmap-font/0.2.0/bitmap_font/index.html)
+ - Version 0.2.1: [Documentation](_site/bitmap-font/0.2.1/bitmap_font/index.html)
+ - Version 0.2.2: [Documentation](_site/bitmap-font/0.2.2/bitmap_font/index.html)
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
- - Version 0.0.4: [Documentation](_site/cargo-doc2readme/0.0.4/cargo-doc2readme/index.html)
- - Version 0.0.5: [Documentation](_site/cargo-doc2readme/0.0.5/cargo-doc2readme/index.html)
- - Version 0.0.6: [Documentation](_site/cargo-doc2readme/0.0.6/cargo-doc2readme/index.html)
- - Version 0.0.7: [Documentation](_site/cargo-doc2readme/0.0.7/cargo-doc2readme/index.html)
- - Version 0.0.8: [Documentation](_site/cargo-doc2readme/0.0.8/cargo-doc2readme/index.html)
+ - Version 0.0.4: [Documentation](_site/cargo-doc2readme/0.0.4/cargo_doc2readme/index.html)
+ - Version 0.0.5: [Documentation](_site/cargo-doc2readme/0.0.5/cargo_doc2readme/index.html)
+ - Version 0.0.6: [Documentation](_site/cargo-doc2readme/0.0.6/cargo_doc2readme/index.html)
+ - Version 0.0.7: [Documentation](_site/cargo-doc2readme/0.0.7/cargo_doc2readme/index.html)
+ - Version 0.0.8: [Documentation](_site/cargo-doc2readme/0.0.8/cargo_doc2readme/index.html)
 
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
  - Version 0.0.1: [Documentation](_site/gotham_formdata/0.0.1/gotham_formdata/index.html)
@@ -108,8 +108,8 @@ Rust Documentation for all of my crates
  - Version 0.1.0+6.0.0: [Documentation](_site/kicad_newstroke_font/0.1.0+6.0.0/kicad_newstroke_font/index.html)
 
 ## log4rs-sentry [![log4rs-sentry on crates.io](https://img.shields.io/crates/v/log4rs-sentry.svg)](https://crates.io/crates/log4rs-sentry) ![downloads](https://img.shields.io/crates/d/log4rs-sentry.svg)
- - Version 1.0.0: [Documentation](_site/log4rs-sentry/1.0.0/log4rs-sentry/index.html)
- - Version 1.0.1: [Documentation](_site/log4rs-sentry/1.0.1/log4rs-sentry/index.html)
+ - Version 1.0.0: [Documentation](_site/log4rs-sentry/1.0.0/log4rs_sentry/index.html)
+ - Version 1.0.1: [Documentation](_site/log4rs-sentry/1.0.1/log4rs_sentry/index.html)
 
 ## lottie2gif [![lottie2gif on crates.io](https://img.shields.io/crates/v/lottie2gif.svg)](https://crates.io/crates/lottie2gif) ![downloads](https://img.shields.io/crates/d/lottie2gif.svg)
  - Version 0.1.0: [Documentation](_site/lottie2gif/0.1.0/lottie2gif/index.html)
@@ -161,11 +161,11 @@ Rust Documentation for all of my crates
  - Version 0.4.0: [Documentation](_site/rlottie/0.4.0/rlottie/index.html)
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
- - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie-sys/index.html)
- - Version 0.2.0: [Documentation](_site/rlottie-sys/0.2.0/rlottie-sys/index.html)
+ - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie_sys/index.html)
+ - Version 0.2.0: [Documentation](_site/rlottie-sys/0.2.0/rlottie_sys/index.html)
 
 ## serde_kicad_sexpr [![serde_kicad_sexpr on crates.io](https://img.shields.io/crates/v/serde_kicad_sexpr.svg)](https://crates.io/crates/serde_kicad_sexpr) ![downloads](https://img.shields.io/crates/d/serde_kicad_sexpr.svg)
  - Version 0.1.0: [Documentation](_site/serde_kicad_sexpr/0.1.0/serde_kicad_sexpr/index.html)
 
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
- - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn-path/index.html)
+ - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)

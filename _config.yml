@@ -1,5 +1,6 @@
 safe: true
 keep_files:
+  - index.html
   - assets
   - dependencies
   - sources
