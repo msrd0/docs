@@ -60,6 +60,7 @@ Rust Documentation for all of my crates
  - Version 0.7.0: [Documentation](_site/gotham_restful/0.7.0/gotham_restful/index.html)
  - Version 0.7.1: [Documentation](_site/gotham_restful/0.7.1/gotham_restful/index.html)
  - Version 0.7.2: [Documentation](_site/gotham_restful/0.7.2/gotham_restful/index.html)
+ - Version 0.7.3: [Documentation](_site/gotham_restful/0.7.3/gotham_restful/index.html)
 
 ## gotham_restful_derive [![gotham_restful_derive on crates.io](https://img.shields.io/crates/v/gotham_restful_derive.svg)](https://crates.io/crates/gotham_restful_derive) ![downloads](https://img.shields.io/crates/d/gotham_restful_derive.svg)
  - Version 0.0.1: [Documentation](_site/gotham_restful_derive/0.0.1/gotham_restful_derive/index.html)
