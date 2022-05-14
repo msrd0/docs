@@ -82,6 +82,14 @@ cat >_site/index.html <<EOF
 		li {
 			flex: 0 0 auto;
 		}
+		li a, li a:hover, li a:visited, li a:focus, li a:active {
+			color: #ffb454;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		li a:hover {
+		   text-decoration: underline;
+		}
 	</style>
 </head>
 <body>
