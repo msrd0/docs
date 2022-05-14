@@ -1,1 +1,0 @@
-initSidebarItems({"macro":[["path","An extremely simple macro that can take paths of the form `my_crate::my_mod::FooBar` and `::my_crate::my_mod::FooBar` and turn them into a `syn::Path`."]]});
