@@ -169,7 +169,7 @@ EOF
 			done
 
 			echo -e "\e[1m  -> Extracting dependencies of version $vers ...\e[0m"
-			find _site/$crate/$vers -maxdepth 2 -name _site/index.html -not -path "*/$crate_escaped/_site/index.html" | while read file; do
+			find _site/$crate/$vers -maxdepth 2 -name index.html -not -path "*/$crate_escaped/index.html" | while read file; do
 				dir="$(dirname "$file")"
 				hash=$(hash_dir "$dir")
 				dep="$(basename "$dir")-$hash"
