@@ -162,6 +162,7 @@ Rust Documentation for all of my crates
  - Version 0.3.0: [Documentation](_site/rlottie/0.3.0/rlottie/index.html)
  - Version 0.3.1: [Documentation](_site/rlottie/0.3.1/rlottie/index.html)
  - Version 0.4.0: [Documentation](_site/rlottie/0.4.0/rlottie/index.html)
+ - Version 0.4.1: [Documentation](_site/rlottie/0.4.1/rlottie/index.html)
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
  - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie_sys/index.html)
