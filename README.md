@@ -19,6 +19,7 @@ Rust Documentation for all of my crates
  - Version 0.0.7: [Documentation](_site/cargo-doc2readme/0.0.7/cargo_doc2readme/index.html)
  - Version 0.0.8: [Documentation](_site/cargo-doc2readme/0.0.8/cargo_doc2readme/index.html)
  - Version 0.1.0: [Documentation](_site/cargo-doc2readme/0.1.0/cargo_doc2readme/index.html)
+ - Version 0.1.1: [Documentation](_site/cargo-doc2readme/0.1.1/cargo_doc2readme/index.html)
 
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
  - Version 0.0.1: [Documentation](_site/gotham_formdata/0.0.1/gotham_formdata/index.html)
