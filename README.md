@@ -128,10 +128,15 @@ Rust Documentation for all of my crates
  - Version 0.3.0: [Documentation](_site/lottie2gif/0.3.0/lottie2gif/index.html)
  - Version 0.3.1: [Documentation](_site/lottie2gif/0.3.1/lottie2gif/index.html)
  - Version 0.4.0: [Documentation](_site/lottie2gif/0.4.0/lottie2gif/index.html)
+ - Version 0.4.1: [Documentation](_site/lottie2gif/0.4.1/lottie2gif/index.html)
 
 ## lottie2webp [![lottie2webp on crates.io](https://img.shields.io/crates/v/lottie2webp.svg)](https://crates.io/crates/lottie2webp) ![downloads](https://img.shields.io/crates/d/lottie2webp.svg)
  - Version 0.1.0: [Documentation](_site/lottie2webp/0.1.0/lottie2webp/index.html)
  - Version 0.2.0: [Documentation](_site/lottie2webp/0.2.0/lottie2webp/index.html)
+ - Version 0.2.1: [Documentation](_site/lottie2webp/0.2.1/lottie2webp/index.html)
+
+## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
+ - Version 0.1.0: [Documentation](_site/lottieconv/0.1.0/lottieconv/index.html)
 
 ## millimeter [![millimeter on crates.io](https://img.shields.io/crates/v/millimeter.svg)](https://crates.io/crates/millimeter) ![downloads](https://img.shields.io/crates/d/millimeter.svg)
  - Version 0.1.0: [Documentation](_site/millimeter/0.1.0/millimeter/index.html)
