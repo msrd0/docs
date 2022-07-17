@@ -137,6 +137,7 @@ Rust Documentation for all of my crates
 
 ## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
  - Version 0.1.0: [Documentation](_site/lottieconv/0.1.0/lottieconv/index.html)
+ - Version 0.1.2: [Documentation](_site/lottieconv/0.1.2/lottieconv/index.html)
 
 ## millimeter [![millimeter on crates.io](https://img.shields.io/crates/v/millimeter.svg)](https://crates.io/crates/millimeter) ![downloads](https://img.shields.io/crates/d/millimeter.svg)
  - Version 0.1.0: [Documentation](_site/millimeter/0.1.0/millimeter/index.html)
@@ -178,6 +179,7 @@ Rust Documentation for all of my crates
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
  - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie_sys/index.html)
  - Version 0.2.0: [Documentation](_site/rlottie-sys/0.2.0/rlottie_sys/index.html)
+ - Version 0.2.2: [Documentation](_site/rlottie-sys/0.2.2/rlottie_sys/index.html)
 
 ## serde_kicad_sexpr [![serde_kicad_sexpr on crates.io](https://img.shields.io/crates/v/serde_kicad_sexpr.svg)](https://crates.io/crates/serde_kicad_sexpr) ![downloads](https://img.shields.io/crates/d/serde_kicad_sexpr.svg)
  - Version 0.1.0: [Documentation](_site/serde_kicad_sexpr/0.1.0/serde_kicad_sexpr/index.html)
