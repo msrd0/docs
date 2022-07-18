@@ -82,8 +82,10 @@ for crate in $crates; do
 	crate_escaped=$(printf "%s" $crate | tr '-' '_')
 	echo -e "\e[1m => Updating crate $crate ...\e[0m"
 
+	description="$(http_get "$base_url/crates/$crate" | jq -r '.crate.description')"
 	echo >>README.md
 	echo "## $crate [![$crate on crates.io](https://img.shields.io/crates/v/$crate.svg)](https://crates.io/crates/$crate) ![downloads](https://img.shields.io/crates/d/$crate.svg)" >>README.md
+	echo "$description" >>README.md
 	echo "  - $crate" >>_config.yml
 	cat >>_site/index.html <<EOF
 				<div class="header" id="$crate">
@@ -93,6 +95,7 @@ for crate in $crates; do
 					</a>
 					<img src="https://img.shields.io/crates/d/$crate.svg"/>
 				</div>
+				<p class="description">$description</p>
 EOF
 	
 	test -d _site/$crate || mkdir _site/$crate
