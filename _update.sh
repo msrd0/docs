@@ -47,59 +47,25 @@ cat >_site/index.html <<EOF
 <head>
 	<title>Crate Documentation</title>
 	<meta charset="utf-8">
-	<style>
-		body {
-			background: #0d1117;
-			color: #c9d1d9;
-			font-family: ui-sans-serif, sans-serif;
-		}
-		.container {
-			max-width: 78ch;
-			margin: 2rem auto;
-		}
-		.header {
-			display: flex;
-			align-items: center;
-			gap: 2ch;
-			margin-bottom: 1rem;
-		}
-		.header a {
-			display: contents;
-		}
-		h1, h2 {
-			margin: 0;
-		}
-		h1 {
-			font-size: 2rem;
-		}
-		h2 {
-			font-size: 1.8rem;
-		}
-		ul {
-			display: flex;
-			flex-direction: column-reverse;
-		}
-		li {
-			flex: 0 0 auto;
-		}
-		li a, li a:hover, li a:visited, li a:focus, li a:active {
-			color: #ffb454;
-			text-decoration: none;
-			cursor: pointer;
-		}
-		li a:hover {
-		   text-decoration: underline;
-		}
-	</style>
+	<link rel="stylesheet" href="/home/msrd0/git/msrd0.de-docker/proxy/public/style.css" />
+	<link rel="stylesheet" href="/home/msrd0/git/msrd0.de-docker/proxy/public/docs.css" />
 </head>
 <body>
-	<div class="container">
-		<div class="header">
-			<h1>Crate Documentation</h1>
-			<a href="https://drone.msrd0.eu/msrd0/docs">
-				<img src="https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main" alt="Build Status" />
-			</a>
-		</div>
+	<div id="bg"></div>
+
+	<div id="top">
+		<a href="https://msrd0.de/datenschutz.html">Privacy</a>
+	</div>
+
+	<div id="container">
+		<main>
+			<div class="header">
+				<h1>Crate Documentation</h1>
+				<a href="https://drone.msrd0.eu/msrd0/docs">
+					<img src="https://drone.msrd0.eu/api/badges/msrd0/docs/status.svg?ref=refs/heads/main" alt="Build Status" />
+				</a>
+			</div>
+			<div id="grid">
 EOF
 
 cat >_config.yml <<EOF
@@ -120,24 +86,23 @@ for crate in $crates; do
 	echo "## $crate [![$crate on crates.io](https://img.shields.io/crates/v/$crate.svg)](https://crates.io/crates/$crate) ![downloads](https://img.shields.io/crates/d/$crate.svg)" >>README.md
 	echo "  - $crate" >>_config.yml
 	cat >>_site/index.html <<EOF
-		<section id="$crate">
-			<div class="header">
-				<h2>$crate</h2>
-				<a href="https://crates.io/crates/$crate">
-					<img src="https://img.shields.io/crates/v/$crate.svg" alt="$crate on crates.io"/>
-				</a>
-				<img src="https://img.shields.io/crates/d/$crate.svg"/>
-			</div>
-			<ul>
+				<div class="header" id="$crate">
+					<h2>$crate</h2>
+					<a href="https://crates.io/crates/$crate">
+						<img src="https://img.shields.io/crates/v/$crate.svg" alt="$crate on crates.io"/>
+					</a>
+					<img src="https://img.shields.io/crates/d/$crate.svg"/>
+				</div>
 EOF
 	
 	test -d _site/$crate || mkdir _site/$crate
 	response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
-	versions="$(printf "%s" "$response" | jq -r 'select(.yanked == false) | .vers')"
+	versions="$(printf "%s" "$response" | jq -r 'select(.yanked == false) | .vers' | tac)"
 	
 	for vers in $versions; do
 		echo " - Version $vers: [Documentation](_site/$crate/$vers/$crate_escaped/index.html)" >>README.md
-		echo "				<li>Version $vers: <a href=\"./$crate/$vers/$crate_escaped/index.html\">Documentation</a></li>" >>_site/index.html
+		echo "				<div class=\"version\">Version $vers</div>" >>_site/index.html
+		echo "				<a href=\"./$crate/$vers/$crate_escaped/index.html\">Documentation</a>" >>_site/index.html
 		
 		if [ ! -d _site/$crate/$vers ]; then
 			echo -e "\e[1m  -> Documenting version $vers ...\e[0m"
@@ -199,14 +164,11 @@ EOF
 			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
 		fi
 	done
-	
-	cat >>_site/index.html <<EOF
-			</ul>
-		</section>
-EOF
 done
 
 cat >>_site/index.html <<EOF
+			</div>
+		</main>
 	</div>
 </body>
 </html>
