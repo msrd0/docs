@@ -47,8 +47,8 @@ cat >_site/index.html <<EOF
 <head>
 	<title>Crate Documentation</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/home/msrd0/git/msrd0.de-docker/proxy/public/style.css" />
-	<link rel="stylesheet" href="/home/msrd0/git/msrd0.de-docker/proxy/public/docs.css" />
+	<link rel="stylesheet" href="https://msrd0.de/style.css" />
+	<link rel="stylesheet" href="https://msrd0.de/docs.css" />
 </head>
 <body>
 	<div id="bg"></div>
