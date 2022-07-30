@@ -11,6 +11,7 @@ keep_files:
   - gotham_formdata_derive
   - gotham_restful
   - gotham_restful_derive
+  - gotham_restful_redoc
   - hershey
   - influxdb
   - influxdb_derive

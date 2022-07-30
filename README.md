@@ -43,6 +43,7 @@ Implementation detail of gotham_formdata
 
 ## gotham_restful [![gotham_restful on crates.io](https://img.shields.io/crates/v/gotham_restful.svg)](https://crates.io/crates/gotham_restful) ![downloads](https://img.shields.io/crates/d/gotham_restful.svg)
 RESTful additions for the gotham web framework
+ - Version 0.7.5: [Documentation](_site/gotham_restful/0.7.5/gotham_restful/index.html)
  - Version 0.7.4: [Documentation](_site/gotham_restful/0.7.4/gotham_restful/index.html)
  - Version 0.7.3: [Documentation](_site/gotham_restful/0.7.3/gotham_restful/index.html)
  - Version 0.7.2: [Documentation](_site/gotham_restful/0.7.2/gotham_restful/index.html)
@@ -93,6 +94,10 @@ Derive macros for gotham_restful
  - Version 0.0.3: [Documentation](_site/gotham_restful_derive/0.0.3/gotham_restful_derive/index.html)
  - Version 0.0.2: [Documentation](_site/gotham_restful_derive/0.0.2/gotham_restful_derive/index.html)
  - Version 0.0.1: [Documentation](_site/gotham_restful_derive/0.0.1/gotham_restful_derive/index.html)
+
+## gotham_restful_redoc [![gotham_restful_redoc on crates.io](https://img.shields.io/crates/v/gotham_restful_redoc.svg)](https://crates.io/crates/gotham_restful_redoc) ![downloads](https://img.shields.io/crates/d/gotham_restful_redoc.svg)
+Private implementation detail of gotham_restful
+ - Version 0.1.0: [Documentation](_site/gotham_restful_redoc/0.1.0/gotham_restful_redoc/index.html)
 
 ## hershey [![hershey on crates.io](https://img.shields.io/crates/v/hershey.svg)](https://crates.io/crates/hershey) ![downloads](https://img.shields.io/crates/d/hershey.svg)
 Hershey font format parser
