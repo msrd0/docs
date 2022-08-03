@@ -7,6 +7,7 @@ keep_files:
   - aatree
   - bitmap-font
   - cargo-doc2readme
+  - ellipse-bin
   - gotham_formdata
   - gotham_formdata_derive
   - gotham_restful

@@ -25,6 +25,10 @@ cargo subcommand to create a readme file containing the rustdoc comments from yo
  - Version 0.0.5: [Documentation](_site/cargo-doc2readme/0.0.5/cargo_doc2readme/index.html)
  - Version 0.0.4: [Documentation](_site/cargo-doc2readme/0.0.4/cargo_doc2readme/index.html)
 
+## ellipse-bin [![ellipse-bin on crates.io](https://img.shields.io/crates/v/ellipse-bin.svg)](https://crates.io/crates/ellipse-bin) ![downloads](https://img.shields.io/crates/d/ellipse-bin.svg)
+Command that truncates and ellipses strings in a human-friendly way
+ - Version 1.0.0: [Documentation](_site/ellipse-bin/1.0.0/ellipse_bin/index.html)
+
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
 Form data parsing for the gotham web framework
  - Version 0.0.6: [Documentation](_site/gotham_formdata/0.0.6/gotham_formdata/index.html)
