@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["gotham"] = [];
+implementors["gotham_middleware_diesel"] = [{"text":"impl&lt;T&gt; <a class=\"trait\" href=\"gotham/middleware/trait.Middleware.html\" title=\"trait gotham::middleware::Middleware\">Middleware</a> for <a class=\"struct\" href=\"gotham_middleware_diesel/struct.DieselMiddleware.html\" title=\"struct gotham_middleware_diesel::DieselMiddleware\">DieselMiddleware</a>&lt;T&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class=\"trait\" href=\"diesel/connection/trait.Connection.html\" title=\"trait diesel::connection::Connection\">Connection</a> + 'static,&nbsp;</span>","synthetic":false,"types":["gotham_middleware_diesel::DieselMiddleware"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

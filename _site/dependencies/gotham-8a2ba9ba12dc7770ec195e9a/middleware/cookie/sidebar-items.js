@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["CookieParser","A struct that can act as a cookie parsing middleware for Gotham."]]};
