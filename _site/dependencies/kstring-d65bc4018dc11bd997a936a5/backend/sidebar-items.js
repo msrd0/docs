@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":[["HeapStr","Abstract over different type of heap-allocated strings"]],"type":[["ArcStr","Cross-thread, O(1) clones"],["BoxedStr","Fast allocations, O(n) clones"],["RcStr","O(1) clones"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["IsArtifact","A boolean-like to indicate if a `Unit` is an artifact or not."]],"fn":[["build_unit_dependencies",""]]};

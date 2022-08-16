@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["escape","Escape for the windows cmd.exe shell."]]};

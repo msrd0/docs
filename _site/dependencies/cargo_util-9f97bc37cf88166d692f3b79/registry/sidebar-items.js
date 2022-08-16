@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["make_dep_path","Make a path to a dependency, which aligns to"]]};

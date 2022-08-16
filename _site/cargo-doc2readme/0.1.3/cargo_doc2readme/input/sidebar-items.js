@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["add_use_tree_to_scope",""],["is_prelude_import",""],["parse_doc_attr",""],["read_code",""],["read_rustdoc_from_file",""],["read_scope_from_file",""],["resolve_dependencies",""]],"macro":[["item_ident",""]],"struct":[["CrateCode",""],["Dependency",""],["InputFile",""],["Scope",""]]};
