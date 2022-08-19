@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This crate defines three parsing combinators for the chumsky parsing library:"><meta name="keywords" content="rust, rustlang, rust-lang, chumsky_branch"><title>chumsky_branch - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../chumsky_branch/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../chumsky_branch/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate chumsky_branch</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.1.1</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../chumsky_branch/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">chumsky_branch</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/chumsky_branch/lib.rs.html#1-90">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This crate defines three parsing combinators for the <a href="../chumsky/index.html">chumsky parsing library</a>:</p>
+<ul>
+<li>[<code>not_starting_with</code>]: This combinator takes a list of patterns, and
+matches the shortest string from the input that diverges from all
+patterns.</li>
+<li>[<code>not_containing</code>]: This combinator takes a list of patterns, and
+any string that does not contain any of the patterns.</li>
+<li>[<code>branch</code>]: This combinator allows branching into a parser. Each
+branch defines two parsers. When the first parser matches, it
+chooses that branch and that branch only, even if the second parser
+fails. The second parser is then used to produce the output type.
+You can combine as many branches as you want (similar to <code>if else</code>).
+Then, you have to define an else branch which just takes a <code>String</code>
+and needs to produce output from that. Useful if you want to parse
+verbatim input plus some syntax.</li>
+</ul>
+<h2 id="example"><a href="#example">Example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">chumsky::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">chumsky_branch::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="kw">enum</span> <span class="ident">Token</span> {
+	<span class="ident">Placeholder</span>(<span class="ident">String</span>),
+	<span class="ident">Comment</span>(<span class="ident">String</span>),
+	<span class="ident">Verbatim</span>(<span class="ident">String</span>)
+}
+
+<span class="kw">impl</span> <span class="ident">Token</span> {
+	<span class="kw">fn</span> <span class="ident">lexer</span>() -&gt; <span class="kw">impl</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="ident">char</span>, <span class="self">Self</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Simple</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+		<span class="ident">branch</span>(
+			<span class="string">&quot;{{&quot;</span>,
+			<span class="ident">text::ident</span>().<span class="ident">then_ignore</span>(<span class="ident">just</span>(<span class="string">&quot;}}&quot;</span>)).<span class="ident">map</span>(<span class="ident"><span class="self">Self</span>::Placeholder</span>)
+		)
+		.<span class="ident">or_branch</span>(
+			<span class="string">&quot;/*&quot;</span>,
+			<span class="ident">not_containing</span>([<span class="string">&quot;*/&quot;</span>])
+				.<span class="ident">then_ignore</span>(<span class="ident">just</span>(<span class="string">&quot;*/&quot;</span>))
+				.<span class="ident">map</span>(<span class="ident"><span class="self">Self</span>::Comment</span>)
+		)
+		.<span class="ident">or_else</span>(<span class="ident"><span class="self">Self</span>::Verbatim</span>)
+	}
+}
+
+<span class="kw">fn</span> <span class="ident">lexer</span>() -&gt; <span class="kw">impl</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="ident">char</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Token</span><span class="op">&gt;</span>, <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Simple</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+	<span class="ident">Token::lexer</span>().<span class="ident">repeated</span>().<span class="ident">then_ignore</span>(<span class="ident">end</span>())
+}
+
+<span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">&quot;/* Greet the user */Hello {{name}}!&quot;</span>;
+<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">lexer</span>().<span class="ident">parse</span>(<span class="ident">input</span>).<span class="ident">unwrap</span>(), <span class="kw-2">&amp;</span>[
+	<span class="ident">Token::Comment</span>(<span class="string">&quot; Greet the user &quot;</span>.<span class="ident">to_owned</span>()),
+	<span class="ident">Token::Verbatim</span>(<span class="string">&quot;Hello &quot;</span>.<span class="ident">to_owned</span>()),
+	<span class="ident">Token::Placeholder</span>(<span class="string">&quot;name&quot;</span>.<span class="ident">to_owned</span>()),
+	<span class="ident">Token::Verbatim</span>(<span class="string">&quot;!&quot;</span>.<span class="ident">to_owned</span>())
+]);</code></pre></div>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="chumsky_branch::prelude mod">prelude</a></div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Branch.html" title="chumsky_branch::Branch struct">Branch</a></div><div class="item-right docblock-short"><p>The return type of <a href="prelude/fn.branch.html" title="branch">branch</a>.</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.branch.html" title="chumsky_branch::branch fn">branch</a></div><div class="item-right docblock-short"><p>Branch into a parser when and only when encountering the <code>begin</code> pattern.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.not_containing.html" title="chumsky_branch::not_containing fn">not_containing</a></div><div class="item-right docblock-short"><p>Parses any non-empty string that does not contain any of the patterns as a substring.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.not_starting_with.html" title="chumsky_branch::not_starting_with fn">not_starting_with</a></div><div class="item-right docblock-short"><p>Parses a string until it diverges from all of the patterns.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="chumsky_branch" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (Arch Linux rust 1:1.63.0-1)" ></div>
+</body></html>
