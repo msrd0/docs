@@ -16,6 +16,7 @@ This crate provides bitmap fonts for the embedded-graphics crate without requiri
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
 cargo subcommand to create a readme file containing the rustdoc comments from your code
+ - Version 0.1.4: [Documentation](_site/cargo-doc2readme/0.1.4/cargo_doc2readme/index.html)
  - Version 0.1.3: [Documentation](_site/cargo-doc2readme/0.1.3/cargo_doc2readme/index.html)
  - Version 0.1.2: [Documentation](_site/cargo-doc2readme/0.1.2/cargo_doc2readme/index.html)
  - Version 0.1.1: [Documentation](_site/cargo-doc2readme/0.1.1/cargo_doc2readme/index.html)
@@ -25,6 +26,10 @@ cargo subcommand to create a readme file containing the rustdoc comments from yo
  - Version 0.0.6: [Documentation](_site/cargo-doc2readme/0.0.6/cargo_doc2readme/index.html)
  - Version 0.0.5: [Documentation](_site/cargo-doc2readme/0.0.5/cargo_doc2readme/index.html)
  - Version 0.0.4: [Documentation](_site/cargo-doc2readme/0.0.4/cargo_doc2readme/index.html)
+
+## chumsky-branch [![chumsky-branch on crates.io](https://img.shields.io/crates/v/chumsky-branch.svg)](https://crates.io/crates/chumsky-branch) ![downloads](https://img.shields.io/crates/d/chumsky-branch.svg)
+branch combinator for the chumsky parsing library
+ - Version 0.1.1: [Documentation](_site/chumsky-branch/0.1.1/chumsky_branch/index.html)
 
 ## ellipse-bin [![ellipse-bin on crates.io](https://img.shields.io/crates/v/ellipse-bin.svg)](https://crates.io/crates/ellipse-bin) ![downloads](https://img.shields.io/crates/d/ellipse-bin.svg)
 Command that truncates and ellipses strings in a human-friendly way
