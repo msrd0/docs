@@ -107,6 +107,7 @@ Derive macros for gotham_restful
 
 ## gotham_restful_redoc [![gotham_restful_redoc on crates.io](https://img.shields.io/crates/v/gotham_restful_redoc.svg)](https://crates.io/crates/gotham_restful_redoc) ![downloads](https://img.shields.io/crates/d/gotham_restful_redoc.svg)
 Private implementation detail of gotham_restful
+ - Version 0.1.2: [Documentation](_site/gotham_restful_redoc/0.1.2/gotham_restful_redoc/index.html)
  - Version 0.1.1: [Documentation](_site/gotham_restful_redoc/0.1.1/gotham_restful_redoc/index.html)
  - Version 0.1.0: [Documentation](_site/gotham_restful_redoc/0.1.0/gotham_restful_redoc/index.html)
 
