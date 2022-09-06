@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["FeatureValue","FeatureValue represents the types of dependencies a feature can have."]],"struct":[["Summary","Subset of a `Manifest`. Contains only the most important information about a package."]],"type":[["FeatureMap",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["ConfigFormat",""]],"fn":[["get",""]],"struct":[["GetOptions","Options for `cargo config get`."]]};

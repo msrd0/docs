@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Check",""]],"fn":[["check_up2date",""]]};

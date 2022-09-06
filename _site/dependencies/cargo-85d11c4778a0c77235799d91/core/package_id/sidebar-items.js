@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["PackageId","Identifier for a specific version of a package in a specific source."],["PackageIdStableHash",""]]};
