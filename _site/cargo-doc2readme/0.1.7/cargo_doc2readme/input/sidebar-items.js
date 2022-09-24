@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["LinkType",""]],"fn":[["is_prelude_import",""],["make_prelude",""],["parse_doc_attr",""],["read_code",""],["read_rustdoc_from_file",""],["read_scope_from_file",""],["resolve_dependencies",""]],"struct":[["CrateCode",""],["Dependency",""],["InputFile",""],["Scope",""],["ScopeEditor",""]],"type":[["ScopeScope",""]]};

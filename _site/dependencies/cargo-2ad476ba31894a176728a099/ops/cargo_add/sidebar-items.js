@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["add","Add dependencies to a manifest"]],"struct":[["AddOptions","Information on what dependencies should be added"],["DepOp","Dependency entry operation"],["DepTable","Dependency table to add dep to"]]};
