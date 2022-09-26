@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["hashbrown","indexmap","itoa","paste","svgwriter"];

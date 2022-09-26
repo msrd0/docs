@@ -1,0 +1,8 @@
+var sourcesIndex = JSON.parse('{\
+"hashbrown":["",[["external_trait_impls",[],["mod.rs"]],["raw",[],["alloc.rs","bitmask.rs","mod.rs","sse2.rs"]]],["lib.rs","macros.rs","map.rs","scopeguard.rs","set.rs"]],\
+"indexmap":["",[["map",[["core",[],["raw.rs"]]],["core.rs"]]],["equivalent.rs","lib.rs","macros.rs","map.rs","mutable_keys.rs","set.rs","util.rs"]],\
+"itoa":["",[],["lib.rs","udiv128.rs"]],\
+"paste":["",[],["attr.rs","error.rs","lib.rs","segment.rs"]],\
+"svgwriter":["",[["tags",[],["common_attrs.rs","mod.rs"]],["xmlwriter",[["src",[],["lib.rs"]]]]],["data.rs","graphic.rs","lib.rs","tag.rs","transform.rs","value.rs"]]\
+}');
+createSourceSidebar();

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["tags",""]],"struct":[["Data",""],["Graphic","An SVG graphic."],["Transform",""]],"trait":[["Value","This trait implements an SVG attribute value."]]};
