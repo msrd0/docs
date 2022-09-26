@@ -28,4 +28,5 @@ keep_files:
   - rlottie
   - rlottie-sys
   - serde_kicad_sexpr
+  - svgwriter
   - syn-path

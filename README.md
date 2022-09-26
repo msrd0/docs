@@ -230,6 +230,10 @@ A platform independent standalone library that plays Lottie Animation
 KiCAD v6 S-Expression Format
  - Version 0.1.0: [Documentation](_site/serde_kicad_sexpr/0.1.0/serde_kicad_sexpr/index.html)
 
+## svgwriter [![svgwriter on crates.io](https://img.shields.io/crates/v/svgwriter.svg)](https://crates.io/crates/svgwriter) ![downloads](https://img.shields.io/crates/d/svgwriter.svg)
+Typed SVG Writer
+ - Version 0.1.0: [Documentation](_site/svgwriter/0.1.0/svgwriter/index.html)
+
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
 A simple macro to declare a syn::Path at compile time
  - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)
