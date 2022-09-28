@@ -99,7 +99,11 @@ for crate in $crates; do
 EOF
 	
 	test -d _site/$crate || mkdir _site/$crate
-	response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
+	if [ "${#crate}" == 3 ]; then
+		response="$(http_get "$crates_io_index/3/${crate:0:1}/$crate")"
+	else
+		response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
+	fi
 	versions="$(printf "%s" "$response" | jq -r 'select(.yanked == false) | .vers' | tac)"
 	
 	for vers in $versions; do
