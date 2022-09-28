@@ -38,6 +38,8 @@ steps:
       host: smtp.migadu.com
       username: noreply@drone.msrd0.eu
       from: noreply@drone.msrd0.eu
+      recipients: git@msrd0.de
+      recipients_only: true
       password:
         from_secret: SMTP_PASSWORD
     when:

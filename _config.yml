@@ -15,18 +15,4 @@ keep_files:
   - gotham_restful_derive
   - gotham_restful_redoc
   - hershey
-  - influxdb
-  - influxdb_derive
-  - kicad_newstroke_font
-  - log4rs-sentry
-  - lottie2gif
-  - lottie2webp
-  - lottieconv
-  - millimeter
-  - openapi_type
-  - openapi_type_derive
-  - rlottie
-  - rlottie-sys
-  - serde_kicad_sexpr
-  - svgwriter
-  - syn-path
+  - heu
