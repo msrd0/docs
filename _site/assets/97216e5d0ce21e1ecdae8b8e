@@ -1,0 +1,4 @@
+var sourcesIndex = JSON.parse('{\
+"heu":["",[],["lib.rs"]]\
+}');
+createSourceSidebar();
