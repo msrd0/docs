@@ -123,3 +123,120 @@ Hershey font format parser
 
 ## heu [![heu on crates.io](https://img.shields.io/crates/v/heu.svg)](https://crates.io/crates/heu) ![downloads](https://img.shields.io/crates/d/heu.svg)
 Reserved
+ - Version 0.0.0: [Documentation](_site/heu/0.0.0/heu/index.html)
+
+## influxdb [![influxdb on crates.io](https://img.shields.io/crates/v/influxdb.svg)](https://crates.io/crates/influxdb) ![downloads](https://img.shields.io/crates/d/influxdb.svg)
+InfluxDB Driver for Rust
+ - Version 0.5.2: [Documentation](_site/influxdb/0.5.2/influxdb/index.html)
+ - Version 0.5.1: [Documentation](_site/influxdb/0.5.1/influxdb/index.html)
+ - Version 0.5.0: [Documentation](_site/influxdb/0.5.0/influxdb/index.html)
+ - Version 0.4.0: [Documentation](_site/influxdb/0.4.0/influxdb/index.html)
+ - Version 0.3.0: [Documentation](_site/influxdb/0.3.0/influxdb/index.html)
+ - Version 0.2.0: [Documentation](_site/influxdb/0.2.0/influxdb/index.html)
+ - Version 0.1.0: [Documentation](_site/influxdb/0.1.0/influxdb/index.html)
+ - Version 0.0.6: [Documentation](_site/influxdb/0.0.6/influxdb/index.html)
+ - Version 0.0.5: [Documentation](_site/influxdb/0.0.5/influxdb/index.html)
+ - Version 0.0.4: [Documentation](_site/influxdb/0.0.4/influxdb/index.html)
+ - Version 0.0.3: [Documentation](_site/influxdb/0.0.3/influxdb/index.html)
+ - Version 0.0.2: [Documentation](_site/influxdb/0.0.2/influxdb/index.html)
+ - Version 0.0.1: [Documentation](_site/influxdb/0.0.1/influxdb/index.html)
+
+## influxdb_derive [![influxdb_derive on crates.io](https://img.shields.io/crates/v/influxdb_derive.svg)](https://crates.io/crates/influxdb_derive) ![downloads](https://img.shields.io/crates/d/influxdb_derive.svg)
+Private implementation detail of the influxdb crate
+ - Version 0.5.0: [Documentation](_site/influxdb_derive/0.5.0/influxdb_derive/index.html)
+ - Version 0.4.0: [Documentation](_site/influxdb_derive/0.4.0/influxdb_derive/index.html)
+ - Version 0.3.0: [Documentation](_site/influxdb_derive/0.3.0/influxdb_derive/index.html)
+ - Version 0.2.0: [Documentation](_site/influxdb_derive/0.2.0/influxdb_derive/index.html)
+ - Version 0.1.0: [Documentation](_site/influxdb_derive/0.1.0/influxdb_derive/index.html)
+
+## kicad_newstroke_font [![kicad_newstroke_font on crates.io](https://img.shields.io/crates/v/kicad_newstroke_font.svg)](https://crates.io/crates/kicad_newstroke_font) ![downloads](https://img.shields.io/crates/d/kicad_newstroke_font.svg)
+KiCAD v6 Newstroke Font (raw data)
+ - Version 0.1.0+6.0.0: [Documentation](_site/kicad_newstroke_font/0.1.0+6.0.0/kicad_newstroke_font/index.html)
+
+## log4rs-sentry [![log4rs-sentry on crates.io](https://img.shields.io/crates/v/log4rs-sentry.svg)](https://crates.io/crates/log4rs-sentry) ![downloads](https://img.shields.io/crates/d/log4rs-sentry.svg)
+Sentry Appender for log4rs
+ - Version 1.0.1: [Documentation](_site/log4rs-sentry/1.0.1/log4rs_sentry/index.html)
+ - Version 1.0.0: [Documentation](_site/log4rs-sentry/1.0.0/log4rs_sentry/index.html)
+
+## lottie2gif [![lottie2gif on crates.io](https://img.shields.io/crates/v/lottie2gif.svg)](https://crates.io/crates/lottie2gif) ![downloads](https://img.shields.io/crates/d/lottie2gif.svg)
+DEPRECATED - use lottieconv crate instead
+ - Version 0.4.1: [Documentation](_site/lottie2gif/0.4.1/lottie2gif/index.html)
+ - Version 0.4.0: [Documentation](_site/lottie2gif/0.4.0/lottie2gif/index.html)
+ - Version 0.3.1: [Documentation](_site/lottie2gif/0.3.1/lottie2gif/index.html)
+ - Version 0.3.0: [Documentation](_site/lottie2gif/0.3.0/lottie2gif/index.html)
+ - Version 0.2.1: [Documentation](_site/lottie2gif/0.2.1/lottie2gif/index.html)
+ - Version 0.2.0: [Documentation](_site/lottie2gif/0.2.0/lottie2gif/index.html)
+ - Version 0.1.1: [Documentation](_site/lottie2gif/0.1.1/lottie2gif/index.html)
+ - Version 0.1.0: [Documentation](_site/lottie2gif/0.1.0/lottie2gif/index.html)
+
+## lottie2webp [![lottie2webp on crates.io](https://img.shields.io/crates/v/lottie2webp.svg)](https://crates.io/crates/lottie2webp) ![downloads](https://img.shields.io/crates/d/lottie2webp.svg)
+DEPRECATED - use lottieconv crate instead
+ - Version 0.2.1: [Documentation](_site/lottie2webp/0.2.1/lottie2webp/index.html)
+ - Version 0.2.0: [Documentation](_site/lottie2webp/0.2.0/lottie2webp/index.html)
+ - Version 0.1.0: [Documentation](_site/lottie2webp/0.1.0/lottie2webp/index.html)
+
+## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
+Convert lottie files to WEBP or GIF
+ - Version 0.2.0: [Documentation](_site/lottieconv/0.2.0/lottieconv/index.html)
+ - Version 0.1.2: [Documentation](_site/lottieconv/0.1.2/lottieconv/index.html)
+ - Version 0.1.0: [Documentation](_site/lottieconv/0.1.0/lottieconv/index.html)
+
+## millimeter [![millimeter on crates.io](https://img.shields.io/crates/v/millimeter.svg)](https://crates.io/crates/millimeter) ![downloads](https://img.shields.io/crates/d/millimeter.svg)
+Primitive type with millimeter unit attached
+ - Version 0.1.0: [Documentation](_site/millimeter/0.1.0/millimeter/index.html)
+
+## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
+OpenAPI type information for Rust structs and enums
+ - Version 0.4.1: [Documentation](_site/openapi_type/0.4.1/openapi_type/index.html)
+ - Version 0.4.0: [Documentation](_site/openapi_type/0.4.0/openapi_type/index.html)
+ - Version 0.3.1: [Documentation](_site/openapi_type/0.3.1/openapi_type/index.html)
+ - Version 0.3.0: [Documentation](_site/openapi_type/0.3.0/openapi_type/index.html)
+ - Version 0.2.4: [Documentation](_site/openapi_type/0.2.4/openapi_type/index.html)
+ - Version 0.2.3: [Documentation](_site/openapi_type/0.2.3/openapi_type/index.html)
+ - Version 0.2.2: [Documentation](_site/openapi_type/0.2.2/openapi_type/index.html)
+ - Version 0.2.1: [Documentation](_site/openapi_type/0.2.1/openapi_type/index.html)
+ - Version 0.2.0: [Documentation](_site/openapi_type/0.2.0/openapi_type/index.html)
+ - Version 0.1.0: [Documentation](_site/openapi_type/0.1.0/openapi_type/index.html)
+
+## openapi_type_derive [![openapi_type_derive on crates.io](https://img.shields.io/crates/v/openapi_type_derive.svg)](https://crates.io/crates/openapi_type_derive) ![downloads](https://img.shields.io/crates/d/openapi_type_derive.svg)
+Implementation detail of the openapi_type crate
+ - Version 0.4.2: [Documentation](_site/openapi_type_derive/0.4.2/openapi_type_derive/index.html)
+ - Version 0.4.1: [Documentation](_site/openapi_type_derive/0.4.1/openapi_type_derive/index.html)
+ - Version 0.4.0: [Documentation](_site/openapi_type_derive/0.4.0/openapi_type_derive/index.html)
+ - Version 0.3.0: [Documentation](_site/openapi_type_derive/0.3.0/openapi_type_derive/index.html)
+ - Version 0.2.5: [Documentation](_site/openapi_type_derive/0.2.5/openapi_type_derive/index.html)
+ - Version 0.2.4: [Documentation](_site/openapi_type_derive/0.2.4/openapi_type_derive/index.html)
+ - Version 0.2.3: [Documentation](_site/openapi_type_derive/0.2.3/openapi_type_derive/index.html)
+ - Version 0.2.2: [Documentation](_site/openapi_type_derive/0.2.2/openapi_type_derive/index.html)
+ - Version 0.2.1: [Documentation](_site/openapi_type_derive/0.2.1/openapi_type_derive/index.html)
+ - Version 0.2.0: [Documentation](_site/openapi_type_derive/0.2.0/openapi_type_derive/index.html)
+ - Version 0.1.0: [Documentation](_site/openapi_type_derive/0.1.0/openapi_type_derive/index.html)
+
+## rlottie [![rlottie on crates.io](https://img.shields.io/crates/v/rlottie.svg)](https://crates.io/crates/rlottie) ![downloads](https://img.shields.io/crates/d/rlottie.svg)
+A platform independent standalone library that plays Lottie Animation
+ - Version 0.5.0: [Documentation](_site/rlottie/0.5.0/rlottie/index.html)
+ - Version 0.4.1: [Documentation](_site/rlottie/0.4.1/rlottie/index.html)
+ - Version 0.4.0: [Documentation](_site/rlottie/0.4.0/rlottie/index.html)
+ - Version 0.3.1: [Documentation](_site/rlottie/0.3.1/rlottie/index.html)
+ - Version 0.3.0: [Documentation](_site/rlottie/0.3.0/rlottie/index.html)
+ - Version 0.2.2: [Documentation](_site/rlottie/0.2.2/rlottie/index.html)
+ - Version 0.2.0: [Documentation](_site/rlottie/0.2.0/rlottie/index.html)
+ - Version 0.1.0: [Documentation](_site/rlottie/0.1.0/rlottie/index.html)
+
+## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
+A platform independent standalone library that plays Lottie Animation
+ - Version 0.2.2: [Documentation](_site/rlottie-sys/0.2.2/rlottie_sys/index.html)
+ - Version 0.2.0: [Documentation](_site/rlottie-sys/0.2.0/rlottie_sys/index.html)
+ - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie_sys/index.html)
+
+## serde_kicad_sexpr [![serde_kicad_sexpr on crates.io](https://img.shields.io/crates/v/serde_kicad_sexpr.svg)](https://crates.io/crates/serde_kicad_sexpr) ![downloads](https://img.shields.io/crates/d/serde_kicad_sexpr.svg)
+KiCAD v6 S-Expression Format
+ - Version 0.1.0: [Documentation](_site/serde_kicad_sexpr/0.1.0/serde_kicad_sexpr/index.html)
+
+## svgwriter [![svgwriter on crates.io](https://img.shields.io/crates/v/svgwriter.svg)](https://crates.io/crates/svgwriter) ![downloads](https://img.shields.io/crates/d/svgwriter.svg)
+Typed SVG Writer
+ - Version 0.1.0: [Documentation](_site/svgwriter/0.1.0/svgwriter/index.html)
+
+## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
+A simple macro to declare a syn::Path at compile time
+ - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)
