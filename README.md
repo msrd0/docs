@@ -239,4 +239,5 @@ Typed SVG Writer
 
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
 A simple macro to declare a syn::Path at compile time
+ - Version 1.0.1: [Documentation](_site/syn-path/1.0.1/syn_path/index.html)
  - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)
