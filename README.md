@@ -177,6 +177,7 @@ DEPRECATED - use lottieconv crate instead
 
 ## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
 Convert lottie files to WEBP or GIF
+ - Version 0.2.1: [Documentation](_site/lottieconv/0.2.1/lottieconv/index.html)
  - Version 0.2.0: [Documentation](_site/lottieconv/0.2.0/lottieconv/index.html)
  - Version 0.1.2: [Documentation](_site/lottieconv/0.1.2/lottieconv/index.html)
  - Version 0.1.0: [Documentation](_site/lottieconv/0.1.0/lottieconv/index.html)
@@ -214,6 +215,7 @@ Implementation detail of the openapi_type crate
 
 ## rlottie [![rlottie on crates.io](https://img.shields.io/crates/v/rlottie.svg)](https://crates.io/crates/rlottie) ![downloads](https://img.shields.io/crates/d/rlottie.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.5.1: [Documentation](_site/rlottie/0.5.1/rlottie/index.html)
  - Version 0.5.0: [Documentation](_site/rlottie/0.5.0/rlottie/index.html)
  - Version 0.4.1: [Documentation](_site/rlottie/0.4.1/rlottie/index.html)
  - Version 0.4.0: [Documentation](_site/rlottie/0.4.0/rlottie/index.html)
@@ -225,6 +227,7 @@ A platform independent standalone library that plays Lottie Animation
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.2.3: [Documentation](_site/rlottie-sys/0.2.3/rlottie_sys/index.html)
  - Version 0.2.2: [Documentation](_site/rlottie-sys/0.2.2/rlottie_sys/index.html)
  - Version 0.2.0: [Documentation](_site/rlottie-sys/0.2.0/rlottie_sys/index.html)
  - Version 0.1.0: [Documentation](_site/rlottie-sys/0.1.0/rlottie_sys/index.html)
