@@ -1,0 +1,5 @@
+(function() {var implementors = {};
+implementors["clap"] = [];
+implementors["lottie2gif"] = [{"text":"impl <a class=\"trait\" href=\"clap/derive/trait.CommandFactory.html\" title=\"trait clap::derive::CommandFactory\">CommandFactory</a> for <a class=\"struct\" href=\"lottie2gif/struct.Args.html\" title=\"struct lottie2gif::Args\">Args</a>","synthetic":false,"types":["lottie2gif::Args"]}];
+implementors["lottie2webp"] = [{"text":"impl <a class=\"trait\" href=\"clap/derive/trait.CommandFactory.html\" title=\"trait clap::derive::CommandFactory\">CommandFactory</a> for <a class=\"struct\" href=\"lottie2webp/struct.Args.html\" title=\"struct lottie2webp::Args\">Args</a>","synthetic":false,"types":["lottie2webp::Args"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
