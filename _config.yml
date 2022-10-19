@@ -5,6 +5,7 @@ keep_files:
   - dependencies
   - sources
   - aatree
+  - bdf-reader
   - bitmap-font
   - cargo-doc2readme
   - chumsky-branch

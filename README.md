@@ -7,6 +7,10 @@ AATree implementation in Rust
  - Version 0.1.1: [Documentation](_site/aatree/0.1.1/aatree/index.html)
  - Version 0.1.0: [Documentation](_site/aatree/0.1.0/aatree/index.html)
 
+## bdf-reader [![bdf-reader on crates.io](https://img.shields.io/crates/v/bdf-reader.svg)](https://crates.io/crates/bdf-reader) ![downloads](https://img.shields.io/crates/d/bdf-reader.svg)
+BDF font format reader
+ - Version 0.1.1: [Documentation](_site/bdf-reader/0.1.1/bdf_reader/index.html)
+
 ## bitmap-font [![bitmap-font on crates.io](https://img.shields.io/crates/v/bitmap-font.svg)](https://crates.io/crates/bitmap-font) ![downloads](https://img.shields.io/crates/d/bitmap-font.svg)
 This crate provides bitmap fonts for the embedded-graphics crate without requiring generics
  - Version 0.2.2: [Documentation](_site/bitmap-font/0.2.2/bitmap_font/index.html)
