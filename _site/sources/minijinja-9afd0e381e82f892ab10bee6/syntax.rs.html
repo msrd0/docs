@@ -1,0 +1,1156 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/root/.cargo/registry/src/github.com-1ecc6299db9ec823/minijinja-0.25.0/src/syntax.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>syntax.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../minijinja/index.html"><div class="logo-container"><img src="https://github.com/mitsuhiko/minijinja/raw/main/artwork/logo-square.png" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../minijinja/index.html"><div class="logo-container">
+                    <img src="https://github.com/mitsuhiko/minijinja/raw/main/artwork/logo-square.png" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../minijinja/index.html">
+                        <img src="https://github.com/mitsuhiko/minijinja/raw/main/artwork/logo-square.png" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Documents the syntax for templates.
+//!
+//! &lt;details&gt;&lt;summary&gt;&lt;strong style=&quot;cursor: pointer&quot;&gt;Table of Contents&lt;/strong&gt;&lt;/summary&gt;
+//!
+//! - [Synopsis](#synopsis)
+//! - [Trailing Newlines](#trailing-newlines)
+//! - [Expressions](#expressions)
+//!   - [Literals](#literals)
+//!   - [Math](#math)
+//!   - [Comparisons](#comparisons)
+//!   - [Logic](#logic)
+//!   - [Other Operators](#other-operators)
+//!   - [If Expressions](#if-expressions)
+//! - [Tags](#tags)
+//!   - [`{% for %}`](#-for-)
+//!   - [`{% if %}`](#-if-)
+//!   - [`{% extends %}`](#-extends-)
+//!   - [`{% block %}`](#-block-)
+//!   - [`{% include %}`](#-include-)
+//!   - [`{% import %}`](#-import-)
+//!   - [`{% with %}`](#-with-)
+//!   - [`{% set %}`](#-set-)
+//!   - [`{% filter %}`](#-filter-)
+//!   - [`{% macro %}`](#-macro-)
+//!   - [`{% autoescape %}`](#-autoescape-)
+//!   - [`{% raw %}`](#-raw-)
+//!
+//! &lt;/details&gt;
+//!
+//! # Synopsis
+//!
+//! A MiniJinja template is simply a text file.  MiniJinja can generate any text-based
+//! format (HTML, XML, CSV, LaTeX, etc.).  A template doesn’t need to have a specific extension
+//! and in fact MiniJinja does not understand much about the file system.  However the default
+//! configuration for [auto escaping](crate::Environment::set_auto_escape_callback) uses file
+//! extensions to configure the initial behavior.
+//!
+//! A template contains [**expressions**](#expressions), which get replaced with values when a
+//! template is rendered; and [**tags**](#tags), which control the logic of the template.  The
+//! template syntax is heavily inspired by Jinja2, Django and Python.
+//!
+//! This is a minimal template that illustrates a few basics:
+//!
+//! ```jinja
+//! &lt;!doctype html&gt;
+//! &lt;title&gt;{% block title %}My Website{% endblock %}&lt;/title&gt;
+//! &lt;ul id=&quot;navigation&quot;&gt;
+//! {% for item in navigation %}
+//!     &lt;li&gt;&lt;a href=&quot;{{ item.href }}&quot;&gt;{{ item.caption }}&lt;/a&gt;&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//!
+//! &lt;h1&gt;My Webpage&lt;/h1&gt;
+//! {% block body %}{% endblock %}
+//!
+//! {# a comment #}
+//! ```
+//!
+//! # Trailing Newlines
+//!
+//! MiniJinja, like Jinja2, will remove one trailing newline from the end of the file automatically
+//! on parsing.  This lets templates produce a consistent output no matter if the editor adds a
+//! trailing newline or not.  If one wants a trailing newline an extra newline can be added or the
+//! code rendering it adds it manually.
+//!
+//! # Expressions
+//!
+//! MiniJinja allows basic expressions everywhere. These work largely as you expect from Jinja2.
+//! Even if you have not used Jinja2 you should feel comfortable with it.  To output the result
+//! of an expression wrap it in `{{ .. }}`.
+//!
+//! ## Literals
+//!
+//! The simplest form of expressions are literals. Literals are representations for Python
+//! objects such as strings and numbers. The following literals exist:
+//!
+//! - `&quot;Hello World&quot;`: Everything between two double or single quotes is a string. They are
+//!   useful whenever you need a string in the template (e.g. as arguments to function calls
+//!   and filters, or just to extend or include a template).
+//! - `42`: Integers are whole numbers without a decimal part.
+//! - `42.0`: Floating point numbers can be written using a `.` as a decimal mark.
+//! - `[&#39;list&#39;, &#39;of&#39;, &#39;objects&#39;]`: Everything between two brackets is a list. Lists are useful
+//!   for compatibility with Jinja2 `(&#39;list&#39;, &#39;of&#39;, &#39;objects&#39;)` is also allowed.
+//!   for storing sequential data to be iterated over.
+//! - `{&#39;map&#39;: &#39;of&#39;, &#39;key&#39;: &#39;and&#39;, &#39;value&#39;: &#39;pairs&#39;}`: A map is a structure that combines keys
+//!   and values. Keys must be unique and always have exactly one value. Maps are rarely
+//!   created in templates.
+//! - `true` / `false` / `none`: boolean values and the special `none` value which maps to the
+//!   unit type in Rust.
+//!
+//! ## Math
+//!
+//! MiniJinja allows you to calculate with values.  The following operators are supported:
+//!
+//! - ``+``: Adds two numbers up. ``{{ 1 + 1 }}`` is ``2``.
+//! - ``-``: Subtract the second number from the first one.  ``{{ 3 - 2 }}`` is ``1``.
+//! - ``/``: Divide two numbers. ``{{ 1 / 2 }}`` is ``0.5``.  See note on divisions below.
+//! - ``//``: Integer divide two numbers. ``{{ 5 // 3 }}`` is ``1``.  See note on divisons below.
+//! - ``%``: Calculate the remainder of an integer division.  ``{{ 11 % 7 }}`` is ``4``.
+//! - ``*``: Multiply the left operand with the right one.  ``{{ 2 * 2 }}`` would return ``4``.
+//! - ``**``: Raise the left operand to the power of the right operand.  ``{{ 2**3 }}``
+//!   would return ``8``.
+//!
+//! Note on divisions: divisions in Jinja2 are flooring, divisions in MiniJinja
+//! are at present using euclidean division.  They are almost the same but not quite.
+//!
+//! ## Comparisons
+//!  
+//! - ``==``: Compares two objects for equality.
+//! - ``!=``: Compares two objects for inequality.
+//! - ``&gt;``: ``true`` if the left hand side is greater than the right hand side.
+//! - ``&gt;=``: ``true`` if the left hand side is greater or equal to the right hand side.
+//! - ``&lt;``:``true`` if the left hand side is lower than the right hand side.
+//! - ``&lt;=``: ``true`` if the left hand side is lower or equal to the right hand side.
+//!
+//! ## Logic
+//!
+//! For ``if`` statements it can be useful to combine multiple expressions:
+//!
+//! - ``and``: Return true if the left and the right operand are true.
+//! - ``or``: Return true if the left or the right operand are true.
+//! - ``not``: negate a statement (see below).
+//! - ``(expr)``: Parentheses group an expression.
+//!
+//! ## Other Operators
+//!
+//! The following operators are very useful but don&#39;t fit into any of the other
+//! two categories:
+//!
+//! - ``is``/``is not``: Performs a [test](crate::tests).
+//! - ``in``/``not in``: Performs a containment check.
+//! - ``|`` (pipe, vertical bar): Applies a [filter](crate::filters).
+//! - ``~`` (tilde): Converts all operands into strings and concatenates them.
+//!   ``{{ &quot;Hello &quot; ~ name ~ &quot;!&quot; }}`` would return (assuming `name` is set
+//!   to ``&#39;John&#39;``) ``Hello John!``.
+//! - ``()``: Call a callable: ``{{ super() }}``.  Inside of the parentheses you
+//!   can use positional arguments.  Additionally keyword arguments are supported
+//!   which are treated like a dict syntax.  Eg: `foo(a=1, b=2)` is the same as
+//!   `foo({&quot;a&quot;: 1, &quot;b&quot;: 2})`.
+//! - ``.`` / ``[]``: Get an attribute of an object.
+//! - ``[start:stop]`` / ``[start:stop:step]``: slices a list or string.  All three expressions
+//!   are optional (`start`, `stop`, `step`).  For instance ``&quot;Hello World&quot;[:5]`` will return
+//!   just `&quot;Hello&quot;`.  Likewise ``&quot;Hello&quot;[1:-1]`` will return `&quot;ell&quot;`.  The step component can
+//!   be used to change the step size.  `&quot;12345&quot;[::2]` will return `&quot;135&quot;`.
+//!
+//! ### If Expressions
+//!
+//! It is also possible to use inline _if_ expressions. These are useful in some situations.
+//! For example, you can use this to extend from one template if a variable is defined,
+//! otherwise from the default layout template:
+//!
+//! ```jinja
+//! {% extends layout_template if layout_template is defined else &#39;default.html&#39; %}
+//! ```
+//!
+//! The `else` part is optional. If not provided, the else block implicitly evaluates
+//! into an undefined value:
+//!
+//! ```jinja
+//! {{ title|upper if title }}
+//! ```
+//!
+//! # Tags
+//!
+//! Tags control logic in templates.  The following tags exist:
+//!
+//! ## `{% for %}`
+//!
+//! The for tag loops over each item in a sequence.  For example, to display a list
+//! of users provided in a variable called `users`:
+//!
+//! ```jinja
+//! &lt;h1&gt;Members&lt;/h1&gt;
+//! &lt;ul&gt;
+//! {% for user in users %}
+//!   &lt;li&gt;{{ user.username }}&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//! ```
+//!
+//! It&#39;s also possible to unpack tuples while iterating:
+//!
+//! ```jinja
+//! &lt;h1&gt;Members&lt;/h1&gt;
+//! &lt;ul&gt;
+//! {% for (key, value) in list_of_pairs %}
+//!   &lt;li&gt;{{ key }}: {{ value }}&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//! ```
+//!
+//! Inside of the for block you can access some special variables:
+//!
+//! - `loop.index`: The current iteration of the loop. (1 indexed)
+//! - `loop.index0`: The current iteration of the loop. (0 indexed)
+//! - `loop.revindex`: The number of iterations from the end of the loop (1 indexed)
+//! - `loop.revindex0`: The number of iterations from the end of the loop (0 indexed)
+//! - `loop.first`: True if this is the first iteration.
+//! - `loop.last`: True if this is the last iteration.
+//! - `loop.length`: The number of items in the sequence.
+//! - `loop.cycle`: A helper function to cycle between a list of sequences. See the explanation below.
+//! - `loop.depth`: Indicates how deep in a recursive loop the rendering currently is. Starts at level 1
+//! - `loop.depth0`: Indicates how deep in a recursive loop the rendering currently is. Starts at level 0
+//! - `loop.changed(...args)`: Returns true if the passed values have changed since the last time it was called with the same arguments.
+//! - `loop.cycle(...args)`: Returns a value from the passed sequence in a cycle.
+//!
+//! Within a for-loop, it’s possible to cycle among a list of strings/variables each time through
+//! the loop by using the special `loop.cycle` helper:
+//!
+//! ```jinja
+//! {% for row in rows %}
+//!   &lt;li class=&quot;{{ loop.cycle(&#39;odd&#39;, &#39;even&#39;) }}&quot;&gt;{{ row }}&lt;/li&gt;
+//! {% endfor %}
+//! ```
+//!
+//! A `loop.changed()` helper is also available which can be used to detect when
+//! a value changes between the last iteration and the current one.  The method
+//! takes one or more arguments that are all compared.
+//!
+//! ```jinja
+//! {% for entry in entries %}
+//!   {% if loop.changed(entry.category) %}
+//!     &lt;h2&gt;{{ entry.category }}&lt;/h2&gt;
+//!   {% endif %}
+//!   &lt;p&gt;{{ entry.message }}&lt;/p&gt;
+//! {% endfor %}
+//! ```
+//!
+//! Unlike in Rust or Python, it’s not possible to break or continue in a loop. You can,
+//! however, filter the sequence during iteration, which allows you to skip items.  The
+//! following example skips all the users which are hidden:
+//!
+//! ```jinja
+//! {% for user in users if not user.hidden %}
+//!   &lt;li&gt;{{ user.username }}&lt;/li&gt;
+//! {% endfor %}
+//! ```
+//!
+//! If no iteration took place because the sequence was empty or the filtering
+//! removed all the items from the sequence, you can render a default block by
+//! using else:
+//!
+//! ```jinja
+//! &lt;ul&gt;
+//! {% for user in users %}
+//!   &lt;li&gt;{{ user.username }}&lt;/li&gt;
+//! {% else %}
+//!   &lt;li&gt;&lt;em&gt;no users found&lt;/em&gt;&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//! ```
+//!
+//! It is also possible to use loops recursively. This is useful if you are
+//! dealing with recursive data such as sitemaps. To use loops recursively, you
+//! basically have to add the ``recursive`` modifier to the loop definition and
+//! call the loop variable with the new iterable where you want to recurse.
+//!
+//! ```jinja
+//! &lt;ul class=&quot;menu&quot;&gt;
+//! {% for item in menu recursive %}
+//!   &lt;li&gt;&lt;a href=&quot;{{ item.href }}&quot;&gt;{{ item.title }}&lt;/a&gt;
+//!   {% if item.children %}
+//!     &lt;ul class=&quot;submenu&quot;&gt;{{ loop(item.children) }}&lt;/ul&gt;
+//!   {% endif %}&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//! ```
+//!
+//! ## `{% if %}`
+//!
+//! The `if` statement is comparable with the Python if statement. In the simplest form,
+//! you can use it to test if a variable is defined, not empty and not false:
+//!
+//! ```jinja
+//! {% if users %}
+//!   &lt;ul&gt;
+//!   {% for user in users %}
+//!     &lt;li&gt;{{ user.username }}&lt;/li&gt;
+//!   {% endfor %}
+//!   &lt;/ul&gt;
+//! {% endif %}
+//! ```
+//!
+//! For multiple branches, `elif` and `else` can be used like in Python.  You can use more
+//! complex expressions there too:
+//!
+//! ```jinja
+//! {% if kenny.sick %}
+//!   Kenny is sick.
+//! {% elif kenny.dead %}
+//!   You killed Kenny!  You bastard!!!
+//! {% else %}
+//!   Kenny looks okay --- so far
+//! {% endif %}
+//! ```
+//!
+//! ## `{% extends %}`
+//!
+//! **Feature:** `multi-template` (included by default)
+//!
+//! The `extends` tag can be used to extend one template from another.  You can have multiple
+//! `extends` tags in a file, but only one of them may be executed at a time.  For more
+//! information see [block](#-block-).
+//!
+//! ## `{% block %}`
+//!
+//! Blocks are used for inheritance and act as both placeholders and replacements at the
+//! same time:
+//!
+//! The most powerful part of MiniJinja is template inheritance. Template inheritance allows
+//! you to build a base &quot;skeleton&quot; template that contains all the common elements of your
+//! site and defines **blocks** that child templates can override.
+//!
+//! **Base Template:**
+//!
+//! This template, which we&#39;ll call ``base.html``, defines a simple HTML skeleton
+//! document that you might use for a simple two-column page. It&#39;s the job of
+//! &quot;child&quot; templates to fill the empty blocks with content:
+//!
+//! ```jinja
+//! &lt;!doctype html&gt;
+//! {% block head %}
+//! &lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+//! {% endblock %}
+//! {% block body %}{% endblock %}
+//! ```
+//!
+//! **Child Template:**
+//!
+//! ```jinja
+//! {% extends &quot;base.html&quot; %}
+//! {% block title %}Index{% endblock %}
+//! {% block head %}
+//!   {{ super() }}
+//!   &lt;style type=&quot;text/css&quot;&gt;
+//!     .important { color: #336699; }
+//!   &lt;/style&gt;
+//! {% endblock %}
+//! {% block body %}
+//!   &lt;h1&gt;Index&lt;/h1&gt;
+//!   &lt;p class=&quot;important&quot;&gt;
+//!     Welcome to my awesome homepage.
+//!   &lt;/p&gt;
+//! {% endblock %}
+//! ```
+//!
+//! The ``{% extends %}`` tag is the key here. It tells the template engine that
+//! this template &quot;extends&quot; another template.  When the template system evaluates
+//! this template, it first locates the parent.  The extends tag should be the
+//! first tag in the template.
+//!
+//! As you can see it&#39;s also possible to render the contents of the parent block by calling
+//! ``super()``. You can’t define multiple ``{% block %}`` tags with the same name in
+//! the same template. This limitation exists because a block tag works in “both”
+//! directions. That is, a block tag doesn’t just provide a placeholder to fill -
+//! it also defines the content that fills the placeholder in the parent. If
+//! there were two similarly-named ``{% block %}`` tags in a template, that
+//! template’s parent wouldn’t know which one of the blocks’ content to use.
+//!
+//! If you want to print a block multiple times, you can, however, use the
+//! special self variable and call the block with that name:
+//!
+//! ```jinja
+//! &lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+//! &lt;h1&gt;{{ self.title() }}&lt;/h1&gt;
+//! {% block body %}{% endblock %}
+//! ```
+//!
+//! MiniJinja allows you to put the name of the block after the end tag for better
+//! readability:
+//!
+//! ```jinja
+//! {% block sidebar %}
+//!   {% block inner_sidebar %}
+//!     ...
+//!   {% endblock inner_sidebar %}
+//! {% endblock sidebar %}
+//! ```
+//!
+//! However, the name after the `endblock` word must match the block name.
+//!
+//! ## `{% include #}`
+//!
+//! **Feature:** `multi-template` (included by default)
+//!  
+//! The `include` tag is useful to include a template and return the rendered contents of that file
+//! into the current namespace::
+//!  
+//! ```jinja
+//! {% include &#39;header.html&#39; %}
+//!   Body
+//! {% include &#39;footer.html&#39; %}
+//! ```
+//!
+//! Optionally `ignore missing` can be added in which case non existing templates
+//! are silently ignored.
+//!
+//! ```jinja
+//! {% include &#39;customization.html&#39; ignore missing %}
+//! ```
+//!
+//! You can also provide a list of templates that are checked for existence
+//! before inclusion. The first template that exists will be included. If `ignore
+//! missing` is set, it will fall back to rendering nothing if none of the
+//! templates exist, otherwise it will fail with an error.
+//!
+//! ```jinja
+//! {% include [&#39;page_detailed.html&#39;, &#39;page.html&#39;] %}
+//! {% include [&#39;special_sidebar.html&#39;, &#39;sidebar.html&#39;] ignore missing %}
+//! ```
+//!  
+//! Included templates have access to the variables of the active context.
+//!
+//! ## `{% import #}`
+//!
+//! **Feature:** `multi-template` (included by default)
+//!
+//! MiniJinja supports the `{% import %}` and `{% from ... import ... %}`
+//! syntax.  With it variables or macros can be included from other templates:
+//!
+//! ```jinja
+//! {% from &quot;my_template.html&quot; import my_macro, my_variable %}
+//! ```
+//!
+//! Imports can also be aliased:
+//!
+//! ```jinja
+//! {% from &quot;my_template.html&quot; import my_macro as other_name %}
+//! {{ other_name() }}
+//! ```
+//!
+//! Full modules can be imported with `{% import ... as ... %}`:
+//!
+//! ```jinja
+//! {% import &quot;my_template.html&quot; as helpers %}
+//! {{ helpers.my_macro() }}
+//! ```
+//!
+//! Note that unlike Jinja2, exported modules do not contain any template code.  Only
+//! variables and macros that are defined can be imported.  Also imports unlike in Jinja2
+//! are not cached and they get access to the full template context.
+//!
+//! ## `{% with %}`
+//!
+//! The with statement makes it possible to create a new inner scope.  Variables set within
+//! this scope are not visible outside of the scope:
+//!
+//! ```jinja
+//! {% with foo = 42 %}
+//!   {{ foo }}           foo is 42 here
+//! {% endwith %}
+//! foo is not visible here any longer
+//! ```
+//!
+//! Multiple variables can be set at once and unpacking is supported:
+//!
+//! ```jinja
+//! {% with a = 1, (b, c) = [2, 3] %}
+//!   {{ a }}, {{ b }}, {{ c }}  (outputs 1, 2, 3)
+//! {% endwith %}
+//! ```
+//!
+//! ## `{% set %}`
+//!
+//! The `set` statement can be used to assign to variables on the same scope.  This is
+//! similar to how `with` works but it won&#39;t introduce a new scope.
+//!
+//! ```jinja
+//! {% set navigation = [(&#39;index.html&#39;, &#39;Index&#39;), (&#39;about.html&#39;, &#39;About&#39;)] %}
+//! ```
+//!
+//! Please keep in mind that it is not possible to set variables inside a block
+//! and have them show up outside of it.  This also applies to loops.  The only
+//! exception to that rule are if statements which do not introduce a scope.
+//!
+//! It&#39;s also possible to capture blocks of template code into a variable by using
+//! the `set` statement as a block.   In that case, instead of using an equals sign
+//! and a value, you just write the variable name and then everything until
+//! `{% endset %}` is captured.
+//!
+//! ```jinja
+//! {% set navigation %}
+//! &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Index&lt;/a&gt;
+//! &lt;li&gt;&lt;a href=&quot;/downloads&quot;&gt;Downloads&lt;/a&gt;
+//! {% endset %}
+//! ```
+//!
+//! The `navigation` variable then contains the navigation HTML source.
+//!
+//! This can also be combined with applying a filter:
+//!
+//! ```jinja
+//! {% set title | upper %}Title of the page{% endset %}
+//! ```
+//!
+//! ## `{% filter %}`
+//!
+//! Filter sections allow you to apply regular [filters](crate::filters) on a
+//! block of template data. Just wrap the code in the special filter block:
+//!
+//! ```jinja
+//! {% filter upper %}
+//!   This text becomes uppercase
+//! {% endfilter %}
+//! ```
+//!
+//! ## `{% macro %}`
+//!
+//! **Feature:** `macros` (included by default)
+//!
+//! MiniJinja has limited support for macros.  They allow you to write reusable
+//! template functions.  hey are useful to put often used idioms into reusable
+//! functions to not repeat yourself (“DRY”).
+//!
+//! Here’s a small example of a macro that renders a form element:
+//!
+//! ```jinja
+//! {% macro input(name, value=&quot;&quot;, type=&quot;text&quot;) -%}
+//! &lt;input type=&quot;{{ type }}&quot; name=&quot;{{ name }}&quot; value=&quot;{{ value }}&quot;&gt;
+//! {%- endmacro %}
+//! ```
+//!
+//! The macro can then be called like a function in the namespace:
+//!
+//! ```jinja
+//! &lt;p&gt;{{ input(&#39;username&#39;) }}&lt;/p&gt;
+//! &lt;p&gt;{{ input(&#39;password&#39;, type=&#39;password&#39;) }}&lt;/p&gt;
+//! ```
+//!
+//! The behavior of macros with regards to undefined variables is that they capture
+//! them at macro declaration time (eg: they use a closure).
+//!
+//! Macros can be imported via `{% include %}` or `{% from ... import %}`.
+//!
+//! ## `{% autoescape %}`
+//!
+//! If you want you can activate and deactivate the autoescaping from within
+//! the templates.
+//!
+//! Example:
+//!
+//! ```jinja
+//! {% autoescape true %}
+//!   Autoescaping is active within this block
+//! {% endautoescape %}
+//!
+//! {% autoescape false %}
+//!   Autoescaping is inactive within this block
+//! {% endautoescape %}
+//! ```
+//!
+//! After an `endautoescape` the behavior is reverted to what it was before.
+//!
+//! The exact auto escaping behavior is determined by the value of
+//! [`AutoEscape`](crate::AutoEscape) set to the template.
+//!
+//! ## `{% raw %}`
+//!
+//! A raw block is a special construct that lets you ignore the embedded template
+//! syntax.  This is particularly useful if a segment of template code would
+//! otherwise require constant escaping with things like `{{ &quot;{{&quot; }}`:
+//!
+//! Example:
+//!
+//! ```jinja
+//! {% raw %}
+//! &lt;ul&gt;
+//! {% for item in seq %}
+//!     &lt;li&gt;{{ item }}&lt;/li&gt;
+//! {% endfor %}
+//! &lt;/ul&gt;
+//! {% endraw %}
+//! ```
+
+</span><span class="comment">// this is just for docs
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="minijinja" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (Arch Linux rust 1:1.65.0-1)" ></div></body></html>

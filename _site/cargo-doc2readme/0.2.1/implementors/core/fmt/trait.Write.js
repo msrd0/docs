@@ -1,0 +1,4 @@
+(function() {var implementors = {
+"arrayvec":[["impl&lt;const CAP:&nbsp;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.65.0/core/primitive.usize.html\">usize</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.65.0/core/fmt/trait.Write.html\" title=\"trait core::fmt::Write\">Write</a> for <a class=\"struct\" href=\"arrayvec/struct.ArrayString.html\" title=\"struct arrayvec::ArrayString\">ArrayString</a>&lt;CAP&gt;"]],
+"minijinja":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.65.0/core/fmt/trait.Write.html\" title=\"trait core::fmt::Write\">Write</a> for <a class=\"struct\" href=\"minijinja/struct.Output.html\" title=\"struct minijinja::Output\">Output</a>&lt;'_&gt;"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
