@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":[["Field","Represents a single field in a database row."],["NamedRow","Represents a row of a SQL query, where the values are accessed by name rather than by index."],["Row","Represents a single database row."],["RowIndex","Representing a way to index into database rows"]],"type":[["FieldRet","Return type of [`Row::get`]"]]};

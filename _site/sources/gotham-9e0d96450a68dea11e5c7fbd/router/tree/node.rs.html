@@ -1,0 +1,1144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/root/.cargo/registry/src/github.com-1ecc6299db9ec823/gotham-0.7.1/src/router/tree/node.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>node.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../gotham/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Defines `Node` for `Tree`.
+
+</span><span class="kw">use </span>hyper::{Body, StatusCode};
+<span class="kw">use </span>log::trace;
+
+<span class="kw">use </span><span class="kw">crate</span>::helpers::http::PercentDecoded;
+<span class="kw">use </span><span class="kw">crate</span>::router::non_match::RouteNonMatch;
+<span class="kw">use </span><span class="kw">crate</span>::router::route::{Delegation, Route};
+<span class="kw">use </span><span class="kw">crate</span>::router::tree::segment::{SegmentMapping, SegmentType};
+<span class="kw">use </span><span class="kw">crate</span>::state::{request_id, State};
+
+<span class="kw">use </span>std::cmp::Ordering;
+<span class="kw">use </span>std::collections::HashMap;
+
+<span class="doccomment">/// A recursive member of `Tree`, representative of segment(s) in a request path.
+///
+/// Each node includes `0..n` `Route` instances, which can be further evaluated by the `Router`
+/// based on a match. Every node may also have `0..n` children to provide the recursive tree
+/// representation.
+</span><span class="kw">pub struct </span>Node {
+    segment: String,
+    segment_type: SegmentType,
+    routes: Vec&lt;Box&lt;<span class="kw">dyn </span>Route&lt;ResBody = Body&gt; + Send + Sync&gt;&gt;,
+    children: Vec&lt;Node&gt;,
+}
+
+<span class="kw">impl </span>Node {
+    <span class="doccomment">/// Creates new `Node` for the given segment and type.
+    </span><span class="kw">pub fn </span>new(segment: <span class="kw-2">&amp;</span>str, segment_type: SegmentType) -&gt; <span class="self">Self </span>{
+        Node {
+            segment_type,
+            segment: segment.to_string(),
+            routes: <span class="macro">vec!</span>[],
+            children: <span class="macro">vec!</span>[],
+        }
+    }
+
+    <span class="doccomment">/// Adds a new child `Node` instance to this `Node`.
+    </span><span class="kw">pub fn </span>add_child(<span class="kw-2">&amp;mut </span><span class="self">self</span>, node: Node) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.children.push(node);
+        <span class="self">self</span>.children.sort();
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Adds a `Route` to this `Node`, to be potentially evaluated by the `Router`.
+    </span><span class="kw">pub fn </span>add_route(<span class="kw-2">&amp;mut </span><span class="self">self</span>, route: Box&lt;<span class="kw">dyn </span>Route&lt;ResBody = Body&gt; + Send + Sync&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.routes.push(route);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Borrows a child `Node` based on the defined segment bounds.
+    </span><span class="kw">pub fn </span>borrow_child(<span class="kw-2">&amp;</span><span class="self">self</span>, segment: <span class="kw-2">&amp;</span>str, segment_type: SegmentType) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Node&gt; {
+        <span class="self">self</span>.children
+            .iter()
+            .find(|n| n.segment_type == segment_type &amp;&amp; n.segment == segment)
+    }
+
+    <span class="doccomment">/// Borrows a mutable child `Node` based on the defined segment bounds.
+    </span><span class="kw">pub fn </span>borrow_child_mut(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        segment: <span class="kw-2">&amp;</span>str,
+        segment_type: SegmentType,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span>Node&gt; {
+        <span class="self">self</span>.children
+            .iter_mut()
+            .find(|n| n.segment_type == segment_type &amp;&amp; n.segment == segment)
+    }
+
+    <span class="doccomment">/// Determines if a child exists based on the defined segment bounds.
+    </span><span class="kw">pub fn </span>has_child(<span class="kw-2">&amp;</span><span class="self">self</span>, segment: <span class="kw-2">&amp;</span>str, segment_type: SegmentType) -&gt; bool {
+        <span class="self">self</span>.borrow_child(segment, segment_type).is_some()
+    }
+
+    <span class="doccomment">/// Determines if this `Node` has any valid `Route` values attached.
+    </span><span class="kw">pub fn </span>is_routable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !<span class="self">self</span>.routes.is_empty()
+    }
+
+    <span class="doccomment">/// Traverses this `Node` and its children, attempting to a locate a path of `Node` instances
+    /// which match all segments of the provided `Request` path. The final `Node` must have at
+    /// least a single `Route` attached in order to be returned.
+    ///
+    /// Only the first matching path is returned from this method, and the value is wrapped in
+    /// an `Option` as there may be no matching node.
+    ///
+    /// Children are searched in a most to least specific order of segments, based on the node
+    /// `SegmentType` value:
+    ///
+    /// 1. Static
+    /// 2. Constrained
+    /// 3. Dynamic
+    /// 4. Glob
+    ///
+    /// This method is a wrapping of an internal recursive implementation to mask the required
+    /// types needed for the recursion.
+    </span><span class="kw">pub fn </span>match_node&lt;<span class="lifetime">&#39;a</span>&gt;(
+        <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
+        segments: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PercentDecoded],
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Node, SegmentMapping&lt;<span class="lifetime">&#39;a</span>&gt;, usize)&gt; {
+        <span class="comment">// accumulators for recursion
+        </span><span class="kw">let </span><span class="kw-2">mut </span>params = HashMap::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>processed = <span class="number">0</span>;
+
+        <span class="comment">// process and map the results through to the required form
+        </span><span class="self">self</span>.inner_match_node(segments, <span class="kw-2">&amp;mut </span>params, <span class="kw-2">&amp;mut </span>processed)
+            .map(|node| (node, params, processed))
+    }
+
+    <span class="doccomment">/// Retrieves a reference to the contained segment value.
+    ///
+    /// This is required for lifetime related annotations.
+    </span><span class="kw">pub fn </span>segment&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.segment
+    }
+
+    <span class="doccomment">/// Determines if a `Route` instance associated with this `Node` is willing to `Handle` the
+    /// request.
+    ///
+    /// Where multiple `Route` instances could possibly handle the `Request` only the first, ordered
+    /// per creation, is invoked.
+    ///
+    /// Where no `Route` instances will accept the `Request` the resulting Error will be the
+    /// union of the `RouteNonMatch` values returned from each `Route`.
+    ///
+    /// In the situation where all these avenues are exhausted an InternalServerError will be
+    /// provided.
+    </span><span class="kw">pub fn </span>select_route(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        state: <span class="kw-2">&amp;</span>State,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>Box&lt;<span class="kw">dyn </span>Route&lt;ResBody = Body&gt; + Send + Sync&gt;, RouteNonMatch&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>err = <span class="prelude-val">Ok</span>(());
+
+        <span class="comment">// check for matching routes
+        </span><span class="kw">for </span>r <span class="kw">in </span><span class="self">self</span>.routes.iter() {
+            <span class="kw">match </span>r.is_match(state) {
+                <span class="prelude-val">Ok</span>(()) =&gt; {
+                    <span class="macro">trace!</span>(<span class="string">&quot;[{}] found matching route&quot;</span>, request_id(state));
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(r);
+                }
+                <span class="prelude-val">Err</span>(e) =&gt; {
+                    <span class="comment">// concat errors
+                    </span>err = <span class="kw">match </span>err {
+                        <span class="prelude-val">Err</span>(e0) =&gt; <span class="prelude-val">Err</span>(e.union(e0)),
+                        <span class="prelude-val">Ok</span>(()) =&gt; <span class="prelude-val">Err</span>(e),
+                    }
+                }
+            }
+        }
+
+        <span class="comment">// unpack required for types
+        </span><span class="kw">if let </span><span class="prelude-val">Err</span>(e) = err {
+            <span class="macro">trace!</span>(
+                <span class="string">&quot;[{}] no matching route, using error status code from route&quot;</span>,
+                request_id(state)
+            );
+            <span class="kw">return </span><span class="prelude-val">Err</span>(e);
+        }
+
+        <span class="macro">trace!</span>(
+            <span class="string">&quot;[{}] invalid state, no routes. sending internal server error&quot;</span>,
+            request_id(state)
+        );
+
+        <span class="comment">// error because we shouldn&#39;t arrive here due to match_node/1
+        </span><span class="prelude-val">Err</span>(RouteNonMatch::new(StatusCode::INTERNAL_SERVER_ERROR))
+    }
+
+    <span class="doccomment">/// Recursive implementation of `match_route` to populate parameters and keep
+    /// track of the number of visited nodes.
+    ///
+    /// There&#39;s space for optimizations in here (perhaps), but it seems to perform
+    /// faster than the previous implementation of the router, so all is well for now.
+    </span><span class="kw">fn </span>inner_match_node&lt;<span class="lifetime">&#39;a</span>&gt;(
+        <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
+        segments: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PercentDecoded],
+        params: <span class="kw-2">&amp;mut </span>SegmentMapping&lt;<span class="lifetime">&#39;a</span>&gt;,
+        processed: <span class="kw-2">&amp;mut </span>usize,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Node&gt; {
+        <span class="kw">let </span>next_segment = segments.split_first();
+
+        <span class="comment">// stop if we&#39;re done
+        </span><span class="kw">if </span>next_segment.is_none() {
+            <span class="kw">if </span>!<span class="self">self</span>.is_routable() {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
+            }
+            <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="self">self</span>);
+        }
+
+        <span class="comment">// check for external delegates, and stop
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(route) = <span class="self">self</span>.routes.first() {
+            <span class="kw">if </span>route.delegation() == Delegation::External {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="self">self</span>);
+            }
+        }
+
+        <span class="kw">let </span>(segment, remaining) = next_segment.unwrap();
+
+        <span class="kw-2">*</span>processed += <span class="number">1</span>;
+
+        <span class="comment">// check all children first
+        </span><span class="kw">for </span>child <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.children {
+            <span class="kw">match </span>child.segment_type {
+                <span class="comment">// Globbing matches everything, so we append the segment value
+                // to the parameters against the child segment name.
+                </span>SegmentType::Glob =&gt; {
+                    params
+                        .entry(<span class="kw-2">&amp;</span>child.segment)
+                        .or_insert_with(Vec::new)
+                        .push(segment);
+                }
+
+                <span class="comment">// Static matches based on a raw string match, so we simply
+                // compare the value of the current segment with that of the
+                // child node we&#39;re currently iterating.
+                </span>SegmentType::Static =&gt; {
+                    <span class="comment">// check for raw string match
+                    </span><span class="kw">if </span>child.segment != segment.as_ref() {
+                        <span class="kw">continue</span>;
+                    }
+                }
+
+                <span class="comment">// Constrained matches are based on a contained pattern the
+                // segment value must match. If the segment matches, we need
+                // to make sure to store the value inside the parameters map.
+                </span>SegmentType::Constrained { <span class="kw-2">ref </span>regex } =&gt; {
+                    <span class="comment">// check for regex matching
+                    </span><span class="kw">if </span>!regex.is_match(segment.as_ref()) {
+                        <span class="kw">continue</span>;
+                    }
+                    <span class="comment">// if there&#39;s a match, store the value
+                    </span>params.insert(<span class="kw-2">&amp;</span>child.segment, <span class="macro">vec!</span>[segment]);
+                }
+
+                <span class="comment">// Dynamic matches match every value, so we just attach the
+                // segment value to the parameters list (just like with the
+                // constrained type).
+                </span>SegmentType::Dynamic =&gt; {
+                    <span class="comment">// if there&#39;s a match, store the value
+                    </span>params.insert(<span class="kw-2">&amp;</span>child.segment, <span class="macro">vec!</span>[segment]);
+                }
+            };
+
+            <span class="comment">// If we hit this point, we&#39;ve determined that the child node is
+            // the correct node to delegate to, so we continue the recursion
+            // on the child node, passing in the same parameters.
+            </span><span class="kw">return </span>child.inner_match_node(remaining, params, processed);
+        }
+
+        <span class="comment">// If there are no children, but this is a globbing node, then we can
+        // continue the nesting by just shifting the path segments and calling
+        // `inner_match_node` on ourself again (to simulate wildcards).
+        </span><span class="kw">if let </span>SegmentType::Glob = <span class="self">self</span>.segment_type {
+            <span class="comment">// push the segment to the parameters of the glob
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(path) = params.get_mut(<span class="self">self</span>.segment()) {
+                path.push(segment);
+            }
+            <span class="comment">// call again, but after shifting the segments to the next
+            </span><span class="kw">return </span><span class="self">self</span>.inner_match_node(remaining, params, processed);
+        }
+
+        <span class="prelude-val">None
+    </span>}
+}
+
+<span class="kw">impl </span>Eq <span class="kw">for </span>Node {}
+<span class="kw">impl </span>PartialEq <span class="kw">for </span>Node {
+    <span class="doccomment">/// Compares two `Node` values for equality based on the segments they represent.
+    </span><span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Node) -&gt; bool {
+        <span class="self">self</span>.segment == other.segment &amp;&amp; <span class="self">self</span>.segment_type == other.segment_type
+    }
+}
+
+<span class="kw">impl </span>Ord <span class="kw">for </span>Node {
+    <span class="doccomment">/// Compares two `Node` values to determine an appropriate `Ordering`.
+    </span><span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Node) -&gt; Ordering {
+        (<span class="kw-2">&amp;</span><span class="self">self</span>.segment_type, <span class="kw-2">&amp;</span><span class="self">self</span>.segment).cmp(<span class="kw-2">&amp;</span>(<span class="kw-2">&amp;</span>other.segment_type, <span class="kw-2">&amp;</span>other.segment))
+    }
+}
+
+<span class="kw">impl </span>PartialOrd <span class="kw">for </span>Node {
+    <span class="doccomment">/// Compares two `Node` values to determine an appropriate `Ordering`.
+    </span><span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Node) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.cmp(other))
+    }
+}
+
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+    <span class="kw">use </span>std::panic::RefUnwindSafe;
+
+    <span class="kw">use </span>hyper::{HeaderMap, Method, Response};
+
+    <span class="kw">use </span><span class="kw">crate</span>::extractor::{NoopPathExtractor, NoopQueryStringExtractor};
+    <span class="kw">use </span><span class="kw">crate</span>::helpers::http::request::path::RequestPathSegments;
+    <span class="kw">use </span><span class="kw">crate</span>::helpers::http::PercentDecoded;
+    <span class="kw">use </span><span class="kw">crate</span>::pipeline::{finalize_pipeline_set, new_pipeline_set, PipelineSet};
+    <span class="kw">use </span><span class="kw">crate</span>::router::route::dispatch::DispatcherImpl;
+    <span class="kw">use </span><span class="kw">crate</span>::router::route::matcher::MethodOnlyRouteMatcher;
+    <span class="kw">use </span><span class="kw">crate</span>::router::route::{Delegation, Extractors, Route, RouteImpl};
+    <span class="kw">use </span><span class="kw">crate</span>::router::tree::regex::ConstrainedSegmentRegex;
+    <span class="kw">use </span><span class="kw">crate</span>::state::{set_request_id, State};
+
+    <span class="kw">fn </span>handler(state: State) -&gt; (State, Response&lt;Body&gt;) {
+        (state, Response::new(Body::empty()))
+    }
+
+    <span class="kw">fn </span>get_route&lt;P&gt;(pipeline_set: PipelineSet&lt;P&gt;) -&gt; Box&lt;<span class="kw">dyn </span>Route&lt;ResBody = Body&gt; + Send + Sync&gt;
+    <span class="kw">where
+        </span>P: Send + Sync + RefUnwindSafe + <span class="lifetime">&#39;static</span>,
+    {
+        <span class="kw">let </span>methods = <span class="macro">vec!</span>[Method::GET];
+        <span class="kw">let </span>matcher = MethodOnlyRouteMatcher::new(methods);
+        <span class="kw">let </span>dispatcher = DispatcherImpl::new(|| <span class="prelude-val">Ok</span>(handler), (), pipeline_set);
+        <span class="kw">let </span>extractors: Extractors&lt;NoopPathExtractor, NoopQueryStringExtractor&gt; = Extractors::new();
+        <span class="kw">let </span>route = RouteImpl::new(
+            matcher,
+            Box::new(dispatcher),
+            extractors,
+            Delegation::Internal,
+        );
+        Box::new(route)
+    }
+
+    <span class="kw">fn </span>test_structure() -&gt; Node {
+        <span class="kw">let </span><span class="kw-2">mut </span>root = Node::new(<span class="string">&quot;/&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span>pipeline_set = finalize_pipeline_set(new_pipeline_set());
+
+        <span class="comment">// Two methods, same path, same handler
+        // [Get|Head]: /seg1
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg1 = Node::new(<span class="string">&quot;seg1&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span>methods = <span class="macro">vec!</span>[Method::GET, Method::HEAD];
+        <span class="kw">let </span>matcher = MethodOnlyRouteMatcher::new(methods);
+        <span class="kw">let </span>dispatcher = DispatcherImpl::new(|| <span class="prelude-val">Ok</span>(handler), (), pipeline_set.clone());
+        <span class="kw">let </span>extractors: Extractors&lt;NoopPathExtractor, NoopQueryStringExtractor&gt; = Extractors::new();
+        <span class="kw">let </span>route = RouteImpl::new(
+            matcher,
+            Box::new(dispatcher),
+            extractors,
+            Delegation::Internal,
+        );
+        seg1.add_route(Box::new(route));
+        root.add_child(seg1);
+
+        <span class="comment">// Two methods, same path, different handlers
+        // Post: /seg2
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg2 = Node::new(<span class="string">&quot;seg2&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span>methods = <span class="macro">vec!</span>[Method::POST];
+        <span class="kw">let </span>matcher = MethodOnlyRouteMatcher::new(methods);
+        <span class="kw">let </span>dispatcher = DispatcherImpl::new(|| <span class="prelude-val">Ok</span>(handler), (), pipeline_set.clone());
+        <span class="kw">let </span>extractors: Extractors&lt;NoopPathExtractor, NoopQueryStringExtractor&gt; = Extractors::new();
+        <span class="kw">let </span>route = RouteImpl::new(
+            matcher,
+            Box::new(dispatcher),
+            extractors,
+            Delegation::Internal,
+        );
+        seg2.add_route(Box::new(route));
+
+        <span class="comment">// Patch: /seg2
+        </span><span class="kw">let </span>methods = <span class="macro">vec!</span>[Method::PATCH];
+        <span class="kw">let </span>matcher = MethodOnlyRouteMatcher::new(methods);
+        <span class="kw">let </span>dispatcher = DispatcherImpl::new(|| <span class="prelude-val">Ok</span>(handler), (), pipeline_set.clone());
+        <span class="kw">let </span>extractors: Extractors&lt;NoopPathExtractor, NoopQueryStringExtractor&gt; = Extractors::new();
+        <span class="kw">let </span>route = RouteImpl::new(
+            matcher,
+            Box::new(dispatcher),
+            extractors,
+            Delegation::Internal,
+        );
+        seg2.add_route(Box::new(route));
+        root.add_child(seg2);
+
+        <span class="comment">// Ensure basic traversal
+        // Get: /seg3/seg4
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg3 = Node::new(<span class="string">&quot;seg3&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span><span class="kw-2">mut </span>seg4 = Node::new(<span class="string">&quot;seg4&quot;</span>, SegmentType::Static);
+        seg4.add_route(get_route(pipeline_set.clone()));
+        seg3.add_child(seg4);
+        root.add_child(seg3);
+
+        <span class="comment">// Ensure regex matching works and that it&#39;s anchored to the segment and does not allow for
+        // overzealous matching
+        // GET: /resource/&lt;id&gt; where id: [0-9]+
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg_resource = Node::new(<span class="string">&quot;resource&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span><span class="kw-2">mut </span>seg_id = Node::new(
+            <span class="string">&quot;id&quot;</span>,
+            SegmentType::Constrained {
+                regex: Box::new(ConstrainedSegmentRegex::new(<span class="string">&quot;[0-9]+&quot;</span>)),
+            },
+        );
+        seg_id.add_route(get_route(pipeline_set.clone()));
+        seg_resource.add_child(seg_id);
+        root.add_child(seg_resource);
+
+        <span class="comment">// Ensure traversal will backtrack and find the correct path if it goes down an ultimately
+        // invalid branch, in this case seg6 initially being matched by the dynamic handler segdyn1
+        // which matches every segment it sees.
+        //
+        // Get /seg5/:segdyn1/seg7
+        // Get /seg5/seg6
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg5 = Node::new(<span class="string">&quot;seg5&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span><span class="kw-2">mut </span>seg6 = Node::new(<span class="string">&quot;seg6&quot;</span>, SegmentType::Static);
+        seg6.add_route(get_route(pipeline_set.clone()));
+
+        <span class="kw">let </span><span class="kw-2">mut </span>segdyn1 = Node::new(<span class="string">&quot;:segdyn1&quot;</span>, SegmentType::Dynamic);
+        <span class="kw">let </span><span class="kw-2">mut </span>seg7 = Node::new(<span class="string">&quot;seg7&quot;</span>, SegmentType::Static);
+        seg7.add_route(get_route(pipeline_set.clone()));
+
+        <span class="comment">// Ensure traversal will respect Globs
+        </span><span class="kw">let </span><span class="kw-2">mut </span>seg8 = Node::new(<span class="string">&quot;seg8&quot;</span>, SegmentType::Glob);
+        <span class="kw">let </span><span class="kw-2">mut </span>seg9 = Node::new(<span class="string">&quot;seg9&quot;</span>, SegmentType::Static);
+
+        <span class="kw">let </span><span class="kw-2">mut </span>seg10 = Node::new(<span class="string">&quot;seg10&quot;</span>, SegmentType::Glob);
+        seg10.add_route(get_route(pipeline_set));
+
+        segdyn1.add_child(seg7);
+        seg5.add_child(seg6);
+        seg5.add_child(segdyn1);
+        root.add_child(seg5);
+
+        seg9.add_child(seg10);
+        seg8.add_child(seg9);
+        root.add_child(seg8);
+
+        root
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>manages_children() {
+        <span class="kw">let </span>root = test_structure();
+
+        <span class="macro">assert!</span>(root.borrow_child(<span class="string">&quot;seg1&quot;</span>, SegmentType::Static).is_some());
+        <span class="macro">assert!</span>(root.borrow_child(<span class="string">&quot;seg2&quot;</span>, SegmentType::Static).is_some());
+        <span class="macro">assert!</span>(root.borrow_child(<span class="string">&quot;seg1&quot;</span>, SegmentType::Dynamic).is_none());
+        <span class="macro">assert!</span>(root.borrow_child(<span class="string">&quot;seg0&quot;</span>, SegmentType::Static).is_none());
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>traverses_children() {
+        <span class="kw">let </span>root = test_structure();
+
+        <span class="comment">// GET /seg3/seg4
+        </span><span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/seg3/seg4&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert_eq!</span>(node.segment, <span class="string">&quot;seg4&quot;</span>);
+                <span class="macro">assert_eq!</span>(processed, <span class="number">2</span>);
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+
+        <span class="comment">// GET /seg3/seg4/seg5
+        </span><span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/seg3/seg4/seg5&quot;</span>);
+        <span class="macro">assert!</span>(root.match_node(rs.segments()).is_none());
+
+        <span class="comment">// GET /seg5/seg6
+        </span><span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/seg5/seg6&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert_eq!</span>(node.segment, <span class="string">&quot;seg6&quot;</span>);
+                <span class="macro">assert_eq!</span>(processed, <span class="number">2</span>);
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+
+        <span class="comment">// GET /seg5/someval/seg7
+        </span><span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/seg5/someval/seg7&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert_eq!</span>(node.segment, <span class="string">&quot;seg7&quot;</span>);
+                <span class="macro">assert_eq!</span>(processed, <span class="number">3</span>);
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+
+        <span class="comment">// GET /some/path/seg9/another/path
+        </span><span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/some/path/seg9/another/branch&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert_eq!</span>(node.segment, <span class="string">&quot;seg10&quot;</span>);
+                <span class="macro">assert_eq!</span>(processed, <span class="number">5</span>);
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+
+        <span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/resource/5001&quot;</span>);
+        <span class="kw">let </span>expected_segment = <span class="string">&quot;id&quot;</span>;
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert_eq!</span>(node.segment, expected_segment);
+                <span class="macro">assert_eq!</span>(processed, <span class="number">2</span>);
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>non_matching_routes_allow_list_tests() {
+        <span class="kw">let </span>root = test_structure();
+
+        <span class="kw">let </span><span class="kw-2">mut </span>state = State::new();
+        state.put(Method::OPTIONS);
+        state.put(HeaderMap::new());
+        set_request_id(<span class="kw-2">&amp;mut </span>state);
+
+        <span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/seg2&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, _processed)) =&gt; <span class="kw">match </span>node.select_route(<span class="kw-2">&amp;</span>state) {
+                <span class="prelude-val">Err</span>(e) =&gt; {
+                    <span class="kw">let </span>(status, <span class="kw-2">mut </span>allow_list) = e.deconstruct();
+                    <span class="macro">assert_eq!</span>(status, StatusCode::METHOD_NOT_ALLOWED);
+                    allow_list.sort_by(|a, b| a.as_ref().cmp(b.as_ref()));
+                    <span class="macro">assert_eq!</span>(allow_list, <span class="macro">vec!</span>[Method::PATCH, Method::POST]);
+                }
+                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;expected mismatched route to test allow header&quot;</span>),
+            },
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+
+        <span class="kw">let </span>rs = RequestPathSegments::new(<span class="string">&quot;/resource/100&quot;</span>);
+        <span class="kw">match </span>root.match_node(rs.segments()) {
+            <span class="prelude-val">Some</span>((node, _params, _processed)) =&gt; <span class="kw">match </span>node.select_route(<span class="kw-2">&amp;</span>state) {
+                <span class="prelude-val">Err</span>(e) =&gt; {
+                    <span class="kw">let </span>(status, <span class="kw-2">mut </span>allow_list) = e.deconstruct();
+                    <span class="macro">assert_eq!</span>(status, StatusCode::METHOD_NOT_ALLOWED);
+                    allow_list.sort_by(|a, b| a.as_ref().cmp(b.as_ref()));
+                    <span class="macro">assert_eq!</span>(allow_list, <span class="macro">vec!</span>[Method::GET]);
+                }
+                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;expected mismatched route to test allow header&quot;</span>),
+            },
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;traversal should have succeeded here&quot;</span>),
+        }
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>node_traversal_tests() {
+        <span class="kw">let </span>pipeline_set = finalize_pipeline_set(new_pipeline_set());
+        <span class="kw">let </span><span class="kw-2">mut </span>root_node_builder = Node::new(<span class="string">&quot;/&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span><span class="kw-2">mut </span>activate_node_builder = Node::new(<span class="string">&quot;activate&quot;</span>, SegmentType::Static);
+
+        <span class="kw">let </span><span class="kw-2">mut </span>workflow_node = Node::new(<span class="string">&quot;workflow&quot;</span>, SegmentType::Static);
+        <span class="kw">let </span>route = {
+            <span class="kw">let </span>methods = <span class="macro">vec!</span>[Method::GET];
+            <span class="kw">let </span>matcher = MethodOnlyRouteMatcher::new(methods);
+            <span class="kw">let </span>dispatcher = Box::new(DispatcherImpl::new(|| <span class="prelude-val">Ok</span>(handler), (), pipeline_set));
+            <span class="kw">let </span>extractors: Extractors&lt;NoopPathExtractor, NoopQueryStringExtractor&gt; =
+                Extractors::new();
+            <span class="kw">let </span>route = RouteImpl::new(matcher, dispatcher, extractors, Delegation::Internal);
+            Box::new(route)
+        };
+        workflow_node.add_route(route);
+
+        activate_node_builder.add_child(workflow_node);
+        root_node_builder.add_child(activate_node_builder);
+
+        <span class="kw">let </span>root_node = root_node_builder;
+        <span class="kw">match </span>root_node.match_node(<span class="kw-2">&amp;</span>[
+            PercentDecoded::new(<span class="string">&quot;activate&quot;</span>).unwrap(),
+            PercentDecoded::new(<span class="string">&quot;workflow&quot;</span>).unwrap(),
+        ]) {
+            <span class="prelude-val">Some</span>((node, _params, processed)) =&gt; {
+                <span class="macro">assert!</span>(node.is_routable());
+                <span class="macro">assert_eq!</span>(processed, <span class="number">2</span>)
+            }
+            <span class="prelude-val">None </span>=&gt; <span class="macro">panic!</span>(),
+        }
+    }
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="gotham" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12) (Arch Linux rust 1:1.66.0-1)" ></div></body></html>

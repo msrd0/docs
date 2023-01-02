@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":[["OpenapiType","The derive macro for `OpenapiType`."]]};
