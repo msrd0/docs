@@ -3,6 +3,7 @@ Rust Documentation for all of my crates
 
 ## aatree [![aatree on crates.io](https://img.shields.io/crates/v/aatree.svg)](https://crates.io/crates/aatree) ![downloads](https://img.shields.io/crates/d/aatree.svg)
 AATree implementation in Rust
+ - Version 0.2.1: [Documentation](_site/aatree/0.2.1/aatree/index.html)
  - Version 0.2.0: [Documentation](_site/aatree/0.2.0/aatree/index.html)
  - Version 0.1.2: [Documentation](_site/aatree/0.1.2/aatree/index.html)
  - Version 0.1.1: [Documentation](_site/aatree/0.1.1/aatree/index.html)
