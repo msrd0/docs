@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":[["document_features","Produce a literal string containing documentation extracted from Cargo.toml"]]};

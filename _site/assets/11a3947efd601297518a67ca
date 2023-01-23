@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["aatree","document_features","hashbrown","indexmap","itoa","litrs","openapi_type","openapi_type_derive","openapiv3","proc_macro2","quote","ryu","serde","serde_derive","serde_derive_internals","serde_json","syn","syn_path","unicode_ident"];
