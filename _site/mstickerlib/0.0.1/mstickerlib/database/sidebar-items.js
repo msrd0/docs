@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["hash",""]],"mod":[["simple_file",""]],"trait":[["Database","Database witch does store a map from a hash to a matrix media url, to avaid duplicated uploads of the same file"]],"type":[["Hash",""]]};

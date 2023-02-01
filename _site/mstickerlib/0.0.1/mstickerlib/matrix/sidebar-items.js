@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["set_widget",""],["whoami",""]],"mod":[["stickerpack",""]],"struct":[["Config",""],["Whoami",""]]};

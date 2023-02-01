@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["WebPSimpleError","An error with no information."]]};

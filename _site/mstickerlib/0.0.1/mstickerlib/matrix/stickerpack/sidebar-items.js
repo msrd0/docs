@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["StickerPack",""],["TgPack","additonal informations about the original telegram sticker pack stored at `net.maunium.telegram.pack`"]]};

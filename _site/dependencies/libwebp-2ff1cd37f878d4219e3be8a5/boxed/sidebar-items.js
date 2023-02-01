@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["WebpBox","A safe RAII wrapper for `WebPFree`."],["WebpYuvBox","A variant of `WebpBox` for return values from `WebPDecodeYUV`."]]};

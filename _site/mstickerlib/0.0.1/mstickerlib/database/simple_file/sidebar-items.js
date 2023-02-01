@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["FileDatabase","simple implemtation of the `Database` traid, with does save data to a file"]]};
