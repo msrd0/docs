@@ -204,6 +204,10 @@ Convert lottie files to WEBP or GIF
 Primitive type with millimeter unit attached
  - Version 0.1.0: [Documentation](_site/millimeter/0.1.0/millimeter/index.html)
 
+## mstickerlib [![mstickerlib on crates.io](https://img.shields.io/crates/v/mstickerlib.svg)](https://crates.io/crates/mstickerlib) ![downloads](https://img.shields.io/crates/d/mstickerlib.svg)
+Private implementation detail of mstickereditor
+ - Version 0.0.1: [Documentation](_site/mstickerlib/0.0.1/mstickerlib/index.html)
+
 ## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
 OpenAPI type information for Rust structs and enums
  - Version 0.4.1: [Documentation](_site/openapi_type/0.4.1/openapi_type/index.html)

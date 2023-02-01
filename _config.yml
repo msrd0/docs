@@ -25,6 +25,7 @@ keep_files:
   - lottie2webp
   - lottieconv
   - millimeter
+  - mstickerlib
   - openapi_type
   - openapi_type_derive
   - rlottie
