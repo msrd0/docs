@@ -9,6 +9,7 @@ keep_files:
   - bitmap-font
   - cargo-doc2readme
   - chumsky-branch
+  - edjie
   - ellipse-bin
   - gotham_formdata
   - gotham_formdata_derive

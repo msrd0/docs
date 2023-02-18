@@ -46,6 +46,10 @@ cargo subcommand to create a readme file containing the rustdoc comments from yo
 branch combinator for the chumsky parsing library
  - Version 0.1.1: [Documentation](_site/chumsky-branch/0.1.1/chumsky_branch/index.html)
 
+## edjie [![edjie on crates.io](https://img.shields.io/crates/v/edjie.svg)](https://crates.io/crates/edjie) ![downloads](https://img.shields.io/crates/d/edjie.svg)
+Reserved
+ - Version 0.0.0: [Documentation](_site/edjie/0.0.0/edjie/index.html)
+
 ## ellipse-bin [![ellipse-bin on crates.io](https://img.shields.io/crates/v/ellipse-bin.svg)](https://crates.io/crates/ellipse-bin) ![downloads](https://img.shields.io/crates/d/ellipse-bin.svg)
 Command that truncates and ellipses strings in a human-friendly way
  - Version 1.0.0: [Documentation](_site/ellipse-bin/1.0.0/ellipse_bin/index.html)
