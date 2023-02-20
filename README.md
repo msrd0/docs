@@ -44,6 +44,7 @@ cargo subcommand to create a readme file containing the rustdoc comments from yo
 
 ## chumsky-branch [![chumsky-branch on crates.io](https://img.shields.io/crates/v/chumsky-branch.svg)](https://crates.io/crates/chumsky-branch) ![downloads](https://img.shields.io/crates/d/chumsky-branch.svg)
 branch combinator for the chumsky parsing library
+ - Version 0.2.0: [Documentation](_site/chumsky-branch/0.2.0/chumsky_branch/index.html)
  - Version 0.1.1: [Documentation](_site/chumsky-branch/0.1.1/chumsky_branch/index.html)
 
 ## edjie [![edjie on crates.io](https://img.shields.io/crates/v/edjie.svg)](https://crates.io/crates/edjie) ![downloads](https://img.shields.io/crates/d/edjie.svg)
