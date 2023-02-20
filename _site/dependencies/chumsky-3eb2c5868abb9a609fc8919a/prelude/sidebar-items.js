@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":[["select","Create a parser that selects one or more input patterns and map them to an output value."]]};
