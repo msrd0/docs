@@ -149,6 +149,7 @@ Reserved
 
 ## influxdb [![influxdb on crates.io](https://img.shields.io/crates/v/influxdb.svg)](https://crates.io/crates/influxdb) ![downloads](https://img.shields.io/crates/d/influxdb.svg)
 InfluxDB Driver for Rust
+ - Version 0.6.0: [Documentation](_site/influxdb/0.6.0/influxdb/index.html)
  - Version 0.5.2: [Documentation](_site/influxdb/0.5.2/influxdb/index.html)
  - Version 0.5.1: [Documentation](_site/influxdb/0.5.1/influxdb/index.html)
  - Version 0.5.0: [Documentation](_site/influxdb/0.5.0/influxdb/index.html)
