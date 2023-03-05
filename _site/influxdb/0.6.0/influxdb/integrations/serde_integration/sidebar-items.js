@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Series","Represents a returned series from InfluxDB"],["TaggedSeries","Represents a returned series from InfluxDB"]]};
