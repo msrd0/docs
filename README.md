@@ -25,6 +25,7 @@ This crate provides bitmap fonts for the embedded-graphics crate without requiri
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
 cargo subcommand to create a readme file containing the rustdoc comments from your code
+ - Version 0.2.4: [Documentation](_site/cargo-doc2readme/0.2.4/cargo_doc2readme/index.html)
  - Version 0.2.3: [Documentation](_site/cargo-doc2readme/0.2.3/cargo_doc2readme/index.html)
  - Version 0.2.2: [Documentation](_site/cargo-doc2readme/0.2.2/cargo_doc2readme/index.html)
  - Version 0.2.1: [Documentation](_site/cargo-doc2readme/0.2.1/cargo_doc2readme/index.html)
@@ -73,6 +74,7 @@ Implementation detail of gotham_formdata
 
 ## gotham_restful [![gotham_restful on crates.io](https://img.shields.io/crates/v/gotham_restful.svg)](https://crates.io/crates/gotham_restful) ![downloads](https://img.shields.io/crates/d/gotham_restful.svg)
 RESTful additions for the gotham web framework
+ - Version 0.8.2: [Documentation](_site/gotham_restful/0.8.2/gotham_restful/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful/0.8.1/gotham_restful/index.html)
  - Version 0.8.0: [Documentation](_site/gotham_restful/0.8.0/gotham_restful/index.html)
  - Version 0.7.8: [Documentation](_site/gotham_restful/0.7.8/gotham_restful/index.html)
