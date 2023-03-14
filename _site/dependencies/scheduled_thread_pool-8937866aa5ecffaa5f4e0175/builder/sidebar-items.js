@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["FinalStage","The final builder stage, allowing configuration of optional paramters."],["NumThreadsStage","The builder stage expecting the `num_threads` value."]]};

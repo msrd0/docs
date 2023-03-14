@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["OnPoolDropBehavior","Options for what the behavior should be in regards to pending scheduled executions when the pool is dropped."]],"mod":[["builder","Staged builder types."]],"struct":[["JobHandle","A handle to a scheduled job."],["ScheduledThreadPool","A pool of threads which can run tasks at specific time intervals."]]};
