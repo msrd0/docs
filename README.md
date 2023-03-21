@@ -58,6 +58,7 @@ Command that truncates and ellipses strings in a human-friendly way
 
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
 Form data parsing for the gotham web framework
+ - Version 0.0.7: [Documentation](_site/gotham_formdata/0.0.7/gotham_formdata/index.html)
  - Version 0.0.6: [Documentation](_site/gotham_formdata/0.0.6/gotham_formdata/index.html)
  - Version 0.0.5: [Documentation](_site/gotham_formdata/0.0.5/gotham_formdata/index.html)
  - Version 0.0.4: [Documentation](_site/gotham_formdata/0.0.4/gotham_formdata/index.html)
@@ -66,6 +67,7 @@ Form data parsing for the gotham web framework
 
 ## gotham_formdata_derive [![gotham_formdata_derive on crates.io](https://img.shields.io/crates/v/gotham_formdata_derive.svg)](https://crates.io/crates/gotham_formdata_derive) ![downloads](https://img.shields.io/crates/d/gotham_formdata_derive.svg)
 Implementation detail of gotham_formdata
+ - Version 0.0.7: [Documentation](_site/gotham_formdata_derive/0.0.7/gotham_formdata_derive/index.html)
  - Version 0.0.5: [Documentation](_site/gotham_formdata_derive/0.0.5/gotham_formdata_derive/index.html)
  - Version 0.0.4: [Documentation](_site/gotham_formdata_derive/0.0.4/gotham_formdata_derive/index.html)
  - Version 0.0.3: [Documentation](_site/gotham_formdata_derive/0.0.3/gotham_formdata_derive/index.html)
@@ -74,6 +76,7 @@ Implementation detail of gotham_formdata
 
 ## gotham_restful [![gotham_restful on crates.io](https://img.shields.io/crates/v/gotham_restful.svg)](https://crates.io/crates/gotham_restful) ![downloads](https://img.shields.io/crates/d/gotham_restful.svg)
 RESTful additions for the gotham web framework
+ - Version 0.8.3: [Documentation](_site/gotham_restful/0.8.3/gotham_restful/index.html)
  - Version 0.8.2: [Documentation](_site/gotham_restful/0.8.2/gotham_restful/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful/0.8.1/gotham_restful/index.html)
  - Version 0.8.0: [Documentation](_site/gotham_restful/0.8.0/gotham_restful/index.html)
@@ -111,7 +114,8 @@ RESTful additions for the gotham web framework
  - Version 0.0.1: [Documentation](_site/gotham_restful/0.0.1/gotham_restful/index.html)
 
 ## gotham_restful_derive [![gotham_restful_derive on crates.io](https://img.shields.io/crates/v/gotham_restful_derive.svg)](https://crates.io/crates/gotham_restful_derive) ![downloads](https://img.shields.io/crates/d/gotham_restful_derive.svg)
-Derive macros for gotham_restful
+Private implementation detail of gotham_restful
+ - Version 0.8.2: [Documentation](_site/gotham_restful_derive/0.8.2/gotham_restful_derive/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful_derive/0.8.1/gotham_restful_derive/index.html)
  - Version 0.8.0: [Documentation](_site/gotham_restful_derive/0.8.0/gotham_restful_derive/index.html)
  - Version 0.7.0: [Documentation](_site/gotham_restful_derive/0.7.0/gotham_restful_derive/index.html)
@@ -218,6 +222,7 @@ Private implementation detail of mstickereditor
 
 ## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
 OpenAPI type information for Rust structs and enums
+ - Version 0.4.2: [Documentation](_site/openapi_type/0.4.2/openapi_type/index.html)
  - Version 0.4.1: [Documentation](_site/openapi_type/0.4.1/openapi_type/index.html)
  - Version 0.4.0: [Documentation](_site/openapi_type/0.4.0/openapi_type/index.html)
  - Version 0.3.1: [Documentation](_site/openapi_type/0.3.1/openapi_type/index.html)
@@ -231,6 +236,7 @@ OpenAPI type information for Rust structs and enums
 
 ## openapi_type_derive [![openapi_type_derive on crates.io](https://img.shields.io/crates/v/openapi_type_derive.svg)](https://crates.io/crates/openapi_type_derive) ![downloads](https://img.shields.io/crates/d/openapi_type_derive.svg)
 Implementation detail of the openapi_type crate
+ - Version 0.4.3: [Documentation](_site/openapi_type_derive/0.4.3/openapi_type_derive/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type_derive/0.4.2/openapi_type_derive/index.html)
  - Version 0.4.1: [Documentation](_site/openapi_type_derive/0.4.1/openapi_type_derive/index.html)
  - Version 0.4.0: [Documentation](_site/openapi_type_derive/0.4.0/openapi_type_derive/index.html)
@@ -276,5 +282,6 @@ Typed SVG Writer
 
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
 A simple macro to declare a syn::Path at compile time
+ - Version 2.0.0: [Documentation](_site/syn-path/2.0.0/syn_path/index.html)
  - Version 1.0.1: [Documentation](_site/syn-path/1.0.1/syn_path/index.html)
  - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)
