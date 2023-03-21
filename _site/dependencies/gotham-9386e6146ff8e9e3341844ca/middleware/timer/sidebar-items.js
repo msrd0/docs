@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["RequestTimer","Middleware binding to attach request execution times inside headers."]]};

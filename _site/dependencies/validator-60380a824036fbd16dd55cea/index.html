@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Example:"><meta name="keywords" content="rust, rustlang, rust-lang, validator"><title>validator - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-93196c7a1c3542a8.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../static.files/light-4743e13df3dfe8c4.css"><link rel="stylesheet" disabled href="../static.files/dark-0e1b889528bd466b.css"><link rel="stylesheet" disabled href="../static.files/ayu-65289d5d067c7c66.css"><script id="default-settings" 
+        data-theme="ayu"
+        data-use_system_theme="false"></script><script src="../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-3367e395607fafc1.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../validator/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../validator/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Crate validator</a></h2><div class="sidebar-elems"><ul class="block"><li class="version">Version 0.16.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">validator</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../src/validator/lib.rs.html#1-93">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="example"><a href="#example">Example:</a></h2>
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">use </span>serde::Deserialize;
+
+<span class="comment">// A trait that the Validate derive will impl
+</span><span class="kw">use </span>validator::{Validate, ValidationError};
+
+<span class="attr">#[derive(Debug, Validate, Deserialize)]
+</span><span class="kw">struct </span>SignupData {
+    <span class="attr">#[validate(email)]
+    </span>mail: String,
+    <span class="attr">#[validate(phone)]
+    </span>phone: String,
+    <span class="attr">#[validate(url)]
+    </span>site: String,
+    <span class="attr">#[validate(length(min = <span class="number">1</span>), custom = <span class="string">&quot;validate_unique_username&quot;</span>)]
+    #[serde(rename = <span class="string">&quot;firstName&quot;</span>)]
+    </span>first_name: String,
+    <span class="attr">#[validate(range(min = <span class="number">18</span>, max = <span class="number">20</span>))]
+    </span>age: u32,
+}
+
+<span class="kw">fn </span>validate_unique_username(username: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), ValidationError&gt; {
+    <span class="kw">if </span>username == <span class="string">&quot;xXxShad0wxXx&quot; </span>{
+        <span class="comment">// the value of the username will automatically be added later
+        </span><span class="kw">return </span><span class="prelude-val">Err</span>(ValidationError::new(<span class="string">&quot;terrible_username&quot;</span>));
+    }
+
+    <span class="prelude-val">Ok</span>(())
+}
+
+<span class="kw">match </span>signup_data.validate() {
+  <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; (),
+  <span class="prelude-val">Err</span>(e) =&gt; <span class="kw">return </span>e;
+};</code></pre></div>
+<h2 id="available-validations"><a href="#available-validations">Available Validations:</a></h2><div><table><thead><tr><th>Validation</th><th>Notes</th></tr></thead><tbody>
+<tr><td><code>email</code></td><td></td></tr>
+<tr><td><code>url</code></td><td></td></tr>
+<tr><td><code>length</code></td><td></td></tr>
+<tr><td><code>range</code></td><td></td></tr>
+<tr><td><code>must_match</code></td><td></td></tr>
+<tr><td><code>contains</code></td><td></td></tr>
+<tr><td><code>does_not_contain</code></td><td></td></tr>
+<tr><td><code>custom</code></td><td></td></tr>
+<tr><td><code>regex</code></td><td></td></tr>
+<tr><td><code>credit_card</code></td><td>(Requires the feature <code>card</code> to be enabled)</td></tr>
+<tr><td><code>phone</code></td><td>(Requires the feature <code>phone</code> to be enabled)</td></tr>
+<tr><td><code>non_control_character</code></td><td>(Required the feature <code>unic</code> to be enabled)</td></tr>
+<tr><td><code>nested</code></td><td>(Uses the validation of the field type it self)</td></tr>
+<tr><td><code>required</code></td><td></td></tr>
+</tbody></table>
+</div>
+<p><a href="https://github.com/Keats/validator/blob/master/README.md">Checkout the project README of an in-depth usage description with examples.</a></p>
+<h2 id="installation"><a href="#installation">Installation:</a></h2>
+<p>Add the validator to the dependencies in the Cargo.toml file.</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+validator = { version = &quot;0.12&quot;, features = [&quot;derive&quot;] }
+</code></pre></div></div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ValidationError.html" title="validator::ValidationError struct">ValidationError</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ValidationErrors.html" title="validator::ValidationErrors struct">ValidationErrors</a></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ValidationErrorsKind.html" title="validator::ValidationErrorsKind enum">ValidationErrorsKind</a></div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Contains.html" title="validator::Contains trait">Contains</a></div><div class="item-right docblock-short">Trait to implement if one wants to make the <code>contains</code> validator
+work for more types</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.HasLen.html" title="validator::HasLen trait">HasLen</a></div><div class="item-right docblock-short">Trait to implement if one wants to make the <code>length</code> validator
+work for more types</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Validate.html" title="validator::Validate trait">Validate</a></div><div class="item-right docblock-short">This is the original trait that was implemented by deriving <code>Validate</code>. It will still be
+implemented for struct validations that don’t take custom arguments. The call is being
+forwarded to the <code>ValidateArgs&lt;'v_a&gt;</code> trait.</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ValidateArgs.html" title="validator::ValidateArgs trait">ValidateArgs</a></div><div class="item-right docblock-short">This trait will be implemented by deriving <code>Validate</code>. This implementation can take one
+argument and pass this on to custom validators. The default <code>Args</code> type will be <code>()</code> if
+there is no custom validation with defined arguments.</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_contains.html" title="validator::validate_contains fn">validate_contains</a></div><div class="item-right docblock-short">Validates whether the value contains the needle
+The value needs to implement the Contains trait, which is implement on String, str and Hashmap<String>
+by default.</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_does_not_contain.html" title="validator::validate_does_not_contain fn">validate_does_not_contain</a></div><div class="item-right docblock-short">Validates whether the value does not contain the needle
+The value needs to implement the Contains trait, which is implement on String, str and Hashmap<String>
+by default.</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_email.html" title="validator::validate_email fn">validate_email</a></div><div class="item-right docblock-short">Validates whether the given string is an email based on the <a href="https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address">HTML5 spec</a>.
+<a href="https://tools.ietf.org/html/rfc5322">RFC 5322</a> is not practical in most circumstances and allows email addresses
+that are unfamiliar to most users.</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_ip.html" title="validator::validate_ip fn">validate_ip</a></div><div class="item-right docblock-short">Validates whether the given string is an IP</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_ip_v4.html" title="validator::validate_ip_v4 fn">validate_ip_v4</a></div><div class="item-right docblock-short">Validates whether the given string is an IP V4</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_ip_v6.html" title="validator::validate_ip_v6 fn">validate_ip_v6</a></div><div class="item-right docblock-short">Validates whether the given string is an IP V6</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_length.html" title="validator::validate_length fn">validate_length</a></div><div class="item-right docblock-short">Validates the length of the value given.
+If the validator has <code>equal</code> set, it will ignore any <code>min</code> and <code>max</code> value.</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_must_match.html" title="validator::validate_must_match fn">validate_must_match</a></div><div class="item-right docblock-short">Validates that the 2 given fields match.
+Both fields are optionals</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_range.html" title="validator::validate_range fn">validate_range</a></div><div class="item-right docblock-short">Validates that the given <code>value</code> is inside the defined range. The <code>max</code> and <code>min</code> parameters are
+optional and will only be validated if they are not <code>None</code></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_required.html" title="validator::validate_required fn">validate_required</a></div><div class="item-right docblock-short">Validates whether the given Option is Some</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_url.html" title="validator::validate_url fn">validate_url</a></div><div class="item-right docblock-short">Validates whether the string given is a url</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="validator" data-themes="" data-resource-suffix="" data-rustdoc-version="1.68.0 (2c8cc3432 2023-03-06) (Arch Linux rust 1:1.68.0-1)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-c3c521c753752a1a.js" data-settings-css="settings-08ddfdda51b8ee2e.css" ></div></body></html>
