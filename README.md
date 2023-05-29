@@ -173,6 +173,7 @@ InfluxDB Driver for Rust
 
 ## influxdb_derive [![influxdb_derive on crates.io](https://img.shields.io/crates/v/influxdb_derive.svg)](https://crates.io/crates/influxdb_derive) ![downloads](https://img.shields.io/crates/d/influxdb_derive.svg)
 Private implementation detail of the influxdb crate
+ - Version 0.5.1: [Documentation](_site/influxdb_derive/0.5.1/influxdb_derive/index.html)
  - Version 0.5.0: [Documentation](_site/influxdb_derive/0.5.0/influxdb_derive/index.html)
  - Version 0.4.0: [Documentation](_site/influxdb_derive/0.4.0/influxdb_derive/index.html)
  - Version 0.3.0: [Documentation](_site/influxdb_derive/0.3.0/influxdb_derive/index.html)
