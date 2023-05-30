@@ -238,6 +238,7 @@ OpenAPI type information for Rust structs and enums
 
 ## openapi_type_derive [![openapi_type_derive on crates.io](https://img.shields.io/crates/v/openapi_type_derive.svg)](https://crates.io/crates/openapi_type_derive) ![downloads](https://img.shields.io/crates/d/openapi_type_derive.svg)
 Implementation detail of the openapi_type crate
+ - Version 0.4.4: [Documentation](_site/openapi_type_derive/0.4.4/openapi_type_derive/index.html)
  - Version 0.4.3: [Documentation](_site/openapi_type_derive/0.4.3/openapi_type_derive/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type_derive/0.4.2/openapi_type_derive/index.html)
  - Version 0.4.1: [Documentation](_site/openapi_type_derive/0.4.1/openapi_type_derive/index.html)
