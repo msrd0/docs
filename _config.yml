@@ -11,6 +11,7 @@ keep_files:
   - chumsky-branch
   - edjie
   - ellipse-bin
+  - fmtparse
   - gotham_formdata
   - gotham_formdata_derive
   - gotham_restful
