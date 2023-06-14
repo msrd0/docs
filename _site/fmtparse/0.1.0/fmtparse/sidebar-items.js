@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Align","Padding","Param","Style","Token","VarName"],"fn":["parse"],"type":["Error"]};
