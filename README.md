@@ -59,6 +59,7 @@ Command that truncates and ellipses strings in a human-friendly way
 
 ## fmtparse [![fmtparse on crates.io](https://img.shields.io/crates/v/fmtparse.svg)](https://crates.io/crates/fmtparse) ![downloads](https://img.shields.io/crates/d/fmtparse.svg)
 Parse format!-like strings
+ - Version 0.2.0: [Documentation](_site/fmtparse/0.2.0/fmtparse/index.html)
  - Version 0.1.0: [Documentation](_site/fmtparse/0.1.0/fmtparse/index.html)
 
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
