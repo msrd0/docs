@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Serde Integration for InfluxDB. Provides deserialization of query returns."><title>influxdb::integrations::serde_integration - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><script id="default-settings" 
+data-theme="ayu"
+data-use_system_theme="false"></script><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="influxdb" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0 (90c541806 2023-05-31) (Arch Linux rust 1:1.70.0-1)" data-search-js="search-e077946657036a58.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../../static.files/main-f61008743c98d196.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../../../influxdb/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../../../influxdb/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Module serde_integration</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#structs">Structs</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">influxdb</a>::<wbr><a href="../index.html">integrations</a>::<wbr><a class="mod" href="#">serde_integration</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../../../src/influxdb/integrations/serde_integration/mod.rs.html#1-181">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Serde Integration for InfluxDB. Provides deserialization of query returns.</p>
+<p>When querying multiple series in the same query (e.g. with a regex query), it might be desirable to flat map
+the resulting series into a single <code>Vec</code> like so. The example assumes, that there are weather readings in multiple
+series named <code>weather_&lt;city_name&gt;</code> (e.g. <code>weather_berlin</code>, or <code>weather_london</code>). Since we’re using a Regex query,
+we don’t actually know which series will be returned. To assign the city name to the series, we can use the series
+<code>name</code>, InfluxDB provides alongside query results.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>influxdb::{Client, Query};
+<span class="kw">use </span>serde::Deserialize;
+
+<span class="attr">#[derive(Deserialize)]
+</span><span class="kw">struct </span>WeatherWithoutCityName {
+    temperature: i32,
+}
+
+<span class="attr">#[derive(Deserialize)]
+</span><span class="kw">struct </span>Weather {
+    city_name: String,
+    weather: WeatherWithoutCityName,
+}
+
+<span class="kw">let </span>client = Client::new(<span class="string">&quot;http://localhost:8086&quot;</span>, <span class="string">&quot;test&quot;</span>);
+<span class="kw">let </span>query = Query::raw_read_query(
+    <span class="string">&quot;SELECT temperature FROM /weather_[a-z]*$/ WHERE time &gt; now() - 1m ORDER BY DESC&quot;</span>,
+);
+<span class="kw">let </span><span class="kw-2">mut </span>db_result = client.json_query(query).<span class="kw">await</span><span class="question-mark">?</span>;
+<span class="kw">let </span>_result = db_result
+    .deserialize_next::&lt;WeatherWithoutCityName&gt;()<span class="question-mark">?
+    </span>.series
+    .into_iter()
+    .map(|<span class="kw-2">mut </span>city_series| {
+        <span class="kw">let </span>city_name =
+            city_series.name.split(<span class="string">&quot;_&quot;</span>).collect::&lt;Vec&lt;<span class="kw-2">&amp;</span>str&gt;&gt;().remove(<span class="number">2</span>);
+        Weather {
+            weather: city_series.values.remove(<span class="number">0</span>),
+            city_name: city_name.to_string(),
+        }
+    })
+    .collect::&lt;Vec&lt;Weather&gt;&gt;();</code></pre></div>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Series.html" title="struct influxdb::integrations::serde_integration::Series">Series</a></div><div class="desc docblock-short">Represents a returned series from InfluxDB</div></li><li><div class="item-name"><a class="struct" href="struct.TaggedSeries.html" title="struct influxdb::integrations::serde_integration::TaggedSeries">TaggedSeries</a></div><div class="desc docblock-short">Represents a returned series from InfluxDB</div></li></ul></section></div></main></body></html>

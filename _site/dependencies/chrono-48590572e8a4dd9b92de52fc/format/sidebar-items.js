@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Fixed","Item","Numeric","Pad","ParseErrorKind"],"fn":["parse","parse_and_remainder"],"mod":["strftime"],"struct":["InternalFixed","InternalNumeric","ParseError","Parsed"],"type":["ParseResult"]};
