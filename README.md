@@ -217,6 +217,7 @@ DEPRECATED - use lottieconv crate instead
 
 ## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
 Convert lottie files to WEBP or GIF
+ - Version 0.2.3: [Documentation](_site/lottieconv/0.2.3/lottieconv/index.html)
  - Version 0.2.2: [Documentation](_site/lottieconv/0.2.2/lottieconv/index.html)
  - Version 0.2.1: [Documentation](_site/lottieconv/0.2.1/lottieconv/index.html)
  - Version 0.2.0: [Documentation](_site/lottieconv/0.2.0/lottieconv/index.html)
