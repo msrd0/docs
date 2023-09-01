@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["set_widget","whoami"],"mod":["sticker","sticker_formats","stickerpack"],"struct":["Config","Mxc","Whoami"]};
