@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This library is a work in progress. This means a feature you might need is not implemented yet or could be handled better."><title>influxdb - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-9bb858ba049f1f21.css" id="mainThemeStyle"><script id="default-settings" 
+data-theme="ayu"
+data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="influxdb" data-themes="" data-resource-suffix="" data-rustdoc-version="1.72.0 (5680fa18f 2023-08-23) (Arch Linux rust 1:1.72.0-1)" data-channel="1.72.0" data-search-js="search-f6292fe389d70017.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-8c76f75bfb6bd192.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ><script src="../static.files/storage-59fd9b8ccb335783.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-0795b7d26be81095.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../influxdb/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../influxdb/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Crate influxdb</a></h2><div class="sidebar-elems"><ul class="block"><li class="version">Version 0.7.1</li><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">influxdb</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../src/influxdb/lib.rs.html#1-157">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This library is a work in progress. This means a feature you might need is not implemented
+yet or could be handled better.</p>
+<p>Pull requests are always welcome. See <a href="https://github.com/influxdb-rs/influxdb-rust/blob/main/CONTRIBUTING.md">Contributing</a> and <a href="https://github.com/influxdb-rs/influxdb-rust/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>. For a list of past changes, see <a href="https://github.com/influxdb-rs/influxdb-rust/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
+<h3 id="currently-supported-features"><a href="#currently-supported-features">Currently Supported Features</a></h3>
+<ul>
+<li>Reading and Writing to InfluxDB</li>
+<li>Optional Serde Support for Deserialization</li>
+<li>Running multiple queries in one request (e.g. <code>SELECT * FROM weather_berlin; SELECT * FROM weather_london</code>)</li>
+<li>Writing single or multiple measurements in one request (e.g. <code>WriteQuery</code> or <code>Vec&lt;WriteQuery&gt;</code> argument)</li>
+<li>Authenticated and Unauthenticated Connections</li>
+<li><code>async</code>/<code>await</code> support</li>
+<li><code>#[derive(InfluxDbWriteable)]</code> Derive Macro for Writing / Reading into Structs</li>
+<li><code>GROUP BY</code> support</li>
+<li>Tokio and async-std support (see example below) or <a href="https://github.com/influxdb-rs/influxdb-rust/blob/main/influxdb/Cargo.toml">available backends</a></li>
+<li>Swappable HTTP backends (<a href="#Choice-of-HTTP-backend">see below</a>)</li>
+</ul>
+<h2 id="quickstart"><a href="#quickstart">Quickstart</a></h2>
+<p>Add the following to your <code>Cargo.toml</code></p>
+<div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, features = [&quot;derive&quot;] }
+</code></pre></div>
+<p>For an example with using Serde deserialization, please refer to <a href="integrations/serde_integration/index.html" title="mod influxdb::integrations::serde_integration">serde_integration</a></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>influxdb::{Client, Query, Timestamp, ReadQuery};
+<span class="kw">use </span>influxdb::InfluxDbWriteable;
+<span class="kw">use </span>chrono::{DateTime, Utc};
+
+<span class="attr">#[tokio::main]
+</span><span class="comment">// or #[async_std::main] if you prefer
+</span><span class="kw">async fn </span>main() {
+    <span class="comment">// Connect to db `test` on `http://localhost:8086`
+    </span><span class="kw">let </span>client = Client::new(<span class="string">&quot;http://localhost:8086&quot;</span>, <span class="string">&quot;test&quot;</span>);
+
+    <span class="attr">#[derive(InfluxDbWriteable)]
+    </span><span class="kw">struct </span>WeatherReading {
+        time: DateTime&lt;Utc&gt;,
+        humidity: i32,
+        <span class="attr">#[influxdb(tag)] </span>wind_direction: String,
+    }
+
+    <span class="comment">// Let&#39;s write some data into a measurement called `weather`
+    </span><span class="kw">let </span>weather_readings = <span class="macro">vec!</span>(
+        WeatherReading {
+            time: Timestamp::Hours(<span class="number">1</span>).into(),
+            humidity: <span class="number">30</span>,
+            wind_direction: String::from(<span class="string">&quot;north&quot;</span>),
+        }.into_query(<span class="string">&quot;weather&quot;</span>),
+        WeatherReading {
+            time: Timestamp::Hours(<span class="number">2</span>).into(),
+            humidity: <span class="number">40</span>,
+            wind_direction: String::from(<span class="string">&quot;west&quot;</span>),
+        }.into_query(<span class="string">&quot;weather&quot;</span>),
+    );
+
+    <span class="kw">let </span>write_result = client
+        .query(weather_readings)
+        .<span class="kw">await</span>;
+    <span class="macro">assert!</span>(write_result.is_ok(), <span class="string">&quot;Write result was not okay&quot;</span>);
+
+    <span class="comment">// Let&#39;s see if the data we wrote is there
+    </span><span class="kw">let </span>read_query = ReadQuery::new(<span class="string">&quot;SELECT * FROM weather&quot;</span>);
+
+    <span class="kw">let </span>read_result = client.query(read_query).<span class="kw">await</span>;
+    <span class="macro">assert!</span>(read_result.is_ok(), <span class="string">&quot;Read result was not ok&quot;</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, read_result.unwrap());
+}</code></pre></div>
+<p>For further examples, check out the Integration Tests in <code>tests/integration_tests.rs</code>
+in the repository.</p>
+<h2 id="choice-of-http-backend"><a href="#choice-of-http-backend">Choice of HTTP backend</a></h2>
+<p>To communicate with InfluxDB, you can choose the HTTP backend to be used configuring the appropriate feature. We recommend sticking with the default reqwest-based client, unless you really need async-std compatibility.</p>
+<ul>
+<li><strong><a href="https://github.com/hyperium/hyper">hyper</a></strong> (through reqwest, used by default), with <a href="https://github.com/ctz/rustls">rustls</a><div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, features = [&quot;derive&quot;] }
+</code></pre></div></li>
+<li><strong><a href="https://github.com/hyperium/hyper">hyper</a></strong> (through reqwest), with native TLS (OpenSSL)<div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;reqwest-client&quot;] }
+</code></pre></div></li>
+<li><strong><a href="https://github.com/hyperium/hyper">hyper</a></strong> (through surf), use this if you need tokio 0.2 compatibility<div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;hyper-client&quot;] }
+</code></pre></div></li>
+<li><strong><a href="https://github.com/alexcrichton/curl-rust">curl</a></strong>, using <a href="https://curl.se/libcurl/">libcurl</a><div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;curl-client&quot;] }
+</code></pre></div></li>
+<li><strong><a href="https://github.com/http-rs/async-h1">async-h1</a></strong> with native TLS (OpenSSL)<div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;h1-client&quot;] }
+</code></pre></div></li>
+<li><strong><a href="https://github.com/http-rs/async-h1">async-h1</a></strong> with <a href="https://github.com/ctz/rustls">rustls</a><div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;h1-client-rustls&quot;] }
+</code></pre></div></li>
+<li>WebAssembly’s <code>window.fetch</code>, via <code>web-sys</code> and <strong><a href="https://github.com/rustwasm/wasm-bindgen">wasm-bindgen</a></strong><div class="example-wrap"><pre class="language-toml"><code>influxdb = { version = &quot;0.7.1&quot;, default-features = false,features = [&quot;derive&quot;, &quot;use-serde&quot;, &quot;wasm-client&quot;] }
+</code></pre></div></li>
+</ul>
+<h2 id="license"><a href="#license">License</a></h2>
+<p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a></p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><ul class="item-table"><li><div class="item-name" id="reexport.ValidQuery"><code>pub use query::ValidQuery;</code></div></li></ul><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="integrations/index.html" title="mod influxdb::integrations">integrations</a></div></li></ul><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.Client.html" title="struct influxdb::Client">Client</a></div><div class="desc docblock-short">Internal Representation of a Client</div></li><li><div class="item-name"><a class="struct" href="struct.ReadQuery.html" title="struct influxdb::ReadQuery">ReadQuery</a></div></li><li><div class="item-name"><a class="struct" href="struct.WriteQuery.html" title="struct influxdb::WriteQuery">WriteQuery</a></div><div class="desc docblock-short">Internal Representation of a Write query that has not yet been built</div></li></ul><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.Error.html" title="enum influxdb::Error">Error</a></div></li><li><div class="item-name"><a class="enum" href="enum.QueryType.html" title="enum influxdb::QueryType">QueryType</a></div><div class="desc docblock-short">Internal Enum used to decide if a <code>POST</code> or <code>GET</code> request should be sent to InfluxDB. See <a href="https://docs.influxdata.com/influxdb/v1.7/tools/api/#query-http-endpoint">InfluxDB Docs</a>.</div></li><li><div class="item-name"><a class="enum" href="enum.Timestamp.html" title="enum influxdb::Timestamp">Timestamp</a></div></li><li><div class="item-name"><a class="enum" href="enum.Type.html" title="enum influxdb::Type">Type</a></div></li></ul><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.InfluxDbWriteable.html" title="trait influxdb::InfluxDbWriteable">InfluxDbWriteable</a></div></li><li><div class="item-name"><a class="trait" href="trait.Query.html" title="trait influxdb::Query">Query</a></div></li></ul></section></div></main></body></html>
