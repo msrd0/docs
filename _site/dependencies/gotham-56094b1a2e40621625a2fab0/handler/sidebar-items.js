@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["DirHandler","FileHandler","FileOptions","FilePathExtractor","HandlerError"],"trait":["Handler","IntoHandlerFuture","IntoResponse","MapHandlerError","MapHandlerErrorFuture","NewHandler"],"type":["HandlerFuture","HandlerResult","SimpleHandlerResult"]};

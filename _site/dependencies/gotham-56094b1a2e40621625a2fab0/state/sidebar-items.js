@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["StateData"],"fn":["client_addr","request_id"],"struct":["State"],"trait":["FromState","StateData"]};

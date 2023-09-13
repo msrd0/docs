@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AcceptHeaderRouteMatcher","AccessControlRequestMethodMatcher","AndRouteMatcher","AnyRouteMatcher","ContentTypeHeaderRouteMatcher","MethodOnlyRouteMatcher"],"trait":["IntoRouteMatcher","RouteMatcher"]};

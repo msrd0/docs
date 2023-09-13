@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Provides an interface for running Diesel queries in a Gotham application."><title>gotham_middleware_diesel - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-9bb858ba049f1f21.css" id="mainThemeStyle"><script id="default-settings" 
+data-theme="ayu"
+data-use_system_theme="false"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="gotham_middleware_diesel" data-themes="" data-resource-suffix="" data-rustdoc-version="1.72.0 (5680fa18f 2023-08-23) (Arch Linux rust 1:1.72.0-1)" data-channel="1.72.0" data-search-js="search-f6292fe389d70017.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-8c76f75bfb6bd192.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ><script src="../static.files/storage-59fd9b8ccb335783.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-0795b7d26be81095.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../gotham_middleware_diesel/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../gotham_middleware_diesel/index.html"><img class="rust-logo" src="../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Crate gotham_middleware_diesel</a></h2><div class="sidebar-elems"><ul class="block"><li class="version">Version 0.5.1</li><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#structs">Structs</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">gotham_middleware_diesel</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../src/gotham_middleware_diesel/lib.rs.html#1-153">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Provides an interface for running Diesel queries in a Gotham application.</p>
+<p>The gotham diesel middleware uses <a href="../tokio/task/blocking/fn.spawn_blocking.html" title="fn tokio::task::blocking::spawn_blocking">tokio::task::spawn_blocking</a>, which allows
+blocking operations to run without blocking the tokio reactor. Although not true async,
+this allows multiple concurrent database requests to be handled, with a default of 100
+concurrent blocking operations.</p>
+<p>Usage example:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>
+<span class="kw">pub type </span>Repo = gotham_middleware_diesel::Repo&lt;SqliteConnection&gt;;
+
+<span class="kw">fn </span>router() -&gt; Router {
+    <span class="comment">// Create a Repo - using an in memory Sqlite DB
+    </span><span class="kw">let </span>repo = Repo::new(<span class="string">&quot;:memory:&quot;</span>);
+    <span class="comment">// Add the diesel middleware to a new pipeline
+    </span><span class="kw">let </span>(chain, pipeline) =
+        single_pipeline(new_pipeline().add(DieselMiddleware::new(repo)).build());
+
+    <span class="comment">// Build the router
+    </span>build_router(chain, pipeline, |route| {
+        route.get(<span class="string">&quot;/&quot;</span>).to(handler);
+    })
+}
+
+<span class="kw">fn </span>handler(state: State) -&gt; Pin&lt;Box&lt;HandlerFuture&gt;&gt; {
+    <span class="kw">let </span>repo = Repo::borrow_from(<span class="kw-2">&amp;</span>state).clone();
+    <span class="comment">// As an example, we perform the query:
+    // `SELECT 1`
+    </span><span class="kw">async move </span>{
+        <span class="kw">let </span>result = repo
+            .run(<span class="kw">move </span>|<span class="kw-2">mut </span>conn| {
+                diesel::select(diesel::dsl::sql::&lt;Int8&gt;(<span class="string">&quot;1&quot;</span>))
+                    .load::&lt;i64&gt;(<span class="kw-2">&amp;mut </span>conn)
+                    .map(|v| v.into_iter().next().expect(<span class="string">&quot;no results&quot;</span>))
+            })
+            .<span class="kw">await</span>;
+        <span class="kw">match </span>result {
+            <span class="prelude-val">Ok</span>(n) =&gt; {
+                <span class="kw">let </span>body = <span class="macro">format!</span>(<span class="string">&quot;result: {}&quot;</span>, n);
+                <span class="kw">let </span>res = create_response(<span class="kw-2">&amp;</span>state, StatusCode::OK, TEXT_PLAIN, body);
+                <span class="prelude-val">Ok</span>((state, res))
+            }
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>((state, e.into())),
+        }
+    }
+    .boxed()
+}
+</code></pre></div>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.DieselMiddleware.html" title="struct gotham_middleware_diesel::DieselMiddleware">DieselMiddleware</a></div><div class="desc docblock-short">A Gotham compatible Middleware that manages a pool of Diesel connections via a <code>Repo</code> and hands
+out connections to other Middleware and Handlers that require them via the Gotham <code>State</code>
+mechanism.</div></li><li><div class="item-name"><a class="struct" href="struct.Repo.html" title="struct gotham_middleware_diesel::Repo">Repo</a></div><div class="desc docblock-short">A database “repository”, for running database workloads.
+Manages a connection pool and running blocking tasks using
+<a href="../tokio/task/blocking/fn.spawn_blocking.html" title="fn tokio::task::blocking::spawn_blocking">tokio::task::spawn_blocking</a> which does not block the tokio event loop.</div></li></ul></section></div></main></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["finalize_pipeline_set","new_pipeline","new_pipeline_set","single_middleware","single_pipeline"],"struct":["Pipeline","PipelineBuilder"],"trait":["PipelineHandleChain"],"type":["EditablePipelineSet","PipelineSet","SinglePipelineChain","SinglePipelineHandle","SinglePipelineSet"]};

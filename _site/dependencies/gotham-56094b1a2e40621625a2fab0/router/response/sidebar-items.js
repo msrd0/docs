@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["StaticResponseExtender"],"struct":["NoopResponseExtender","ResponseFinalizer","ResponseFinalizerBuilder"],"trait":["ResponseExtender","StaticResponseExtender"]};
