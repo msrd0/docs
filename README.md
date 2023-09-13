@@ -84,6 +84,7 @@ Implementation detail of gotham_formdata
 
 ## gotham_restful [![gotham_restful on crates.io](https://img.shields.io/crates/v/gotham_restful.svg)](https://crates.io/crates/gotham_restful) ![downloads](https://img.shields.io/crates/d/gotham_restful.svg)
 RESTful additions for the gotham web framework
+ - Version 0.8.4: [Documentation](_site/gotham_restful/0.8.4/gotham_restful/index.html)
  - Version 0.8.3: [Documentation](_site/gotham_restful/0.8.3/gotham_restful/index.html)
  - Version 0.8.2: [Documentation](_site/gotham_restful/0.8.2/gotham_restful/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful/0.8.1/gotham_restful/index.html)
@@ -123,6 +124,7 @@ RESTful additions for the gotham web framework
 
 ## gotham_restful_derive [![gotham_restful_derive on crates.io](https://img.shields.io/crates/v/gotham_restful_derive.svg)](https://crates.io/crates/gotham_restful_derive) ![downloads](https://img.shields.io/crates/d/gotham_restful_derive.svg)
 Private implementation detail of gotham_restful
+ - Version 0.8.3: [Documentation](_site/gotham_restful_derive/0.8.3/gotham_restful_derive/index.html)
  - Version 0.8.2: [Documentation](_site/gotham_restful_derive/0.8.2/gotham_restful_derive/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful_derive/0.8.1/gotham_restful_derive/index.html)
  - Version 0.8.0: [Documentation](_site/gotham_restful_derive/0.8.0/gotham_restful_derive/index.html)
@@ -146,6 +148,7 @@ Private implementation detail of gotham_restful
 
 ## gotham_restful_redoc [![gotham_restful_redoc on crates.io](https://img.shields.io/crates/v/gotham_restful_redoc.svg)](https://crates.io/crates/gotham_restful_redoc) ![downloads](https://img.shields.io/crates/d/gotham_restful_redoc.svg)
 Private implementation detail of gotham_restful
+ - Version 0.2.3+2.1.2: [Documentation](_site/gotham_restful_redoc/0.2.3+2.1.2/gotham_restful_redoc/index.html)
  - Version 0.2.2+2.1.1: [Documentation](_site/gotham_restful_redoc/0.2.2+2.1.1/gotham_restful_redoc/index.html)
  - Version 0.2.1+2.0.0: [Documentation](_site/gotham_restful_redoc/0.2.1+2.0.0/gotham_restful_redoc/index.html)
  - Version 0.2.0: [Documentation](_site/gotham_restful_redoc/0.2.0/gotham_restful_redoc/index.html)
@@ -236,6 +239,7 @@ Private implementation detail of mstickereditor
 
 ## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
 OpenAPI type information for Rust structs and enums
+ - Version 0.4.3: [Documentation](_site/openapi_type/0.4.3/openapi_type/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type/0.4.2/openapi_type/index.html)
  - Version 0.4.1: [Documentation](_site/openapi_type/0.4.1/openapi_type/index.html)
  - Version 0.4.0: [Documentation](_site/openapi_type/0.4.0/openapi_type/index.html)
@@ -250,6 +254,7 @@ OpenAPI type information for Rust structs and enums
 
 ## openapi_type_derive [![openapi_type_derive on crates.io](https://img.shields.io/crates/v/openapi_type_derive.svg)](https://crates.io/crates/openapi_type_derive) ![downloads](https://img.shields.io/crates/d/openapi_type_derive.svg)
 Implementation detail of the openapi_type crate
+ - Version 0.4.5: [Documentation](_site/openapi_type_derive/0.4.5/openapi_type_derive/index.html)
  - Version 0.4.4: [Documentation](_site/openapi_type_derive/0.4.4/openapi_type_derive/index.html)
  - Version 0.4.3: [Documentation](_site/openapi_type_derive/0.4.3/openapi_type_derive/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type_derive/0.4.2/openapi_type_derive/index.html)
