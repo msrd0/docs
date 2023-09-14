@@ -284,6 +284,7 @@ A platform independent standalone library that plays Lottie Animation
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.2.9: [Documentation](_site/rlottie-sys/0.2.9/rlottie_sys/index.html)
  - Version 0.2.8: [Documentation](_site/rlottie-sys/0.2.8/rlottie_sys/index.html)
  - Version 0.2.7: [Documentation](_site/rlottie-sys/0.2.7/rlottie_sys/index.html)
  - Version 0.2.6: [Documentation](_site/rlottie-sys/0.2.6/rlottie_sys/index.html)
