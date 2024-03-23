@@ -1,0 +1,24 @@
+name: Update
+
+on:
+  push:
+    branches:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    steps:
+      - run: pacman -Syu --noconfirm --needed b3sum clang curl ffmpeg git jq libgit2 rust wget
+      - run: sed -i -e 's,exit \$E_ROOT,,' /usr/bin/makepkg
+      - uses: actions/checkout@v4
+      - run: |
+          git clone https://aur.archlinux.org/rlottie
+          cd rlottie
+          makepkg -si --noconfirm
+          cd ..
+          rm -rf rlottie
+      - run: ./_update.sh
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
