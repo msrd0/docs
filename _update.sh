@@ -3,13 +3,14 @@ set -euo pipefail
 
 user="msrd0"
 base_url="https://crates.io/api/v1"
-crates_io_index="https://github.com/rust-lang/crates.io-index/raw/master/"
+#crates_io_index="https://github.com/rust-lang/crates.io-index/raw/master/"
+crates_io_index="https://index.crates.io"
 
 function http_get() {
 	# on ArchLinux, wget does not support https so we can't use it
 	# on AlpineLinux, they've patched it to do certificate validation and enabled
 	#                 https, but also it is symlinked to /usr/bin so this works as well
-	/usr/bin/wget -q -O - -U "wget; bot (contact: git at msrd0 dot de)" "${@}"
+	timeout 30s /usr/bin/wget -q -O - -U "wget; bot (contact: git at msrd0 dot de)" "${@}"
 }
 
 user_id="$(http_get "$base_url/users/msrd0" | jq -r '.user.id')"
@@ -99,12 +100,14 @@ for crate in $crates; do
 EOF
 	
 	test -d _site/$crate || mkdir _site/$crate
+	echo -en "\e[1m  -> Downloading information for $crate ...\e[0m "
 	if [ "${#crate}" == 3 ]; then
 		response="$(http_get "$crates_io_index/3/${crate:0:1}/$crate")"
 	else
 		response="$(http_get "$crates_io_index/${crate:0:2}/${crate:2:2}/$crate")"
 	fi
 	versions="$(printf "%s" "$response" | jq -r 'select(.yanked == false) | .vers' | tac)"
+	echo done
 	
 	for vers in $versions; do
 		echo " - Version $vers: [Documentation](_site/$crate/$vers/$crate_escaped/index.html)" >>README.md
@@ -112,6 +115,11 @@ EOF
 		echo "				<a href=\"./$crate/$vers/$crate_escaped/index.html\">Documentation</a>" >>_site/index.html
 		
 		if [ ! -d _site/$crate/$vers ]; then
+			# ffmpeg doesn't compile anymore
+			if [ "$crate" == "mstickerlib" ] && [ "$vers" == "0.1.1" ]; then
+				continue
+			fi
+
 			echo -e "\e[1m  -> Documenting version $vers ...\e[0m"
 			
 			tmp=$(mktemp -d)
@@ -119,7 +127,7 @@ EOF
 			dir="$tmp/$crate-$vers"
 			
 			args="--manifest-path $dir/Cargo.toml"
-			if [ -f $tmp/Cargo.lock ]; then
+			if [ -f "$dir/Cargo.lock" ]; then
 				args="$args --locked"
 			fi
 			
