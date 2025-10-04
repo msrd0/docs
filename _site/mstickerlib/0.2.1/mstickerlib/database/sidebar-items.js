@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["hash"],"struct":["DummyDatabase","FileDatabase"],"trait":["Database"],"type":["Hash"]};
