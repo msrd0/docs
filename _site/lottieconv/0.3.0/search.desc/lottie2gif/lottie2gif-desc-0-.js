@@ -1,0 +1,1 @@
+searchState.loadedDescShard("lottie2gif", 0, "Convert lottie files GIF.\nThe background color in hexadecimal format.\nDisable background transparency.\nReturns the argument unchanged.\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.\nCalls <code>U::from(self)</code>.\nThe location of the lottie file.\nThe output file.")

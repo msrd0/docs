@@ -1,0 +1,1 @@
+searchState.loadedDescShard("lottie2webp", 0, "Convert lottie files WEBP.\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.\nThe location of the lottie file.\nThe output file.")

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ColorMode","EncodingType","Error"],"mod":["prelude"],"struct":["AnimParams","Decoder","DecoderIterator","DecoderOptions","Encoder","EncoderOptions","EncodingConfig","Frame","LossyEncodingConfig","WebPData"]};
