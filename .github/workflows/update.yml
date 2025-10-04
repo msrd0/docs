@@ -3,6 +3,9 @@ name: Update
 on:
   push:
     branches:
+  schedule:
+    - cron: '17 30 * * *'
+  workflow_dispatch:
 
 jobs:
   update:
