@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["NoopPathExtractor","NoopQueryStringExtractor"],"trait":["PathExtractor","QueryStringExtractor"]};

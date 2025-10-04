@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["build_router","build_simple_router"],"struct":["AssociatedRouteBuilder","DelegateRouteBuilder","RouterBuilder","ScopeBuilder","SingleRouteBuilder"],"trait":["DefineSingleRoute","DrawRoutes","ExtendRouteMatcher","ReplacePathExtractor","ReplaceQueryStringExtractor"],"type":["AssociatedSingleRouteBuilder"]};

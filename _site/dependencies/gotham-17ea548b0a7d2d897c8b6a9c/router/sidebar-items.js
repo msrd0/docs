@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["builder","response","route","tree"],"struct":["RouteNonMatch","Router"]};

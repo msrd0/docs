@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["OpenapiType"],"enum":["OpenapiVisitor"],"struct":["OpenapiSchema"],"trait":["AlternativesVisitor","ObjectVisitor","OpenapiType","Visitor"]};

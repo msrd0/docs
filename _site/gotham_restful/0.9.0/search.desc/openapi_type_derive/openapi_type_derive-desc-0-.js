@@ -1,0 +1,1 @@
+searchState.loadedDescShard("openapi_type_derive", 0, "This crate defines the macros for <code>#[derive(OpenapiType)]</code>.\nThe derive macro for <code>OpenapiType</code>.")

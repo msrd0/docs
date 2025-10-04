@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Delegation"],"mod":["dispatch","matcher"],"struct":["ExtractorFailed","Extractors","RouteImpl"],"trait":["Route"]};

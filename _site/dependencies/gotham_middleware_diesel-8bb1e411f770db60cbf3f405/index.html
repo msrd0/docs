@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Provides an interface for running Diesel queries in a Gotham application."><title>gotham_middleware_diesel - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-aa0817cf.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="gotham_middleware_diesel" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0 (1159e78c4 2025-09-14)" data-channel="1.90.0" data-search-js="search-fa3e91e5.js" data-settings-js="settings-5514c975.js" ><script src="../static.files/storage-68b7e25d.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-eebb9057.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../gotham_middleware_diesel/index.html">gotham_<wbr>middleware_<wbr>diesel</a><span class="version">0.5.1</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#structs">Crate Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>gotham_middleware_diesel</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/gotham_middleware_diesel/lib.rs.html#1-153">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Provides an interface for running Diesel queries in a Gotham application.</p>
+<p>The gotham diesel middleware uses <a href="../tokio/task/blocking/fn.spawn_blocking.html" title="fn tokio::task::blocking::spawn_blocking">tokio::task::spawn_blocking</a>, which allows
+blocking operations to run without blocking the tokio reactor. Although not true async,
+this allows multiple concurrent database requests to be handled, with a default of 100
+concurrent blocking operations.</p>
+<p>Usage example:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>
+<span class="kw">pub type </span>Repo = gotham_middleware_diesel::Repo&lt;SqliteConnection&gt;;
+
+<span class="kw">fn </span>router() -&gt; Router {
+    <span class="comment">// Create a Repo - using an in memory Sqlite DB
+    </span><span class="kw">let </span>repo = Repo::new(<span class="string">":memory:"</span>);
+    <span class="comment">// Add the diesel middleware to a new pipeline
+    </span><span class="kw">let </span>(chain, pipeline) =
+        single_pipeline(new_pipeline().add(DieselMiddleware::new(repo)).build());
+
+    <span class="comment">// Build the router
+    </span>build_router(chain, pipeline, |route| {
+        route.get(<span class="string">"/"</span>).to(handler);
+    })
+}
+
+<span class="kw">fn </span>handler(state: State) -&gt; Pin&lt;Box&lt;HandlerFuture&gt;&gt; {
+    <span class="kw">let </span>repo = Repo::borrow_from(<span class="kw-2">&amp;</span>state).clone();
+    <span class="comment">// As an example, we perform the query:
+    // `SELECT 1`
+    </span><span class="kw">async move </span>{
+        <span class="kw">let </span>result = repo
+            .run(<span class="kw">move </span>|<span class="kw-2">mut </span>conn| {
+                diesel::select(diesel::dsl::sql::&lt;Int8&gt;(<span class="string">"1"</span>))
+                    .load::&lt;i64&gt;(<span class="kw-2">&amp;mut </span>conn)
+                    .map(|v| v.into_iter().next().expect(<span class="string">"no results"</span>))
+            })
+            .<span class="kw">await</span>;
+        <span class="kw">match </span>result {
+            <span class="prelude-val">Ok</span>(n) =&gt; {
+                <span class="kw">let </span>body = <span class="macro">format!</span>(<span class="string">"result: {}"</span>, n);
+                <span class="kw">let </span>res = create_response(<span class="kw-2">&amp;</span>state, StatusCode::OK, TEXT_PLAIN, body);
+                <span class="prelude-val">Ok</span>((state, res))
+            }
+            <span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>((state, e.into())),
+        }
+    }
+    .boxed()
+}
+</code></pre></div>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.DieselMiddleware.html" title="struct gotham_middleware_diesel::DieselMiddleware">Diesel<wbr>Middleware</a></dt><dd>A Gotham compatible Middleware that manages a pool of Diesel connections via a <code>Repo</code> and hands
+out connections to other Middleware and Handlers that require them via the Gotham <code>State</code>
+mechanism.</dd><dt><a class="struct" href="struct.Repo.html" title="struct gotham_middleware_diesel::Repo">Repo</a></dt><dd>A database “repository”, for running database workloads.
+Manages a connection pool and running blocking tasks using
+<a href="../tokio/task/blocking/fn.spawn_blocking.html" title="fn tokio::task::blocking::spawn_blocking">tokio::task::spawn_blocking</a> which does not block the tokio event loop.</dd></dl></section></div></main></body></html>
