@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Error","QueryType","Timestamp","Type"],"mod":["integrations"],"struct":["Client","ReadQuery","WriteQuery"],"trait":["InfluxDbWriteable","Query"]};
