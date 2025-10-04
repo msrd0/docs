@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="A `Handler` is an asynchronous function, taking a `State` value which represents the request and related runtime state, and returns a future which resolves to a response."><title>Handler in gotham::handler - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-aa0817cf.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="gotham" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0 (1159e78c4 2025-09-14)" data-channel="1.90.0" data-search-js="search-fa3e91e5.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-68b7e25d.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-eebb9057.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../gotham/index.html">gotham</a><span class="version">0.7.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Handler</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a></li></ul><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.handle" title="handle">handle</a></li></ul><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In gotham::<wbr>handler</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">gotham</a>::<wbr><a href="index.html">handler</a></div><h1>Trait <span class="trait">Handler</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/gotham/handler/mod.rs.html#160-163">Source</a> </span></div><pre class="rust item-decl"><code>pub trait Handler: <a class="trait" href="https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> {
+    // Required method
+    fn <a href="#tymethod.handle" class="fn">handle</a>(self, state: <a class="struct" href="../state/struct.State.html" title="struct gotham::state::State">State</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.90.0/core/pin/struct.Pin.html" title="struct core::pin::Pin">Pin</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.90.0/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="type" href="type.HandlerFuture.html" title="type gotham::handler::HandlerFuture">HandlerFuture</a>&gt;&gt;;
+}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A <code>Handler</code> is an asynchronous function, taking a <code>State</code> value which represents the request
+and related runtime state, and returns a future which resolves to a response.</p>
+<p>This represents the common entry point for the parts of a Gotham application, and is used with
+the <code>Router</code> API to describe how a request should be dispatched and handled.</p>
+<p>The <code>Handler</code> is created and consumed by each request. In the most common case (a bare function
+acting as a <code>Handler</code>) the <code>Handler + Copy</code> traits allow the <code>Handler</code> to be copied for each
+request, and the copy consumed. For a closure or a custom handler, the <code>NewHandler</code>
+implementation creates a <code>Handler</code> value for each request.</p>
+<h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2>
+<p>The simplest kind of handler is a bare function which returns a synchronous response. This is
+useful when we don’t need to do any I/O before generating a response.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">fn </span>my_handler(_state: State) -&gt; (State, Response&lt;Body&gt;) {
+    <span class="comment">// Implementation elided.
+</span>}</code></pre></div>
+<p>An asynchronous handler returns a <code>HandlerFuture</code> that will resolve to the response. For
+example, this allows I/O work to begin, and for the Gotham app to continue generating a
+response once the work completes.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">fn </span>async_handler(_state: State) -&gt; Pin&lt;Box&lt;HandlerFuture&gt;&gt; {
+    <span class="comment">// Implementation elided.
+</span>}</code></pre></div>
+<p>A closure can implement <code>Handler</code> automatically, in the same way as a bare function. When
+constructing a <code>Handler</code> in this way, a wrapping closure must also be used to implement the
+<code>NewHandler</code> trait.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>new_handler = || {
+    <span class="kw">let </span>handler = |state: State| {
+        <span class="comment">// Implementation elided.
+    </span>};
+    <span class="prelude-val">Ok</span>(handler)
+};
+
+<span class="comment">// Pass `new_handler` to the router, using the `to_new_handler` API.</span></code></pre></div>
+<p>A custom handler, which implements the <code>NewHandler</code> and <code>Handler</code> traits directly for greater
+control. See the <code>NewHandler</code> trait for more examples of custom handlers.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>MyCustomHandler;
+
+<span class="kw">impl </span>NewHandler <span class="kw">for </span>MyCustomHandler {
+    <span class="kw">type </span>Instance = <span class="self">Self</span>;
+
+    <span class="kw">fn </span>new_handler(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; anyhow::Result&lt;<span class="self">Self</span>::Instance&gt; {
+        <span class="prelude-val">Ok</span>(<span class="kw-2">*</span><span class="self">self</span>)
+    }
+}
+
+<span class="kw">impl </span>Handler <span class="kw">for </span>MyCustomHandler {
+    <span class="kw">fn </span>handle(<span class="self">self</span>, _state: State) -&gt; Pin&lt;Box&lt;HandlerFuture&gt;&gt; {
+        <span class="comment">// Implementation elided.
+    </span>}
+}</code></pre></div>
+</div></details><h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.handle" class="method"><a class="src rightside" href="../../src/gotham/handler/mod.rs.html#162">Source</a><h4 class="code-header">fn <a href="#tymethod.handle" class="fn">handle</a>(self, state: <a class="struct" href="../state/struct.State.html" title="struct gotham::state::State">State</a>) -&gt; <a class="struct" href="https://doc.rust-lang.org/1.90.0/core/pin/struct.Pin.html" title="struct core::pin::Pin">Pin</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.90.0/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="type" href="type.HandlerFuture.html" title="type gotham::handler::HandlerFuture">HandlerFuture</a>&gt;&gt;</h4></section></summary><div class="docblock"><p>Handles the request, returning a boxed future which resolves to a response.</p>
+</div></details></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><section id="impl-Handler-for-Router" class="impl"><a class="src rightside" href="../../src/gotham/router/mod.rs.html#71-124">Source</a><a href="#impl-Handler-for-Router" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.Handler.html" title="trait gotham::handler::Handler">Handler</a> for <a class="struct" href="../router/struct.Router.html" title="struct gotham::router::Router">Router</a></h3></section><section id="impl-Handler-for-DirHandler" class="impl"><a class="src rightside" href="../../src/gotham/handler/assets/mod.rs.html#188-204">Source</a><a href="#impl-Handler-for-DirHandler" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.Handler.html" title="trait gotham::handler::Handler">Handler</a> for <a class="struct" href="struct.DirHandler.html" title="struct gotham::handler::DirHandler">DirHandler</a></h3></section><section id="impl-Handler-for-FileHandler" class="impl"><a class="src rightside" href="../../src/gotham/handler/assets/mod.rs.html#206-210">Source</a><a href="#impl-Handler-for-FileHandler" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.Handler.html" title="trait gotham::handler::Handler">Handler</a> for <a class="struct" href="struct.FileHandler.html" title="struct gotham::handler::FileHandler">FileHandler</a></h3></section><section id="impl-Handler-for-F" class="impl"><a class="src rightside" href="../../src/gotham/handler/mod.rs.html#165-173">Source</a><a href="#impl-Handler-for-F" class="anchor">§</a><h3 class="code-header">impl&lt;F, R&gt; <a class="trait" href="trait.Handler.html" title="trait gotham::handler::Handler">Handler</a> for F<div class="where">where
+    F: <a class="trait" href="https://doc.rust-lang.org/1.90.0/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>(<a class="struct" href="../state/struct.State.html" title="struct gotham::state::State">State</a>) -&gt; R + <a class="trait" href="https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a>,
+    R: <a class="trait" href="trait.IntoHandlerFuture.html" title="trait gotham::handler::IntoHandlerFuture">IntoHandlerFuture</a>,</div></h3></section></div><script src="../../trait.impl/gotham/handler/trait.Handler.js" async></script></section></div></main></body></html>

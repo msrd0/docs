@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["FormData"],"enum":["Error"],"mod":["value"],"trait":["FormData","FormDataFromState"],"type":["FormDataFuture"]};

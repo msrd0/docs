@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["BorrowBag","Handle"],"trait":["Append","Lookup"]};
