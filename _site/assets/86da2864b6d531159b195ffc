@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["chrono","deranged","equivalent","hashbrown","indexmap","itoa","linked_hash_map","memchr","num_conv","num_traits","openapi_type","openapi_type_derive","openapiv3","powerfmt","proc_macro2","quote","ryu","serde","serde_core","serde_derive","serde_derive_internals","serde_json","syn","syn_path","time","time_core","unicode_ident","uuid"];
+//{"start":21,"fragment_lengths":[8,11,13,12,11,7,18,9,11,13,15,22,12,11,14,8,6,8,13,15,25,13,6,11,7,12,16,7]}
