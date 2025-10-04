@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Sticker","StickerInfo","StickerPack","TgPackInfo","TgPackRootInfo","TgStickerInfo"]};

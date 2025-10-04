@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["pack_url_to_name"],"struct":["Config","ImportConfig","PhotoSize","Sticker","StickerPack"]};

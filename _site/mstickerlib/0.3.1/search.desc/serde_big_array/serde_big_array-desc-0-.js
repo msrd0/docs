@@ -1,0 +1,1 @@
+searchState.loadedDescShard("serde_big_array", 0, "Big array helper for serde. The purpose of this crate is …\nAn array newtype usable for nested structures\nThe big array serialization helper trait\nReturns the argument unchanged.\nCalls <code>U::from(self)</code>.")
