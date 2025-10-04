@@ -3,6 +3,7 @@ Rust Documentation for all of my crates
 
 ## aatree [![aatree on crates.io](https://img.shields.io/crates/v/aatree.svg)](https://crates.io/crates/aatree) ![downloads](https://img.shields.io/crates/d/aatree.svg)
 AATree implementation in Rust
+ - Version 0.2.3: [Documentation](_site/aatree/0.2.3/aatree/index.html)
  - Version 0.2.2: [Documentation](_site/aatree/0.2.2/aatree/index.html)
  - Version 0.2.1: [Documentation](_site/aatree/0.2.1/aatree/index.html)
  - Version 0.2.0: [Documentation](_site/aatree/0.2.0/aatree/index.html)
@@ -12,6 +13,8 @@ AATree implementation in Rust
 
 ## bdf-reader [![bdf-reader on crates.io](https://img.shields.io/crates/v/bdf-reader.svg)](https://crates.io/crates/bdf-reader) ![downloads](https://img.shields.io/crates/d/bdf-reader.svg)
 BDF font format reader
+ - Version 0.1.3: [Documentation](_site/bdf-reader/0.1.3/bdf_reader/index.html)
+ - Version 0.1.2: [Documentation](_site/bdf-reader/0.1.2/bdf_reader/index.html)
  - Version 0.1.1: [Documentation](_site/bdf-reader/0.1.1/bdf_reader/index.html)
 
 ## bitmap-font [![bitmap-font on crates.io](https://img.shields.io/crates/v/bitmap-font.svg)](https://crates.io/crates/bitmap-font) ![downloads](https://img.shields.io/crates/d/bitmap-font.svg)
@@ -26,6 +29,16 @@ Bitmap fonts for the embedded-graphics crate that don't require generics
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
 cargo subcommand to create a readme file containing the rustdoc comments from your code
+ - Version 0.6.3: [Documentation](_site/cargo-doc2readme/0.6.3/cargo_doc2readme/index.html)
+ - Version 0.6.2: [Documentation](_site/cargo-doc2readme/0.6.2/cargo_doc2readme/index.html)
+ - Version 0.6.1: [Documentation](_site/cargo-doc2readme/0.6.1/cargo_doc2readme/index.html)
+ - Version 0.6.0: [Documentation](_site/cargo-doc2readme/0.6.0/cargo_doc2readme/index.html)
+ - Version 0.5.2: [Documentation](_site/cargo-doc2readme/0.5.2/cargo_doc2readme/index.html)
+ - Version 0.5.1: [Documentation](_site/cargo-doc2readme/0.5.1/cargo_doc2readme/index.html)
+ - Version 0.5.0: [Documentation](_site/cargo-doc2readme/0.5.0/cargo_doc2readme/index.html)
+ - Version 0.4.2: [Documentation](_site/cargo-doc2readme/0.4.2/cargo_doc2readme/index.html)
+ - Version 0.4.1: [Documentation](_site/cargo-doc2readme/0.4.1/cargo_doc2readme/index.html)
+ - Version 0.4.0: [Documentation](_site/cargo-doc2readme/0.4.0/cargo_doc2readme/index.html)
  - Version 0.3.0: [Documentation](_site/cargo-doc2readme/0.3.0/cargo_doc2readme/index.html)
  - Version 0.2.6: [Documentation](_site/cargo-doc2readme/0.2.6/cargo_doc2readme/index.html)
  - Version 0.2.5: [Documentation](_site/cargo-doc2readme/0.2.5/cargo_doc2readme/index.html)
@@ -67,6 +80,7 @@ Parse format!-like strings
 
 ## gotham_formdata [![gotham_formdata on crates.io](https://img.shields.io/crates/v/gotham_formdata.svg)](https://crates.io/crates/gotham_formdata) ![downloads](https://img.shields.io/crates/d/gotham_formdata.svg)
 Form data parsing for the gotham web framework
+ - Version 0.0.8: [Documentation](_site/gotham_formdata/0.0.8/gotham_formdata/index.html)
  - Version 0.0.7: [Documentation](_site/gotham_formdata/0.0.7/gotham_formdata/index.html)
  - Version 0.0.6: [Documentation](_site/gotham_formdata/0.0.6/gotham_formdata/index.html)
  - Version 0.0.5: [Documentation](_site/gotham_formdata/0.0.5/gotham_formdata/index.html)
@@ -85,6 +99,8 @@ Implementation detail of gotham_formdata
 
 ## gotham_restful [![gotham_restful on crates.io](https://img.shields.io/crates/v/gotham_restful.svg)](https://crates.io/crates/gotham_restful) ![downloads](https://img.shields.io/crates/d/gotham_restful.svg)
 RESTful additions for the gotham web framework
+ - Version 0.9.0: [Documentation](_site/gotham_restful/0.9.0/gotham_restful/index.html)
+ - Version 0.8.5: [Documentation](_site/gotham_restful/0.8.5/gotham_restful/index.html)
  - Version 0.8.4: [Documentation](_site/gotham_restful/0.8.4/gotham_restful/index.html)
  - Version 0.8.3: [Documentation](_site/gotham_restful/0.8.3/gotham_restful/index.html)
  - Version 0.8.2: [Documentation](_site/gotham_restful/0.8.2/gotham_restful/index.html)
@@ -125,6 +141,7 @@ RESTful additions for the gotham web framework
 
 ## gotham_restful_derive [![gotham_restful_derive on crates.io](https://img.shields.io/crates/v/gotham_restful_derive.svg)](https://crates.io/crates/gotham_restful_derive) ![downloads](https://img.shields.io/crates/d/gotham_restful_derive.svg)
 Private implementation detail of gotham_restful
+ - Version 0.9.0: [Documentation](_site/gotham_restful_derive/0.9.0/gotham_restful_derive/index.html)
  - Version 0.8.3: [Documentation](_site/gotham_restful_derive/0.8.3/gotham_restful_derive/index.html)
  - Version 0.8.2: [Documentation](_site/gotham_restful_derive/0.8.2/gotham_restful_derive/index.html)
  - Version 0.8.1: [Documentation](_site/gotham_restful_derive/0.8.1/gotham_restful_derive/index.html)
@@ -149,6 +166,15 @@ Private implementation detail of gotham_restful
 
 ## gotham_restful_redoc [![gotham_restful_redoc on crates.io](https://img.shields.io/crates/v/gotham_restful_redoc.svg)](https://crates.io/crates/gotham_restful_redoc) ![downloads](https://img.shields.io/crates/d/gotham_restful_redoc.svg)
 Private implementation detail of gotham_restful
+ - Version 0.2.12+2.5.1: [Documentation](_site/gotham_restful_redoc/0.2.12+2.5.1/gotham_restful_redoc/index.html)
+ - Version 0.2.11+2.5.0: [Documentation](_site/gotham_restful_redoc/0.2.11+2.5.0/gotham_restful_redoc/index.html)
+ - Version 0.2.10+2.4.0: [Documentation](_site/gotham_restful_redoc/0.2.10+2.4.0/gotham_restful_redoc/index.html)
+ - Version 0.2.9+2.3.0: [Documentation](_site/gotham_restful_redoc/0.2.9+2.3.0/gotham_restful_redoc/index.html)
+ - Version 0.2.8+2.2.0: [Documentation](_site/gotham_restful_redoc/0.2.8+2.2.0/gotham_restful_redoc/index.html)
+ - Version 0.2.7+2.1.5: [Documentation](_site/gotham_restful_redoc/0.2.7+2.1.5/gotham_restful_redoc/index.html)
+ - Version 0.2.6+2.1.4: [Documentation](_site/gotham_restful_redoc/0.2.6+2.1.4/gotham_restful_redoc/index.html)
+ - Version 0.2.5+2.1.4: [Documentation](_site/gotham_restful_redoc/0.2.5+2.1.4/gotham_restful_redoc/index.html)
+ - Version 0.2.4+2.1.3: [Documentation](_site/gotham_restful_redoc/0.2.4+2.1.3/gotham_restful_redoc/index.html)
  - Version 0.2.3+2.1.2: [Documentation](_site/gotham_restful_redoc/0.2.3+2.1.2/gotham_restful_redoc/index.html)
  - Version 0.2.2+2.1.1: [Documentation](_site/gotham_restful_redoc/0.2.2+2.1.1/gotham_restful_redoc/index.html)
  - Version 0.2.1+2.0.0: [Documentation](_site/gotham_restful_redoc/0.2.1+2.0.0/gotham_restful_redoc/index.html)
@@ -159,6 +185,7 @@ Private implementation detail of gotham_restful
 
 ## hershey [![hershey on crates.io](https://img.shields.io/crates/v/hershey.svg)](https://crates.io/crates/hershey) ![downloads](https://img.shields.io/crates/d/hershey.svg)
 Hershey font format parser
+ - Version 0.1.2: [Documentation](_site/hershey/0.1.2/hershey/index.html)
  - Version 0.1.1: [Documentation](_site/hershey/0.1.1/hershey/index.html)
  - Version 0.1.0: [Documentation](_site/hershey/0.1.0/hershey/index.html)
 
@@ -168,6 +195,7 @@ Reserved
 
 ## influxdb [![influxdb on crates.io](https://img.shields.io/crates/v/influxdb.svg)](https://crates.io/crates/influxdb) ![downloads](https://img.shields.io/crates/d/influxdb.svg)
 InfluxDB Driver for Rust
+ - Version 0.7.2: [Documentation](_site/influxdb/0.7.2/influxdb/index.html)
  - Version 0.7.1: [Documentation](_site/influxdb/0.7.1/influxdb/index.html)
  - Version 0.7.0: [Documentation](_site/influxdb/0.7.0/influxdb/index.html)
  - Version 0.6.0: [Documentation](_site/influxdb/0.6.0/influxdb/index.html)
@@ -222,6 +250,7 @@ DEPRECATED - use lottieconv crate instead
 
 ## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
 Convert lottie files to WEBP or GIF
+ - Version 0.3.0: [Documentation](_site/lottieconv/0.3.0/lottieconv/index.html)
  - Version 0.2.3: [Documentation](_site/lottieconv/0.2.3/lottieconv/index.html)
  - Version 0.2.2: [Documentation](_site/lottieconv/0.2.2/lottieconv/index.html)
  - Version 0.2.1: [Documentation](_site/lottieconv/0.2.1/lottieconv/index.html)
@@ -235,11 +264,17 @@ Primitive type with millimeter unit attached
 
 ## mstickerlib [![mstickerlib on crates.io](https://img.shields.io/crates/v/mstickerlib.svg)](https://crates.io/crates/mstickerlib) ![downloads](https://img.shields.io/crates/d/mstickerlib.svg)
 Private implementation detail of mstickereditor
+ - Version 0.3.2: [Documentation](_site/mstickerlib/0.3.2/mstickerlib/index.html)
+ - Version 0.3.1: [Documentation](_site/mstickerlib/0.3.1/mstickerlib/index.html)
+ - Version 0.3.0: [Documentation](_site/mstickerlib/0.3.0/mstickerlib/index.html)
+ - Version 0.2.1: [Documentation](_site/mstickerlib/0.2.1/mstickerlib/index.html)
+ - Version 0.1.1: [Documentation](_site/mstickerlib/0.1.1/mstickerlib/index.html)
  - Version 0.1.0: [Documentation](_site/mstickerlib/0.1.0/mstickerlib/index.html)
  - Version 0.0.1: [Documentation](_site/mstickerlib/0.0.1/mstickerlib/index.html)
 
 ## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
 OpenAPI type information for Rust structs and enums
+ - Version 0.5.0: [Documentation](_site/openapi_type/0.5.0/openapi_type/index.html)
  - Version 0.4.3: [Documentation](_site/openapi_type/0.4.3/openapi_type/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type/0.4.2/openapi_type/index.html)
  - Version 0.4.1: [Documentation](_site/openapi_type/0.4.1/openapi_type/index.html)
@@ -285,6 +320,7 @@ A platform independent standalone library that plays Lottie Animation
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.2.10: [Documentation](_site/rlottie-sys/0.2.10/rlottie_sys/index.html)
  - Version 0.2.9: [Documentation](_site/rlottie-sys/0.2.9/rlottie_sys/index.html)
  - Version 0.2.8: [Documentation](_site/rlottie-sys/0.2.8/rlottie_sys/index.html)
  - Version 0.2.7: [Documentation](_site/rlottie-sys/0.2.7/rlottie_sys/index.html)
@@ -306,6 +342,7 @@ Typed SVG Writer
 
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)
 A simple macro to declare a syn::Path at compile time
+ - Version 2.1.0: [Documentation](_site/syn-path/2.1.0/syn_path/index.html)
  - Version 2.0.0: [Documentation](_site/syn-path/2.0.0/syn_path/index.html)
  - Version 1.0.1: [Documentation](_site/syn-path/1.0.1/syn_path/index.html)
  - Version 1.0.0: [Documentation](_site/syn-path/1.0.0/syn_path/index.html)
