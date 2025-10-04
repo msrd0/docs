@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["MustBe"],"struct":["MustBeBool","MustBeChar","MustBeI128","MustBeI16","MustBeI32","MustBeI64","MustBeI8","MustBeU128","MustBeU16","MustBeU32","MustBeU64","MustBeU8"],"trait":["ConstStr","MustBe"],"type":["MustBeStr"]};
