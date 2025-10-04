@@ -1,0 +1,1 @@
+searchState.loadedDescShard("cargo_doc2readme", 0, "<strong>THIS IS NOT A LIBRARY. NONE OF THE APIS ARE PUBLIC. THEY </strong>…")
