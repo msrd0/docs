@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DEFAULT_CODE_BLOCK_TOKEN_COUNT"],"enum":["Alignment","LinkCategory"],"fn":["calculate_code_block_token_count","cmark","cmark_resume","cmark_resume_with_options","cmark_with_options"],"struct":["Heading","ImageLink","Options","State"]};
