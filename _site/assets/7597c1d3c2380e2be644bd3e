@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["bdf_reader","bit_vec","log","paste","proc_macro2","quote","syn","thiserror","thiserror_impl","unicode_ident"];
+//{"start":21,"fragment_lengths":[12,10,6,8,14,8,6,12,17,16]}
