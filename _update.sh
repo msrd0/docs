@@ -176,7 +176,9 @@ EOF
 			git add _site/$crate/$vers _site/{assets,dependencies,sources}
 			git commit -q -m "add documentation for $crate $vers" \
 				--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-			git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+			if [ -n ${GITHUB_TOKEN+x} ]; then
+				git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+			fi
 		fi
 	done
 done
@@ -193,7 +195,9 @@ if ! git diff --exit-code _site/index.html README.md _config.yml &>/dev/null;  t
 	git add _site/index.html README.md _config.yml 
 	git commit -q -m "update readme and config" \
 		--author "drone-msrd0-eu[bot] <noreply@drone.msrd0.eu>"
-	git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+	if [ -n ${GITHUB_TOKEN+x} ]; then
+		git push "https://$GITHUB_TOKEN@github.com/msrd0/docs"
+	fi
 fi
 
 # there shouldn't be any changed files left over
