@@ -1,0 +1,1 @@
+searchState.loadedDescShard("gotham_derive", 0, "This crate is a private implementation detail of <code>gotham</code>. …")

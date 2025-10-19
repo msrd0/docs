@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["gotham",[]],["gotham_middleware_diesel",[["impl&lt;T&gt; <a class=\"trait\" href=\"gotham/middleware/trait.Middleware.html\" title=\"trait gotham::middleware::Middleware\">Middleware</a> for <a class=\"struct\" href=\"gotham_middleware_diesel/struct.DieselMiddleware.html\" title=\"struct gotham_middleware_diesel::DieselMiddleware\">DieselMiddleware</a>&lt;T&gt;<div class=\"where\">where\n    T: <a class=\"trait\" href=\"diesel/r2d2/trait.R2D2Connection.html\" title=\"trait diesel::r2d2::R2D2Connection\">R2D2Connection</a> + 'static,</div>"]]],["gotham_restful",[["impl <a class=\"trait\" href=\"gotham/middleware/trait.Middleware.html\" title=\"trait gotham::middleware::Middleware\">Middleware</a> for <a class=\"struct\" href=\"gotham_restful/cors/struct.CorsConfig.html\" title=\"struct gotham_restful::cors::CorsConfig\">CorsConfig</a>"],["impl&lt;Data, Handler&gt; <a class=\"trait\" href=\"gotham/middleware/trait.Middleware.html\" title=\"trait gotham::middleware::Middleware\">Middleware</a> for <a class=\"struct\" href=\"gotham_restful/struct.AuthMiddleware.html\" title=\"struct gotham_restful::AuthMiddleware\">AuthMiddleware</a>&lt;Data, Handler&gt;<div class=\"where\">where\n    Data: <a class=\"trait\" href=\"serde_core/de/trait.DeserializeOwned.html\" title=\"trait serde_core::de::DeserializeOwned\">DeserializeOwned</a> + <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a> + 'static,\n    Handler: <a class=\"trait\" href=\"gotham_restful/trait.AuthHandler.html\" title=\"trait gotham_restful::AuthHandler\">AuthHandler</a>&lt;Data&gt;,</div>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[13,537,1106]}

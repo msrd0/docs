@@ -1,0 +1,1 @@
+searchState.loadedDescShard("syn_path", 0, "This crate contains macros to construct <code>syn</code>-types that …\nThis macro takes paths of the form <code>my_crate::my_mod::FooBar</code>…\nThis macro takes type paths of the form …\nThis macro takes type paths of the form …")

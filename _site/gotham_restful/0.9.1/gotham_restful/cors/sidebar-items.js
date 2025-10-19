@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Headers","Origin"],"fn":["handle_cors"],"struct":["CorsConfig"],"trait":["CorsRoute"]};
