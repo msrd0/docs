@@ -131,7 +131,7 @@ EOF
 				args="$args --locked"
 			fi
 			
-			features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | .features | to_entries[] | .key'))
+			features=($(printf "%s" "$response" | jq -r 'select(.vers == "'$vers'") | [.features, .features2 // []] | .[] | to_entries[] | .key'))
 			if [[ ${features[*]} =~ tokio ]] || [[ ${features[*]} =~ async[\-_]std ]] || [[ ${features[*]} =~ hyper ]]; then
 				# we want to make very sure not to enable tokio and async-std based stuff at the same time
 				true
