@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["BlockBuffer","Eager","Lazy"],"trait":["BufferKind"],"type":["Block","EagerBuffer","LazyBuffer"]};

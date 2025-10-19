@@ -1,0 +1,1 @@
+searchState.loadedDescShard("gotham_restful_redoc", 0, "Private implementation detail of the <code>gotham_restful</code> crate.")
