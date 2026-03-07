@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["openapi_type_derive","proc_macro2","quote","serde_derive_internals","syn","syn_path","unicode_ident"];
+//{"start":21,"fragment_lengths":[21,14,8,25,6,11,16]}
