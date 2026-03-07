@@ -29,6 +29,8 @@ Bitmap fonts for the embedded-graphics crate that don't require generics
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
 cargo subcommand to create a readme file containing the rustdoc comments from your code
+ - Version 0.6.5: [Documentation](_site/cargo-doc2readme/0.6.5/cargo_doc2readme/index.html)
+ - Version 0.6.4: [Documentation](_site/cargo-doc2readme/0.6.4/cargo_doc2readme/index.html)
  - Version 0.6.3: [Documentation](_site/cargo-doc2readme/0.6.3/cargo_doc2readme/index.html)
  - Version 0.6.2: [Documentation](_site/cargo-doc2readme/0.6.2/cargo_doc2readme/index.html)
  - Version 0.6.1: [Documentation](_site/cargo-doc2readme/0.6.1/cargo_doc2readme/index.html)
@@ -71,10 +73,12 @@ Reserved
 
 ## ellipse-bin [![ellipse-bin on crates.io](https://img.shields.io/crates/v/ellipse-bin.svg)](https://crates.io/crates/ellipse-bin) ![downloads](https://img.shields.io/crates/d/ellipse-bin.svg)
 Command that truncates and ellipses strings in a human-friendly way
+ - Version 1.0.1: [Documentation](_site/ellipse-bin/1.0.1/ellipse_bin/index.html)
  - Version 1.0.0: [Documentation](_site/ellipse-bin/1.0.0/ellipse_bin/index.html)
 
 ## fmtparse [![fmtparse on crates.io](https://img.shields.io/crates/v/fmtparse.svg)](https://crates.io/crates/fmtparse) ![downloads](https://img.shields.io/crates/d/fmtparse.svg)
 Parse format!-like strings
+ - Version 0.3.0: [Documentation](_site/fmtparse/0.3.0/fmtparse/index.html)
  - Version 0.2.0: [Documentation](_site/fmtparse/0.2.0/fmtparse/index.html)
  - Version 0.1.0: [Documentation](_site/fmtparse/0.1.0/fmtparse/index.html)
 
@@ -197,6 +201,7 @@ Reserved
 
 ## influxdb [![influxdb on crates.io](https://img.shields.io/crates/v/influxdb.svg)](https://crates.io/crates/influxdb) ![downloads](https://img.shields.io/crates/d/influxdb.svg)
 InfluxDB Driver for Rust
+ - Version 0.8.0: [Documentation](_site/influxdb/0.8.0/influxdb/index.html)
  - Version 0.7.2: [Documentation](_site/influxdb/0.7.2/influxdb/index.html)
  - Version 0.7.1: [Documentation](_site/influxdb/0.7.1/influxdb/index.html)
  - Version 0.7.0: [Documentation](_site/influxdb/0.7.0/influxdb/index.html)
@@ -217,6 +222,7 @@ InfluxDB Driver for Rust
 
 ## influxdb_derive [![influxdb_derive on crates.io](https://img.shields.io/crates/v/influxdb_derive.svg)](https://crates.io/crates/influxdb_derive) ![downloads](https://img.shields.io/crates/d/influxdb_derive.svg)
 Private implementation detail of the influxdb crate
+ - Version 0.6.0: [Documentation](_site/influxdb_derive/0.6.0/influxdb_derive/index.html)
  - Version 0.5.1: [Documentation](_site/influxdb_derive/0.5.1/influxdb_derive/index.html)
  - Version 0.5.0: [Documentation](_site/influxdb_derive/0.5.0/influxdb_derive/index.html)
  - Version 0.4.0: [Documentation](_site/influxdb_derive/0.4.0/influxdb_derive/index.html)
@@ -227,6 +233,11 @@ Private implementation detail of the influxdb crate
 ## kicad_newstroke_font [![kicad_newstroke_font on crates.io](https://img.shields.io/crates/v/kicad_newstroke_font.svg)](https://crates.io/crates/kicad_newstroke_font) ![downloads](https://img.shields.io/crates/d/kicad_newstroke_font.svg)
 KiCAD v6 Newstroke Font (raw data)
  - Version 0.1.0+6.0.0: [Documentation](_site/kicad_newstroke_font/0.1.0+6.0.0/kicad_newstroke_font/index.html)
+
+## krilla-rxing [![krilla-rxing on crates.io](https://img.shields.io/crates/v/krilla-rxing.svg)](https://crates.io/crates/krilla-rxing) ![downloads](https://img.shields.io/crates/d/krilla-rxing.svg)
+Render barcodes (QR Codes, Aztec, Data Matrix, etc) using rxing into a krilla Surface (PDF)
+ - Version 0.1.1: [Documentation](_site/krilla-rxing/0.1.1/krilla_rxing/index.html)
+ - Version 0.1.0: [Documentation](_site/krilla-rxing/0.1.0/krilla_rxing/index.html)
 
 ## log4rs-sentry [![log4rs-sentry on crates.io](https://img.shields.io/crates/v/log4rs-sentry.svg)](https://crates.io/crates/log4rs-sentry) ![downloads](https://img.shields.io/crates/d/log4rs-sentry.svg)
 Sentry Appender for log4rs
@@ -252,6 +263,7 @@ DEPRECATED - use lottieconv crate instead
 
 ## lottieconv [![lottieconv on crates.io](https://img.shields.io/crates/v/lottieconv.svg)](https://crates.io/crates/lottieconv) ![downloads](https://img.shields.io/crates/d/lottieconv.svg)
 Convert lottie files to WEBP or GIF
+ - Version 0.3.1: [Documentation](_site/lottieconv/0.3.1/lottieconv/index.html)
  - Version 0.3.0: [Documentation](_site/lottieconv/0.3.0/lottieconv/index.html)
  - Version 0.2.3: [Documentation](_site/lottieconv/0.2.3/lottieconv/index.html)
  - Version 0.2.2: [Documentation](_site/lottieconv/0.2.2/lottieconv/index.html)
@@ -276,6 +288,7 @@ Private implementation detail of mstickereditor
 
 ## openapi_type [![openapi_type on crates.io](https://img.shields.io/crates/v/openapi_type.svg)](https://crates.io/crates/openapi_type) ![downloads](https://img.shields.io/crates/d/openapi_type.svg)
 OpenAPI type information for Rust structs and enums
+ - Version 0.5.2: [Documentation](_site/openapi_type/0.5.2/openapi_type/index.html)
  - Version 0.5.0: [Documentation](_site/openapi_type/0.5.0/openapi_type/index.html)
  - Version 0.4.3: [Documentation](_site/openapi_type/0.4.3/openapi_type/index.html)
  - Version 0.4.2: [Documentation](_site/openapi_type/0.4.2/openapi_type/index.html)
@@ -292,6 +305,7 @@ OpenAPI type information for Rust structs and enums
 
 ## openapi_type_derive [![openapi_type_derive on crates.io](https://img.shields.io/crates/v/openapi_type_derive.svg)](https://crates.io/crates/openapi_type_derive) ![downloads](https://img.shields.io/crates/d/openapi_type_derive.svg)
 Implementation detail of the openapi_type crate
+ - Version 0.4.6: [Documentation](_site/openapi_type_derive/0.4.6/openapi_type_derive/index.html)
  - Version 0.4.5: [Documentation](_site/openapi_type_derive/0.4.5/openapi_type_derive/index.html)
  - Version 0.4.4: [Documentation](_site/openapi_type_derive/0.4.4/openapi_type_derive/index.html)
  - Version 0.4.3: [Documentation](_site/openapi_type_derive/0.4.3/openapi_type_derive/index.html)
@@ -307,8 +321,15 @@ Implementation detail of the openapi_type crate
  - Version 0.2.0: [Documentation](_site/openapi_type_derive/0.2.0/openapi_type_derive/index.html)
  - Version 0.1.0: [Documentation](_site/openapi_type_derive/0.1.0/openapi_type_derive/index.html)
 
+## qrcode2pdf [![qrcode2pdf on crates.io](https://img.shields.io/crates/v/qrcode2pdf.svg)](https://crates.io/crates/qrcode2pdf) ![downloads](https://img.shields.io/crates/d/qrcode2pdf.svg)
+Render barcodes (QR Codes, Aztec, Data Matrix, etc) using rxing into a krilla Surface (PDF)
+ - Version 0.1.1: [Documentation](_site/qrcode2pdf/0.1.1/qrcode2pdf/index.html)
+ - Version 0.1.0: [Documentation](_site/qrcode2pdf/0.1.0/qrcode2pdf/index.html)
+
 ## rlottie [![rlottie on crates.io](https://img.shields.io/crates/v/rlottie.svg)](https://crates.io/crates/rlottie) ![downloads](https://img.shields.io/crates/d/rlottie.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.5.4: [Documentation](_site/rlottie/0.5.4/rlottie/index.html)
+ - Version 0.5.3: [Documentation](_site/rlottie/0.5.3/rlottie/index.html)
  - Version 0.5.2: [Documentation](_site/rlottie/0.5.2/rlottie/index.html)
  - Version 0.5.1: [Documentation](_site/rlottie/0.5.1/rlottie/index.html)
  - Version 0.5.0: [Documentation](_site/rlottie/0.5.0/rlottie/index.html)
@@ -322,6 +343,8 @@ A platform independent standalone library that plays Lottie Animation
 
 ## rlottie-sys [![rlottie-sys on crates.io](https://img.shields.io/crates/v/rlottie-sys.svg)](https://crates.io/crates/rlottie-sys) ![downloads](https://img.shields.io/crates/d/rlottie-sys.svg)
 A platform independent standalone library that plays Lottie Animation
+ - Version 0.2.12: [Documentation](_site/rlottie-sys/0.2.12/rlottie_sys/index.html)
+ - Version 0.2.11: [Documentation](_site/rlottie-sys/0.2.11/rlottie_sys/index.html)
  - Version 0.2.10: [Documentation](_site/rlottie-sys/0.2.10/rlottie_sys/index.html)
  - Version 0.2.9: [Documentation](_site/rlottie-sys/0.2.9/rlottie_sys/index.html)
  - Version 0.2.8: [Documentation](_site/rlottie-sys/0.2.8/rlottie_sys/index.html)
@@ -340,6 +363,7 @@ KiCAD v6 S-Expression Format
 
 ## svgwriter [![svgwriter on crates.io](https://img.shields.io/crates/v/svgwriter.svg)](https://crates.io/crates/svgwriter) ![downloads](https://img.shields.io/crates/d/svgwriter.svg)
 Typed SVG Writer
+ - Version 0.1.1: [Documentation](_site/svgwriter/0.1.1/svgwriter/index.html)
  - Version 0.1.0: [Documentation](_site/svgwriter/0.1.0/svgwriter/index.html)
 
 ## syn-path [![syn-path on crates.io](https://img.shields.io/crates/v/syn-path.svg)](https://crates.io/crates/syn-path) ![downloads](https://img.shields.io/crates/d/syn-path.svg)

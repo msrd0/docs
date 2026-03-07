@@ -22,6 +22,7 @@ keep_files:
   - influxdb
   - influxdb_derive
   - kicad_newstroke_font
+  - krilla-rxing
   - log4rs-sentry
   - lottie2gif
   - lottie2webp
@@ -30,6 +31,7 @@ keep_files:
   - mstickerlib
   - openapi_type
   - openapi_type_derive
+  - qrcode2pdf
   - rlottie
   - rlottie-sys
   - serde_kicad_sexpr
