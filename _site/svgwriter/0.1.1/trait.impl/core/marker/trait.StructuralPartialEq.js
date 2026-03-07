@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["hashbrown",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/marker/trait.StructuralPartialEq.html\" title=\"trait core::marker::StructuralPartialEq\">StructuralPartialEq</a> for <a class=\"enum\" href=\"hashbrown/enum.TryReserveError.html\" title=\"enum hashbrown::TryReserveError\">TryReserveError</a>"]]],["indexmap",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/marker/trait.StructuralPartialEq.html\" title=\"trait core::marker::StructuralPartialEq\">StructuralPartialEq</a> for <a class=\"enum\" href=\"indexmap/enum.GetDisjointMutError.html\" title=\"enum indexmap::GetDisjointMutError\">GetDisjointMutError</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/marker/trait.StructuralPartialEq.html\" title=\"trait core::marker::StructuralPartialEq\">StructuralPartialEq</a> for <a class=\"struct\" href=\"indexmap/struct.TryReserveError.html\" title=\"struct indexmap::TryReserveError\">TryReserveError</a>"]]],["svgwriter",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/marker/trait.StructuralPartialEq.html\" title=\"trait core::marker::StructuralPartialEq\">StructuralPartialEq</a> for <a class=\"struct\" href=\"svgwriter/struct.Data.html\" title=\"struct svgwriter::Data\">Data</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/marker/trait.StructuralPartialEq.html\" title=\"trait core::marker::StructuralPartialEq\">StructuralPartialEq</a> for <a class=\"struct\" href=\"svgwriter/struct.Transform.html\" title=\"struct svgwriter::Transform\">Transform</a>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[331,661,609]}

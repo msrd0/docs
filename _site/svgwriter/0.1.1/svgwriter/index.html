@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="`svgwriter` is a typed library for writing correct SVG files. It includes SVG specification and documentation from mdn."><title>svgwriter - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="svgwriter" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate svgwriter</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../svgwriter/index.html">svgwriter</a><span class="version">0.1.1</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#example" title="Example">Example</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>svgwriter</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/svgwriter/lib.rs.html#1-75">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>svgwriter</code> is a typed library for writing correct SVG files. It includes SVG
+specification and documentation from <a href="https://developer.mozilla.org">mdn</a>.</p>
+<h3 id="example"><a class="doc-anchor" href="#example">§</a>Example</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>svgwriter::{
+	tags::{Path, TagWithPresentationAttributes <span class="kw">as _</span>},
+	Data, Graphic
+};
+
+<span class="kw">let </span><span class="kw-2">mut </span>svg = Graphic::new();
+<span class="kw">let </span>size = <span class="number">100</span>;
+svg.set_width(size);
+svg.set_height(size);
+svg.set_view_box(<span class="macro">format!</span>(<span class="string">"0 0 {size} {size}"</span>));
+
+<span class="comment">// draw a heart, inspired by https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#example
+</span><span class="kw">let </span>d = <span class="number">40</span>;
+<span class="kw">let </span>padding = size / <span class="number">2 </span>- d;
+<span class="kw">let </span><span class="kw-2">mut </span>heart = Data::new();
+heart
+	.move_to(padding, padding + d / <span class="number">2</span>)
+	.arc_by(d / <span class="number">2</span>, d / <span class="number">2</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, d, <span class="number">0</span>)
+	.arc_by(d / <span class="number">2</span>, d / <span class="number">2</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>, d, <span class="number">0</span>)
+	.quad_by(<span class="number">0</span>, d * <span class="number">3 </span>/ <span class="number">4</span>, -d, d * <span class="number">3 </span>/ <span class="number">2</span>)
+	.quad_by(-d,-d * <span class="number">3 </span>/ <span class="number">4</span>, -d, -d * <span class="number">3 </span>/ <span class="number">2</span>);
+svg.push(
+	Path::new()
+		.with_d(heart)
+		.with_fill(<span class="string">"#A919FA"</span>)
+		.with_fill_opacity(<span class="number">0.5</span>)
+		.with_stroke(<span class="string">"#A919FA"</span>)
+		.with_stroke_width(<span class="number">3</span>)
+);
+
+<span class="comment">// write the svg to a file
+</span><span class="macro">write!</span>(file, <span class="string">"{}"</span>, svg.to_string());</code></pre></div>
+<p>This code produces the following image:</p>
+<p><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='100' height='100' viewBox='0 0 100 100'><path d='M10,30a20,20,0,0,1,40,0a20,20,0,0,1,40,0q0,30,-40,60q-40,-30,-40,-60' fill='#A919FA' fill-opacity='0.5' stroke='#A919FA' stroke-width='3'/></svg></p>
+<p><img src="data:image/svg+xml,%3Csvg%20xmlns=&#x27;http://www.w3.org/2000/svg&#x27;%20xmlns:xlink=&#x27;http://www.w3.org/1999/xlink&#x27;%20width=&#x27;100&#x27;%20height=&#x27;100&#x27;%20viewBox=&#x27;0%200%20100%20100&#x27;%3E%3Cpath%20d=&#x27;M10,30a20,20,0,0,1,40,0a20,20,0,0,1,40,0q0,30,-40,60q-40,-30,-40,-60&#x27;%20fill=&#x27;%23A919FA&#x27;%20fill-opacity=&#x27;0.5&#x27;%20stroke=&#x27;%23A919FA&#x27;%20stroke-width=&#x27;3&#x27;/%3E%3C/svg%3E" alt="Image produced by example code" /></p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="tags/index.html" title="mod svgwriter::tags">tags</a></dt></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Data.html" title="struct svgwriter::Data">Data</a></dt><dt><a class="struct" href="struct.Graphic.html" title="struct svgwriter::Graphic">Graphic</a></dt><dd>An SVG graphic.</dd><dt><a class="struct" href="struct.RawXml.html" title="struct svgwriter::RawXml">RawXml</a></dt><dt><a class="struct" href="struct.Transform.html" title="struct svgwriter::Transform">Transform</a></dt></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.Container.html" title="trait svgwriter::Container">Container</a></dt><dt><a class="trait" href="trait.Value.html" title="trait svgwriter::Value">Value</a></dt><dd>This trait implements an SVG attribute value.</dd></dl></section></div></main></body></html>
