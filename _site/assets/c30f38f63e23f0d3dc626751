@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["allocator_api2","cfg_if","chumsky","equivalent","fmtparse","foldhash","hashbrown","libc","psm","stacker","unicode_ident","unicode_segmentation"];
+//{"start":21,"fragment_lengths":[16,9,10,13,11,11,12,7,6,10,16,23]}
