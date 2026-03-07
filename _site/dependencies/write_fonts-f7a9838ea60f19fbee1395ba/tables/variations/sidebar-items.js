@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["DeltaRunType","DeltaSetIndexMap","PackedPointNumbers"],"mod":["ivs_builder"],"struct":["DeltaSetIndexMapFormat0","DeltaSetIndexMapFormat1","EntryFormat","ItemVariationData","ItemVariationStore","PackedDeltas","RegionAxisCoordinates","Tuple","TupleIndex","TupleVariationCount","TupleVariationHeader","VariationRegion","VariationRegionList"]};

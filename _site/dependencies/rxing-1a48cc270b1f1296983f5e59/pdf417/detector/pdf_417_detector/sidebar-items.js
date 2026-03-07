@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["detect","detect_with_hints"]};

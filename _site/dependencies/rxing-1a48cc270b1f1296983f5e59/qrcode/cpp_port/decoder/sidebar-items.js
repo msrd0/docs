@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["CorrectErrors","Decode","DecodeAlphanumericSegment","DecodeBitStream","DecodeByteSegment","DecodeHanziSegment","DecodeKanjiSegment","DecodeNumericSegment","IsEndOfStream","ParseECIValue","ToAlphaNumericChar"]};

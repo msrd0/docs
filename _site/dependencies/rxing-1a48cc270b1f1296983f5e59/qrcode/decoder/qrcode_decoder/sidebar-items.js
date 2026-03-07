@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["decode_bitmatrix","decode_bitmatrix_with_hints","decode_bool_array","decode_bool_array_with_hints"]};

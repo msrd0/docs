@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Compaction"],"mod":["pdf_417_error_correction","pdf_417_high_level_encoder"],"struct":["BarcodeMatrix","BarcodeRow","Dimensions","PDF417"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["action","annotation","blend","color","configure","destination","document","embed","error","geom","graphic","icc","mask","metadata","num","outline","page","paint","stream","surface","tagging","text"],"struct":["Data","SerializeSettings"]};

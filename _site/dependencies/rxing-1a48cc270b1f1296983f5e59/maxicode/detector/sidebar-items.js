@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["detect","read_bits"],"struct":["MaxicodeDetectionResult"]};

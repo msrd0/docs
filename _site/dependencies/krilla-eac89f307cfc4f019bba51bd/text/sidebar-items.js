@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Font","GlyphId","KrillaGlyph","Tag"],"trait":["Glyph"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"externcrate":["types"],"fn":["dump_table"],"mod":["error","from_obj","tables","validate"],"struct":["BuilderError","FontBuilder","NullableOffsetMarker","OffsetMarker","TableWriter"],"trait":["FontWrite","OtRound"]};

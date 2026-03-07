@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["cpp_port","decoder","detector","encoder"],"struct":["QRCodeReader","QRCodeWriter"]};

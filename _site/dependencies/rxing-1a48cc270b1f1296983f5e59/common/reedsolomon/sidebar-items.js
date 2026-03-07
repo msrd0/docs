@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PredefinedGenericGF"],"fn":["get_predefined_genericgf"],"struct":["GenericGF","GenericGFPoly","ReedSolomonDecoder","ReedSolomonEncoder"],"type":["GenericGFRef"]};

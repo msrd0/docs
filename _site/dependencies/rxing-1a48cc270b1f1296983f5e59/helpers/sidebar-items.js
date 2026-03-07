@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["detect_in_luma","detect_in_luma_filtered","detect_in_luma_filtered_with_hints","detect_in_luma_with_hints","detect_multiple_in_luma","detect_multiple_in_luma_with_hints","save_file"]};

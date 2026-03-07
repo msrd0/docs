@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["GvarInputError"],"mod":["iup"],"struct":["GlyphDelta","GlyphDeltas","GlyphVariationData","GlyphVariationDataHeader","GlyphVariations","Gvar","GvarFlags","SharedTuples","Tent"]};

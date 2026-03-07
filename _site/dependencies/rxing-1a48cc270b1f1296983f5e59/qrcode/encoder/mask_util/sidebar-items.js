@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["applyMaskPenaltyRule1","applyMaskPenaltyRule2","applyMaskPenaltyRule3","applyMaskPenaltyRule4","getDataMaskBit","isWhiteHorizontal","isWhiteVertical"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["SHIFT_JIS_CHARSET"],"fn":["guessCharset","guessEncoding"]};

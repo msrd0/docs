@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["FindLeftGuard","FindLeftGuardBy","GetPatternRow","GetPatternRowTP","IsPattern","IsRightGuard","NormalizedE2EPattern","NormalizedPattern"],"struct":["BarAndSpace","FixedPattern","PatternRow","PatternView","PatternViewIterator"],"type":["FixedSparcePattern","Pattern","PatternType"]};

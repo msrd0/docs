@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["decoded_bit_stream_parser","ec","pdf_417_codeword_decoder","pdf_417_scanning_decoder"],"struct":["BarcodeMetadata","BarcodeValue","BoundingBox","Codeword","DetectionRXingResult","DetectionRXingResultColumn"],"trait":["DetectionRXingResultColumnTrait","DetectionRXingResultRowIndicatorColumn"]};

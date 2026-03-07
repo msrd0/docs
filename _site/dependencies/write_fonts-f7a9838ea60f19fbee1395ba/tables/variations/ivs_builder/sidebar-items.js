@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["VariationIndexRemapping","VariationStoreBuilder"],"trait":["RemapVariationIndices"]};

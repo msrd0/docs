@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Reduces the size and coverage of OpenType fonts with TrueType or CFF outlines for embedding in PDFs. You can in general expect very good results in terms of font size, as most of the things that can be subsetted are also subsetted."><title>subsetter - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="subsetter" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate subsetter</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../subsetter/index.html">subsetter</a><span class="version">0.2.3</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#scope" title="Scope">Scope</a></li><li><a href="#notes" title="Notes">Notes</a></li><li><a href="#example" title="Example">Example</a></li></ul><h3><a href="#structs">Crate Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>subsetter</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/subsetter/lib.rs.html#1-663">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Reduces the size and coverage of OpenType fonts with TrueType or CFF outlines for embedding
+in PDFs. You can in general expect very good results in terms of font size, as most of the things
+that can be subsetted are also subsetted.</p>
+<h2 id="scope"><a class="doc-anchor" href="#scope">§</a>Scope</h2>
+<p><strong>Note that the resulting font subsets will most likely be unusable in any other contexts than PDF writing,
+since a lot of information will be removed from the font which is not necessary in PDFs, but is
+necessary in other contexts.</strong> This is on purpose, and for now, there are no plans to expand the
+scope of this crate to become a general purpose subsetter, as this is a massive undertaking and
+will make the already complex codebase even more complex.</p>
+<p>In the future,
+<a href="https://github.com/googlefonts/fontations/tree/main/klippa">klippa</a> will hopefully fill the gap
+of a general-purpose subsetter in the Rust ecosystem.</p>
+<h2 id="notes"><a class="doc-anchor" href="#notes">§</a>Notes</h2>
+<p>A couple of important notes if you want to use this crate in combination with your own pdf writer:</p>
+<ul>
+<li>You must write your fonts as a CID font. This is because we remove the <code>cmap</code> table from the font,
+so you must provide your own cmap table in the PDF.</li>
+<li>Copyright information in the font will be retained.</li>
+<li>When writing a CID font in PDF, CIDs must be used to address glyphs. This can be pretty tricky,
+because the meaning of CID depends on the type of font you are embedding (see the PDF specification
+for more information). The subsetter will convert SID-keyed fonts to CID-keyed ones and an identity
+mapping from GID to CID for all fonts, regardless of the previous mapping. Because of this, you can
+always use the remapped GID as the CID for a glyph, and do not need to worry about the type of font
+you are embedding.</li>
+</ul>
+<h2 id="example"><a class="doc-anchor" href="#example">§</a>Example</h2>
+<p>In the example below, we remove all glyphs except the ones with IDs 68, 69, 70 from Noto Sans.
+Those correspond to the letters ‘a’, ‘b’ and ‘c’. We then save the resulting font to disk.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>subsetter::{subset, GlyphRemapper};
+
+<span class="comment">// Read the raw font data.
+</span><span class="kw">let </span>data = std::fs::read(<span class="string">"fonts/NotoSans-Regular.ttf"</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// These are the glyphs we want to keep.
+</span><span class="kw">let </span>glyphs = <span class="kw-2">&amp;</span>[<span class="number">68</span>, <span class="number">69</span>, <span class="number">70</span>];
+
+<span class="comment">// Create a new glyph remapper that remaps our glyphs to new glyph IDs. This is necessary because
+// glyph IDs in fonts must be consecutive. So if we only include the glyphs 68, 69, 70 and remove all
+// other glyph IDs, in the new font they will have the glyph IDs 1, 2, 3.
+</span><span class="kw">let </span><span class="kw-2">mut </span>remapper = GlyphRemapper::new();
+<span class="kw">for </span>glyph <span class="kw">in </span>glyphs {
+    remapper.remap(<span class="kw-2">*</span>glyph);
+}
+
+<span class="comment">// Create the subset.
+</span><span class="kw">let </span>sub = subset(<span class="kw-2">&amp;</span>data, <span class="number">0</span>, <span class="kw-2">&amp;</span>remapper)<span class="question-mark">?</span>;
+
+<span class="comment">// This is how you can access the new glyph ID of a glyph in the old font.
+</span><span class="kw">for </span>glyph <span class="kw">in </span>glyphs {
+    <span class="macro">println!</span>(<span class="string">"Glyph {} has the ID {} in the new font"</span>, <span class="kw-2">*</span>glyph, remapper.get(<span class="kw-2">*</span>glyph).unwrap());
+}
+
+<span class="comment">// Write the resulting file.
+</span>std::fs::write(<span class="string">"target/Noto-Small.ttf"</span>, sub)<span class="question-mark">?</span>;</code></pre></div>
+<p>In the above example, the original font was 556 KB, while the
+resulting font is 1 KB.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.GlyphRemapper.html" title="struct subsetter::GlyphRemapper">Glyph<wbr>Remapper</a></dt><dd>A remapper that allows to assign a new ordering to a subset of glyphs.</dd><dt><a class="struct" href="struct.Tag.html" title="struct subsetter::Tag">Tag</a></dt><dd>A 4-byte OpenType tag.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Error.html" title="enum subsetter::Error">Error</a></dt><dd>Parsing failed because the font face is malformed.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.subset.html" title="fn subsetter::subset">subset</a></dt><dd>Subset the font face to include only the necessary glyphs and tables.</dd><dt><a class="fn" href="fn.subset_with_variations.html" title="fn subsetter::subset_with_variations">subset_<wbr>with_<wbr>variations</a></dt><dd>Subset the font face to include only the necessary glyphs and tables, instantiated
+to the given variation coordinates.</dd></dl></section></div></main></body></html>

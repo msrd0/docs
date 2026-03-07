@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AlignmentPattern","AlignmentPatternFinder","Detector","FinderPattern","FinderPatternFinder","FinderPatternInfo","QRCodeDetectorResult"]};

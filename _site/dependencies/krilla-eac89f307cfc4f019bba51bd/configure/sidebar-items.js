@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PdfVersion"],"mod":["validate"],"struct":["Configuration"]};

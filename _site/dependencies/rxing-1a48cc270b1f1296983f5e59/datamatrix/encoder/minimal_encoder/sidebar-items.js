@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["encodeHighLevel","encodeHighLevelWithDetails","isExtendedASCII"]};

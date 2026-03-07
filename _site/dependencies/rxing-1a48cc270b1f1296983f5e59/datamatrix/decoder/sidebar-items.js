@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["decoded_bit_stream_parser"],"struct":["BitMatrixParser","DataBlock","Decoder","ECB","ECBlocks","Version"],"type":["VersionRef"]};

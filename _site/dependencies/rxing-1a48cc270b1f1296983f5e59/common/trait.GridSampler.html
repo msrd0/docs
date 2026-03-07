@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Implementations of this class can, given locations of finder patterns for a QR code in an image, sample the right points in the image to reconstruct the QR code, accounting for perspective distortion. It is abstracted since it is relatively expensive and should be allowed to take advantage of platform-specific optimized implementations, like Sun’s Java Advanced Imaging library, but which may not be available in other environments such as J2ME, and vice versa."><title>GridSampler in rxing::common - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="rxing" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">GridSampler</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../rxing/index.html">rxing</a><span class="version">0.8.3</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Grid<wbr>Sampler</a></h2><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.checkAndNudgePoints" title="checkAndNudgePoints">checkAndNudgePoints</a></li><li><a href="#method.sample_grid" title="sample_grid">sample_grid</a></li><li><a href="#method.sample_grid_detailed" title="sample_grid_detailed">sample_grid_detailed</a></li></ul><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In rxing::<wbr>common</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">rxing</a>::<wbr><a href="index.html">common</a></div><h1>Trait <span class="trait">Grid<wbr>Sampler</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/rxing/common/grid_sampler.rs.html#39-240">Source</a> </span></div><pre class="rust item-decl"><code>pub trait GridSampler {
+    // Provided methods
+    fn <a href="#method.sample_grid_detailed" class="fn">sample_grid_detailed</a>(
+        &amp;self,
+        image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+        dimensionX: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+        dimensionY: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+        dst: <a class="struct" href="struct.Quadrilateral.html" title="struct rxing::common::Quadrilateral">Quadrilateral</a>,
+        src: <a class="struct" href="struct.Quadrilateral.html" title="struct rxing::common::Quadrilateral">Quadrilateral</a>,
+    ) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;(<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>, [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>; <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.array.html">4</a>])&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.sample_grid" class="fn">sample_grid</a>(
+        &amp;self,
+        image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+        dimensionX: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+        dimensionY: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+        controls: &amp;[<a class="struct" href="struct.SamplerControl.html" title="struct rxing::common::SamplerControl">SamplerControl</a>],
+    ) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;(<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>, [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>; <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.array.html">4</a>])&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.checkAndNudgePoints" class="fn">checkAndNudgePoints</a>(
+        &amp;self,
+        image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+        points: &amp;mut [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>],
+    ) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.unit.html">()</a>&gt; { ... }
+}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Implementations of this class can, given locations of finder patterns for a QR code in an
+image, sample the right points in the image to reconstruct the QR code, accounting for
+perspective distortion. It is abstracted since it is relatively expensive and should be allowed
+to take advantage of platform-specific optimized implementations, like Sun’s Java Advanced
+Imaging library, but which may not be available in other environments such as J2ME, and vice
+versa.</p>
+<p>The implementation used can be controlled by calling {@link #setGridSampler(GridSampler)}
+with an instance of a class which implements this interface.</p>
+<p>@author Sean Owen</p>
+</div></details><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.sample_grid_detailed" class="method"><a class="src rightside" href="../../src/rxing/common/grid_sampler.rs.html#90-106">Source</a><h4 class="code-header">fn <a href="#method.sample_grid_detailed" class="fn">sample_grid_detailed</a>(
+    &amp;self,
+    image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+    dimensionX: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+    dimensionY: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+    dst: <a class="struct" href="struct.Quadrilateral.html" title="struct rxing::common::Quadrilateral">Quadrilateral</a>,
+    src: <a class="struct" href="struct.Quadrilateral.html" title="struct rxing::common::Quadrilateral">Quadrilateral</a>,
+) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;(<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>, [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>; <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.array.html">4</a>])&gt;</h4></section></summary><div class="docblock"><p>Samples an image for a rectangular matrix of bits of the given dimension. The sampling
+transformation is determined by the coordinates of 4 points, in the original and transformed
+image space.</p>
+<p>@param image image to sample
+@param dimensionX width of {@link BitMatrix} to sample from image
+@param dimensionY height of {@link BitMatrix} to sample from image
+@param p1ToX point 1 preimage X
+@param p1ToY point 1 preimage Y
+@param p2ToX point 2 preimage X
+@param p2ToY point 2 preimage Y
+@param p3ToX point 3 preimage X
+@param p3ToY point 3 preimage Y
+@param p4ToX point 4 preimage X
+@param p4ToY point 4 preimage Y
+@param p1FromX point 1 image X
+@param p1FromY point 1 image Y
+@param p2FromX point 2 image X
+@param p2FromY point 2 image Y
+@param p3FromX point 3 image X
+@param p3FromY point 3 image Y
+@param p4FromX point 4 image X
+@param p4FromY point 4 image Y
+@return {@link BitMatrix} representing a grid of points sampled from the image within a region
+defined by the “from” parameters
+@throws NotFoundException if image can’t be sampled, for example, if the transformation defined
+by the given points is invalid or results in sampling outside the image boundaries</p>
+</div></details><section id="method.sample_grid" class="method"><a class="src rightside" href="../../src/rxing/common/grid_sampler.rs.html#108-166">Source</a><h4 class="code-header">fn <a href="#method.sample_grid" class="fn">sample_grid</a>(
+    &amp;self,
+    image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+    dimensionX: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+    dimensionY: <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.u32.html">u32</a>,
+    controls: &amp;[<a class="struct" href="struct.SamplerControl.html" title="struct rxing::common::SamplerControl">SamplerControl</a>],
+) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;(<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>, [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>; <a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.array.html">4</a>])&gt;</h4></section><details class="toggle method-toggle" open><summary><section id="method.checkAndNudgePoints" class="method"><a class="src rightside" href="../../src/rxing/common/grid_sampler.rs.html#183-239">Source</a><h4 class="code-header">fn <a href="#method.checkAndNudgePoints" class="fn">checkAndNudgePoints</a>(
+    &amp;self,
+    image: &amp;<a class="struct" href="struct.BitMatrix.html" title="struct rxing::common::BitMatrix">BitMatrix</a>,
+    points: &amp;mut [<a class="type" href="../type.Point.html" title="type rxing::Point">Point</a>],
+) -&gt; <a class="type" href="type.Result.html" title="type rxing::common::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.93.1/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>Checks a set of points that have been transformed to sample points on an image against
+the image's dimensions to see if the point are even within the image.</p>
+<p>This method will actually "nudge" the endpoints back onto the image if they are found to be
+barely (less than 1 pixel) off the image. This accounts for imperfect detection of finder
+patterns in an image where the QR Code runs all the way to the image border.</p>
+<p>For efficiency, the method will check points from either end of the line until one is found
+to be within the image. Because the set of points are assumed to be linear, this is valid.</p>
+<p>@param image image into which the points should map
+@param points actual points in x1,y1,…,xn,yn form
+@throws NotFoundException if an endpoint is lies outside the image boundaries</p>
+</div></details></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><section id="impl-GridSampler-for-DefaultGridSampler" class="impl"><a class="src rightside" href="../../src/rxing/common/default_grid_sampler.rs.html#32-103">Source</a><a href="#impl-GridSampler-for-DefaultGridSampler" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.GridSampler.html" title="trait rxing::common::GridSampler">GridSampler</a> for <a class="struct" href="struct.DefaultGridSampler.html" title="struct rxing::common::DefaultGridSampler">DefaultGridSampler</a></h3></section></div><script src="../../trait.impl/rxing/common/grid_sampler/trait.GridSampler.js" async></script></section></div></main></body></html>

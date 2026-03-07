@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["decoded_bit_stream_parser","maxicode_decoder"],"struct":["BitMatrixParser"]};

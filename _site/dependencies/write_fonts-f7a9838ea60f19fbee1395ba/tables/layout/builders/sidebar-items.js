@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["CaretValueBuilder","DeviceOrDeltas"],"struct":["ClassDefBuilder","CoverageTableBuilder","LookupBuilder","Metric"],"trait":["Builder"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["qrcode"],"struct":["ByQuadrantReader","GenericMultipleBarcodeReader"],"trait":["MultipleBarcodeReader"]};

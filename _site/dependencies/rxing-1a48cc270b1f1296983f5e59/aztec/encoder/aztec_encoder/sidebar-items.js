@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DEFAULT_AZTEC_LAYERS","DEFAULT_EC_PERCENT","MAX_NB_BITS","MAX_NB_BITS_COMPACT","WORD_SIZE"],"fn":["encode","encode_bytes","encode_bytes_simple","encode_bytes_with_charset","encode_simple","encode_with_charset","generateModeMessage","stuffBits"]};

@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Writing and modifying OpenType tables"><title>write_fonts - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="write_fonts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.1 (01f6ddf75 2026-02-11)" data-channel="1.93.1" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate write_fonts</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../write_fonts/index.html">write_<wbr>fonts</a><span class="version">0.43.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#write-versus-read-types" title="‘write’ versus ‘read’ types">‘write’ versus ‘read’ types</a></li><li><a href="#loading-and-modifying-fonts" title="Loading and modifying fonts">Loading and modifying fonts</a></li><li><a href="#writing-subtables" title="Writing subtables">Writing subtables</a></li><li><a href="#examples" title="Examples">Examples</a></li></ul><h3><a href="#reexports">Crate Items</a></h3><ul class="block"><li><a href="#reexports" title="Re-exports">Re-exports</a></li><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>write_<wbr>fonts</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/write_fonts/lib.rs.html#1-193">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Writing and modifying OpenType tables</p>
+<p>This crate provides a collection of types correlating to what is described
+in the <a href="https://learn.microsoft.com/en-us/typography/opentype/spec/">OpenType spec</a>, along with the logic to serialize these types
+into binary font tables. It is a companion to <a href="https://docs.rs/read-fonts/"><code>read-fonts</code></a>, which provides
+efficient zero-allocation parsing of these types. It is intended to be used
+as the basis for font engineering tools such as compilers.</p>
+<h3 id="write-versus-read-types"><a class="doc-anchor" href="#write-versus-read-types">§</a>‘write’ versus ‘read’ types</h3>
+<p>Both <code>write-fonts</code> and <a href="https://docs.rs/read-fonts/"><code>read-fonts</code></a> make heavy use of code generation, and
+they have a similar structure, where a <code>tables</code> module contains a submodule for
+each supported <a href="https://learn.microsoft.com/en-us/typography/opentype/spec/otff#table-directory">table</a>, and that module contains items for
+each table, record, flagset or enum described in the spec. This means that
+there are (for instance) two distinct <code>ValueRecord</code> types, one defined in
+<code>read_fonts::tables::gpos</code>, and one defined in <code>write_fonts::tables::gpos</code>.</p>
+<p>The reason for the distinct types is that it allows us to dramatically
+simplify the scope of <code>read-fonts</code>; the types in that crate are generally
+just typed views into raw slices of bytes and cannot be modified, whereas
+the types in <code>write-fonts</code> are generally familiar Rust structs and enums.</p>
+<h3 id="loading-and-modifying-fonts"><a class="doc-anchor" href="#loading-and-modifying-fonts">§</a>Loading and modifying fonts</h3>
+<p>When modifying a font, you will typically start by reading the font data
+using <code>read-fonts</code>. When you come to write the font out, however, you will
+quickly discover that tables generated by <code>read-fonts</code> have different
+types to those required by <code>write-fonts</code>. This is because <code>read-fonts</code> types
+borrow their data from an underlying backing store, but <code>write-fonts</code> types
+need to own their data. In order to modify a table parsed by <code>read-fonts</code>,
+you will need to convert it to a <code>write-fonts</code> type. This can be done with
+the <code>FromTableRef</code> and <code>ToOwnedTable</code> traits: bring these traits into scope
+and call <code>.to_owned_table()</code> or <code>.to_owned_obj()</code> on the table or subtable
+you want to modify. For example:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>read_fonts::{FontRef, TableProvider};
+<span class="kw">use </span>write_fonts::{from_obj::ToOwnedTable, tables::head::Head, types::LongDateTime};
+<span class="comment">// ...
+</span><span class="kw">let </span><span class="kw-2">mut </span>head: Head = font.head().expect(<span class="string">"missing 'head' table"</span>).to_owned_table();
+head.modified = seconds_since_font_epoch();</code></pre></div>
+<p>(For a full example, see <a href="#examples">below</a>.)</p>
+<p>When loading and modifying fonts, you will likely need to interact with both
+<code>write-fonts</code> and <code>read-fonts</code> directly. To avoid having to manage both of
+these dependencies, there is a “read” feature on <code>write-fonts</code> that reexports
+<code>read-fonts</code> as <code>read</code> at the crate root:</p>
+<div class="example-wrap"><pre class="language-toml"><code># Cargo.toml
+[dependencies]
+write-fonts = { version = &quot;*&quot;, features = [&quot;read&quot;] }</code></pre></div><div class="example-wrap"><pre class="language-no_compile"><code>// main.rs
+use write_fonts::read::FontRef;</code></pre></div><h3 id="writing-subtables"><a class="doc-anchor" href="#writing-subtables">§</a>Writing subtables</h3>
+<p>A font table commonly contains some set of subtables which are referenced
+in the font binary as offsets relative to the position (within the file) of
+the parent table; and these subtables can themselves contain subtables, and
+so on. We refer to the entire structure of tables as the ‘table graph’.
+A consequence of this structure is that compiling
+a table is not as simple as just sequentially writing out the bytes of each
+field; it also involves computing an ordering for the subtables, determining
+their position in the final binary, and correctly writing that position in
+the appropriate location in any tables that reference that subtable.</p>
+<p>As most subtable positions (offsets) are stored as 16-bit integers,
+it is possible in certain cases that offsets overflow. The task of finding
+a suitable ordering for each table in the table graph is called “table packing”.
+<code>write-fonts</code> handles the packing of tables at serialization time, based
+on the <a href="https://github.com/harfbuzz/harfbuzz/blob/main/docs/repacker.md">hb-repacker</a> implementation from <a href="https://harfbuzz.github.io">HarfBuzz</a>.</p>
+<h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2>
+<p>Create an ‘hhea’ table</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>write_fonts::{tables::hhea::Hhea, types::{FWord, UfWord}};
+
+<span class="kw">let </span>my_table = Hhea {
+    ascender: FWord::new(<span class="number">700</span>),
+    descender: FWord::new(-<span class="number">195</span>),
+    line_gap: FWord::new(<span class="number">0</span>),
+    advance_width_max: UfWord::new(<span class="number">1200</span>),
+    min_left_side_bearing: FWord::new(-<span class="number">80</span>),
+    min_right_side_bearing: FWord::new(-<span class="number">420</span>),
+    x_max_extent: FWord::new(<span class="number">1122</span>),
+    caret_slope_rise: <span class="number">1</span>,
+    caret_slope_run: <span class="number">0</span>,
+    caret_offset: <span class="number">0</span>,
+    number_of_h_metrics: <span class="number">301</span>,
+};
+
+<span class="kw">let </span>_bytes = write_fonts::dump_table(<span class="kw-2">&amp;</span>my_table).expect(<span class="string">"failed to write bytes"</span>);</code></pre></div>
+<p>Read/modify/write an existing font</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>read_fonts::{FontRef, TableProvider};
+<span class="kw">use </span>write_fonts::{
+    from_obj::ToOwnedTable,
+    tables::head::Head,
+    types::LongDateTime,
+    FontBuilder,
+};
+<span class="kw">let </span>font_bytes = std::fs::read(path_to_my_font_file).unwrap();
+<span class="kw">let </span>font = FontRef::new(<span class="kw-2">&amp;</span>font_bytes).expect(<span class="string">"failed to read font data"</span>);
+<span class="kw">let </span><span class="kw-2">mut </span>head: Head = font.head().expect(<span class="string">"missing 'head' table"</span>).to_owned_table();
+head.modified  = seconds_since_font_epoch();
+<span class="kw">let </span>new_bytes = FontBuilder::new()
+    .add_table(<span class="kw-2">&amp;</span>head)
+    .unwrap() <span class="comment">// errors if we can't compile 'head', unlikely here
+    </span>.copy_missing_tables(font)
+    .build();
+std::fs::write(<span class="string">"mynewfont.ttf"</span>, <span class="kw-2">&amp;</span>new_bytes).unwrap();</code></pre></div></div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><dl class="item-table reexports"><dt><code>pub extern crate <a class="mod" href="../font_types/index.html" title="mod font_types">font_types</a> as types;</dl><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="error/index.html" title="mod write_fonts::error">error</a></dt><dd>Errors that occur during writing</dd><dt><a class="mod" href="from_obj/index.html" title="mod write_fonts::from_obj">from_<wbr>obj</a></dt><dd>Traits for converting from parsed font data to their compile equivalents</dd><dt><a class="mod" href="tables/index.html" title="mod write_fonts::tables">tables</a></dt><dd>A directory of all the font tables.</dd><dt><a class="mod" href="validate/index.html" title="mod write_fonts::validate">validate</a></dt><dd>The pre-compilation validation pass</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.BuilderError.html" title="struct write_fonts::BuilderError">Builder<wbr>Error</a></dt><dd>An error returned when attempting to add a table to the builder.</dd><dt><a class="struct" href="struct.FontBuilder.html" title="struct write_fonts::FontBuilder">Font<wbr>Builder</a></dt><dd>Build a font from some set of tables.</dd><dt><a class="struct" href="struct.NullableOffsetMarker.html" title="struct write_fonts::NullableOffsetMarker">Nullable<wbr>Offset<wbr>Marker</a></dt><dd>An offset subtable which may be null.</dd><dt><a class="struct" href="struct.OffsetMarker.html" title="struct write_fonts::OffsetMarker">Offset<wbr>Marker</a></dt><dd>An offset subtable.</dd><dt><a class="struct" href="struct.TableWriter.html" title="struct write_fonts::TableWriter">Table<wbr>Writer</a></dt><dd>An object that manages a collection of serialized tables.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FontWrite.html" title="trait write_fonts::FontWrite">Font<wbr>Write</a></dt><dd>A type that that can be written out as part of a font file.</dd><dt><a class="trait" href="trait.OtRound.html" title="trait write_fonts::OtRound">OtRound</a></dt><dd>Floating-point rounding per the <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/otvaroverview#coordinate-scales-and-normalization">OpenType spec</a>.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.dump_table.html" title="fn write_fonts::dump_table">dump_<wbr>table</a></dt><dd>Attempt to serialize a table.</dd></dl></section></div></main></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["IupError"],"fn":["iup_delta_optimize"]};

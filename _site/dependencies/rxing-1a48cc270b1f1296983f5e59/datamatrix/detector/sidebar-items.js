@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["zxing_cpp_detector"],"struct":["DatamatrixDetectorResult","Detector"]};

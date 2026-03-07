@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AnchorBuilder","CursivePosBuilder","MarkToBaseBuilder","MarkToLigBuilder","MarkToMarkBuilder","PairPosBuilder","PreviouslyAssignedClass","SinglePosBuilder","ValueRecordBuilder"]};

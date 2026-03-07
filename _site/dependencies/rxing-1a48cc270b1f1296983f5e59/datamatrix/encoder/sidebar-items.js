@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SymbolShapeHint"],"mod":["error_correction","high_level_encoder","minimal_encoder"],"struct":["ASCIIEncoder","Base256Encoder","C40Encoder","DefaultPlacement","EdifactEncoder","EncoderContext","SymbolInfo","SymbolInfoLookup","TextEncoder","X12Encoder"],"trait":["Encoder"]};

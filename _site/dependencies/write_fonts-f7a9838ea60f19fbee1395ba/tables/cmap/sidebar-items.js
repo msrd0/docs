@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["CmapSubtable","PlatformId"],"struct":["Cmap","Cmap0","Cmap10","Cmap12","Cmap13","Cmap14","Cmap2","Cmap4","Cmap6","Cmap8","CmapConflict","ConstantMapGroup","DefaultUvs","EncodingRecord","NonDefaultUvs","SequentialMapGroup","SubHeader","UnicodeRange","UvsMapping","VariationSelector"]};

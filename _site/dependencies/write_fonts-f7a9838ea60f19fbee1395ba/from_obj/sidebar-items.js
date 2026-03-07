@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":["FromObjRef","FromTableRef","ToOwnedObj","ToOwnedTable"]};

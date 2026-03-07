@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["VersionSize"],"mod":["mask_util","matrix_util","qrcode_encoder"],"struct":["BlockPair","ByteMatrix","Edge","MinimalEncoder","QRCode","RXingResultList"]};

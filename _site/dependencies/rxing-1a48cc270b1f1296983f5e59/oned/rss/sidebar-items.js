@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["expanded","rss_utils"],"struct":["DataCharacter","FinderPattern","Pair","RSS14Reader"],"trait":["AbstractRSSReaderTrait"]};

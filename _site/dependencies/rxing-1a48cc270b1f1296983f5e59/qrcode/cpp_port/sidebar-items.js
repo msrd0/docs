@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Type"],"mod":["decoder","detector"],"struct":["QrReader"]};
