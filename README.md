@@ -29,6 +29,7 @@ Bitmap fonts for the embedded-graphics crate that don't require generics
 
 ## cargo-doc2readme [![cargo-doc2readme on crates.io](https://img.shields.io/crates/v/cargo-doc2readme.svg)](https://crates.io/crates/cargo-doc2readme) ![downloads](https://img.shields.io/crates/d/cargo-doc2readme.svg)
 cargo subcommand to create a readme file containing the rustdoc comments from your code
+ - Version 0.7.0: [Documentation](_site/cargo-doc2readme/0.7.0/cargo_doc2readme/index.html)
  - Version 0.6.5: [Documentation](_site/cargo-doc2readme/0.6.5/cargo_doc2readme/index.html)
  - Version 0.6.4: [Documentation](_site/cargo-doc2readme/0.6.4/cargo_doc2readme/index.html)
  - Version 0.6.3: [Documentation](_site/cargo-doc2readme/0.6.3/cargo_doc2readme/index.html)
