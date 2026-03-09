@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["toml_parser",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/ops/arith/trait.AddAssign.html\" title=\"trait core::ops::arith::AddAssign\">AddAssign</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.93.1/std/primitive.usize.html\">usize</a>&gt; for <a class=\"struct\" href=\"toml_parser/struct.Span.html\" title=\"struct toml_parser::Span\">Span</a>"]]],["writeable",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/ops/arith/trait.AddAssign.html\" title=\"trait core::ops::arith::AddAssign\">AddAssign</a> for <a class=\"struct\" href=\"writeable/struct.LengthHint.html\" title=\"struct writeable::LengthHint\">LengthHint</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.1/core/ops/arith/trait.AddAssign.html\" title=\"trait core::ops::arith::AddAssign\">AddAssign</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.93.1/std/primitive.usize.html\">usize</a>&gt; for <a class=\"struct\" href=\"writeable/struct.LengthHint.html\" title=\"struct writeable::LengthHint\">LengthHint</a>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[394,691]}
